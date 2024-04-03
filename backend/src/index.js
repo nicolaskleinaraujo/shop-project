@@ -18,6 +18,9 @@ app.get("/", (req, res) => {
   res.send("Bem-vindo a minha API, consulte o projeto para mais informações!")
 })
 
+const users = require("./Routes/users")
+app.use("/", users)
+
 app.listen(port, () => {
   console.log("Server running!")
 })
