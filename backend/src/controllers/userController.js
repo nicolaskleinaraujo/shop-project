@@ -1,6 +1,6 @@
 const prisma = require("../db/client")
 
-const UserController = {
+const userController = {
   create: async (req, res) => {
     const fullName = req.body.fullName
     const email = req.body.email
@@ -27,30 +27,32 @@ const UserController = {
     })
 
     const searchNumber = await prisma.user.findUnique({
-        where: {
-            number: number
-        }
+      where: {
+        number: number,
+      },
     })
 
     if (searchEmail != null && searchNumber != null) {
-        res.status(400).json({ msg: "Email ou numero já cadastrado" })
-        return
+      res.status(400).json({ msg: "Email ou numero já cadastrado" })
+      return
     }
 
     try {
-        await prisma.user.create({
-            data: {
-                fullName,
-                email,
-                number,
-                city,
-                street,
-                houseNum
-            }
-        })
-        res.status(200).json({ msg: "Usuario criado com sucesso" })
+      await prisma.user.create({
+        data: {
+          fullName,
+          email,
+          number,
+          city,
+          street,
+          houseNum,
+        },
+      })
+      res.status(200).json({ msg: "Usuario criado com sucesso" })
     } catch (err) {
       res.status(400).json(err)
     }
   },
 }
+
+module.exports = userController
