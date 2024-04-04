@@ -164,6 +164,32 @@ const userController = {
       res.status(500).json(err)
     }
   },
+
+  delete: async (req, res) => {
+    const id = parseInt(req.params.id)
+
+    if (isNaN(id)) {
+      res.status(400).json({ msg: "ID não especificado" })
+    }
+
+    const user = await prisma.user.findUnique({
+      where: {
+        id,
+      },
+    })
+
+    if (!user) {
+      res.status(400).json({ msg: "Usuario inexistente" })
+      return
+    }
+    
+    prisma.user.delete({
+      where: {
+        id
+      }
+    })
+    res.status(200).json({ msg: "Usuario deletado com sucesso" })
+  }
 }
 
 module.exports = userController
