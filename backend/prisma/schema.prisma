@@ -3,15 +3,16 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
 model User {
-  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  id       Int       @id @default(autoincrement())
   fullName String
   email    String    @unique
-  number   Int?      @unique
+  number   Int       @unique
+  password String
   city     String
   street   String
   houseNum Int
@@ -19,10 +20,10 @@ model User {
 }
 
 model Request {
-  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+  id       Int     @id @default(autoincrement())
   slug     String  @unique
   author   User    @relation(fields: [authorId], references: [id])
-  authorId String  @db.ObjectId
+  authorId Int
   items    String
   details  String?
 }
