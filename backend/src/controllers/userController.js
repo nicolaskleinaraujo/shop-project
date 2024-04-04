@@ -29,13 +29,13 @@ const userController = {
     // Checks if the email or the number is already cadastered
     const searchEmail = await prisma.user.findUnique({
       where: {
-        email: email,
+        email,
       },
     })
 
     const searchNumber = await prisma.user.findUnique({
       where: {
-        number: number,
+        number,
       },
     })
 
@@ -64,6 +64,28 @@ const userController = {
     } catch (err) {
       res.status(400).json(err)
     }
+  },
+
+  getById: async (req, res) => {
+    const id = req.params.id
+
+    if (!id) {
+      res.status(400).json({ msg: "ID não especificado" })
+      return
+    }
+
+    const user = await prisma.user.findUnique({
+      where: {
+        id,
+      },
+    })
+
+    if (!user) {
+      res.status(400).json({ msg: "Usuario inexistente" })
+      return
+    }
+
+    res.status(200).json(user)
   },
 }
 
