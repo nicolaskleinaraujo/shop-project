@@ -1,4 +1,6 @@
+// Imports
 const prisma = require("../db/client")
+const bcrypt = require("bcryptjs")
 
 const userController = {
   create: async (req, res) => {
@@ -10,6 +12,7 @@ const userController = {
     const street = req.body.street
     const houseNum = req.body.houseNum
 
+    // Checks if some info is missing
     if (
       fullName === "" ||
       email === "" ||
@@ -23,6 +26,7 @@ const userController = {
       return
     }
 
+    // Checks if the email or the number is already cadastered
     const searchEmail = await prisma.user.findUnique({
       where: {
         email: email,
@@ -40,13 +44,17 @@ const userController = {
       return
     }
 
+    // Hashing the password
+    const salt = bcrypt.genSaltSync(10)
+    const hash = bcrypt.hashSync(password, salt)
+
     try {
       await prisma.user.create({
         data: {
           fullName,
           email,
           number,
-          password,
+          password: hash,
           city,
           street,
           houseNum,
