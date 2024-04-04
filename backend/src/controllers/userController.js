@@ -16,11 +16,11 @@ const userController = {
     if (
       fullName === "" ||
       email === "" ||
-      number === "" ||
+      number === undefined ||
       password === "" ||
       city === "" ||
       street === "" ||
-      houseNum === ""
+      houseNum === undefined
     ) {
       res.status(400).json({ msg: "Informações insuficientes" })
       return
@@ -69,7 +69,7 @@ const userController = {
   getById: async (req, res) => {
     const id = parseInt(req.params.id)
 
-    if (isNaN(id) || null) {
+    if (isNaN(id) || undefined) {
       res.status(400).json({ msg: "ID não especificado" })
       return
     }
@@ -100,13 +100,14 @@ const userController = {
 
     // Checks if some info is missing
     if (
+      id === undefined ||
       fullName === "" ||
       email === "" ||
-      number === "" ||
+      number === undefined ||
       password === "" ||
       city === "" ||
       street === "" ||
-      houseNum === ""
+      houseNum === undefined
     ) {
       res.status(400).json({ msg: "Informações insuficientes" })
       return
@@ -158,7 +159,7 @@ const userController = {
           city,
           street,
           houseNum,
-        }
+        },
       })
       res.status(200).json({ msg: "Usuario atualizado com sucesso" })
     } catch (err) {
