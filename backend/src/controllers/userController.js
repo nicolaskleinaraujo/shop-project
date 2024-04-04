@@ -69,7 +69,7 @@ const userController = {
   getById: async (req, res) => {
     const id = parseInt(req.params.id)
 
-    if (isNaN(id) || undefined) {
+    if (isNaN(id)) {
       res.status(400).json({ msg: "ID não especificado" })
       return
     }
@@ -100,7 +100,7 @@ const userController = {
 
     // Checks if some info is missing
     if (
-      id === undefined ||
+      isNaN(id) ||
       fullName === "" ||
       email === "" ||
       number === undefined ||
@@ -133,10 +133,8 @@ const userController = {
     })
 
     if (
-      searchEmail != null ||
-      searchNumber != null &&
-      searchEmail.id != user.id ||
-      searchNumber.id != user.id
+      (searchEmail != null || searchNumber != null) &&
+      (searchEmail.id != user.id || searchNumber.id != user.id)
     ) {
       res.status(400).json({ msg: "Email ou numero já cadastrado" })
       return
