@@ -183,7 +183,7 @@ const userController = {
       return
     }
     
-    prisma.user.delete({
+    await prisma.user.delete({
       where: {
         id
       }
