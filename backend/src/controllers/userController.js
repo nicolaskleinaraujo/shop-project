@@ -39,7 +39,7 @@ const userController = {
       },
     })
 
-    if (searchEmail != null && searchNumber != null) {
+    if (searchEmail != null || searchNumber != null) {
       res.status(400).json({ msg: "Email ou numero já cadastrado" })
       return
     }
@@ -133,9 +133,9 @@ const userController = {
     })
 
     if (
-      searchEmail != null &&
+      searchEmail != null ||
       searchNumber != null &&
-      searchEmail.id != user.id &&
+      searchEmail.id != user.id ||
       searchNumber.id != user.id
     ) {
       res.status(400).json({ msg: "Email ou numero já cadastrado" })
