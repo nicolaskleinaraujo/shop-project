@@ -170,6 +170,7 @@ const userController = {
 
     if (isNaN(id)) {
       res.status(400).json({ msg: "ID não especificado" })
+      return
     }
 
     const user = await prisma.user.findUnique({
