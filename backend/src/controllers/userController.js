@@ -67,9 +67,9 @@ const userController = {
   },
 
   getById: async (req, res) => {
-    const id = req.params.id
+    const id = parseInt(req.params.id)
 
-    if (!id) {
+    if (isNaN(id) || null) {
       res.status(400).json({ msg: "ID não especificado" })
       return
     }
