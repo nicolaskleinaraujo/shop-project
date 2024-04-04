@@ -21,6 +21,9 @@ app.get("/", (req, res) => {
 const users = require("./Routes/users")
 app.use("/", users)
 
+const requests = require("./Routes/requests")
+app.use("/", requests)
+
 app.listen(port, () => {
   console.log("Server running!")
 })
