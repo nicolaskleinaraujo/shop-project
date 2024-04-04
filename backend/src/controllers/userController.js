@@ -5,6 +5,7 @@ const userController = {
     const fullName = req.body.fullName
     const email = req.body.email
     const number = req.body.number
+    const password = req.body.password
     const city = req.body.city
     const street = req.body.street
     const houseNum = req.body.houseNum
@@ -12,6 +13,8 @@ const userController = {
     if (
       fullName === "" ||
       email === "" ||
+      number === "" ||
+      password === "" ||
       city === "" ||
       street === "" ||
       houseNum === ""
@@ -43,6 +46,7 @@ const userController = {
           fullName,
           email,
           number,
+          password,
           city,
           street,
           houseNum,
