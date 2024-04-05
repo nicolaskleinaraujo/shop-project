@@ -8,34 +8,35 @@ const requestController = {
     const items = req.body.items
     const details = req.body.details
 
-    if (isNaN(authorId) || items === "" || details === "") {
+    if (isNaN(authorId) || items === "") {
       res.status(400).json({ msg: "Informações insuficientes" })
       return
     }
 
-    const user = prisma.user.findUnique({
-        where: {
-            id
-        }
+    const user = await prisma.user.findUnique({
+      where: {
+        id: authorId,
+      },
     })
 
-    if(!user) {
-        res.status(400).json({ msg: "Usuario inexistente" })
+    if (!user) {
+      res.status(400).json({ msg: "Usuario inexistente" })
+      return
     }
 
-    const slug = slugify(Date.now() + user.fullName, {lower: true})
     try {
-        await prisma.request.create({
-            data: {
-                authorId,
-                items,
-                details,
-                slug,
-            }
-        })
-        res.status(200).json({ msg: "Pedido feito com sucesso" })
+      const slug = slugify(user.fullName + " " + Date.now(), { lower: true })
+      await prisma.request.create({
+        data: {
+          authorId,
+          items,
+          details,
+          slug,
+        },
+      })
+      res.status(200).json({ msg: "Pedido feito com sucesso" })
     } catch (err) {
-        res.status(500).json(err)
+      res.status(500).json(err)
     }
   },
 }
