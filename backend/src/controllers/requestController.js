@@ -105,24 +105,28 @@ const requestController = {
       return
     }
 
-    const request = await prisma.request.findUnique({
-      where: {
-        id,
-      },
-    })
+    try {
+      const request = await prisma.request.findUnique({
+        where: {
+          id,
+        },
+      })
 
-    if (!request) {
+      if (!request) {
         res.status(400).json({ msg: "Pedido inexistente" })
         return
-    }
+      }
 
-    await prisma.request.delete({
+      await prisma.request.delete({
         where: {
-            id
-        }
-    })
+          id,
+        },
+      })
 
-    res.status(200).json({ msg: "Pedido deletado com sucesso" })
+      res.status(200).json({ msg: "Pedido deletado com sucesso" })
+    } catch (err) {
+      res.status(500).json(err)
+    }
   },
 }
 
