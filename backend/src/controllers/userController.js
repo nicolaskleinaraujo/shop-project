@@ -1,6 +1,7 @@
 // Imports
 const prisma = require("../db/client")
 const bcrypt = require("bcryptjs")
+const { json } = require("body-parser")
 const jwt = require("jsonwebtoken")
 
 const userController = {
@@ -206,39 +207,48 @@ const userController = {
     const email = req.body.email
     const password = req.body.password
 
-    if (email === "" || password === "") {
+    if (
+      email === "" ||
+      email === undefined ||
+      password === "" ||
+      password === undefined
+    ) {
       res.status(400).json({ msg: "Informações insuficientes" })
       return
     }
 
-    const user = await prisma.user.findUnique({
-      where: {
-        email,
-      },
-    })
+    try {
+      const user = await prisma.user.findUnique({
+        where: {
+          email,
+        },
+      })
 
-    if (!user) {
-      res.status(400).json({ msg: "Login incorreto" })
-      return
+      if (!user) {
+        res.status(400).json({ msg: "Login incorreto" })
+        return
+      }
+
+      const testPassword = bcrypt.compareSync(password, user.password)
+
+      if (!testPassword) {
+        res.status(400).json({ msg: "Login incorreto" })
+        return
+      }
+
+      const token = jwt.sign(
+        {
+          id: user.id,
+          email: user.email,
+        },
+        process.env.JWT_SECRET,
+        { expiresIn: "120h" }
+      )
+  
+      res.status(200).json({ msg: "Logado com sucesso", token })
+    } catch (err) {
+      res.status(500).json(err)
     }
-
-    const testPassword = bcrypt.compareSync(password, user.password)
-
-    if (!testPassword) {
-      res.status(400).json({ msg: "Login incorreto" })
-      return
-    }
-
-    const token = jwt.sign(
-      {
-        id: user.id,
-        email: user.email,
-      },
-      process.env.JWT_SECRET,
-      { expiresIn: "120h" }
-    )
-
-    res.status(200).json({ msg: "Loggado com sucesso", token })
   },
 }
 
