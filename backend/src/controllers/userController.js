@@ -245,7 +245,11 @@ const userController = {
         { expiresIn: "120h" }
       )
 
-      res.status(200).json({ msg: "Logado com sucesso", token })
+      res.cookie("jwt", token, {
+        httpOnly: true,
+        maxAge: 120 * 60 * 60 * 1000,
+      })
+      res.status(200).json({ msg: "Logado com sucesso" })
     } catch (err) {
       res.status(500).json(err)
     }
