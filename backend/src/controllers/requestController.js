@@ -76,7 +76,7 @@ const requestController = {
     const items = req.body.items
     const details = req.body.details
 
-    if (isNaN(id) || items === "") {
+    if (isNaN(id) || (items === "" || items === undefined)) {
       res.status(400).json({ msg: "Informações insuficientes" })
       return
     }
