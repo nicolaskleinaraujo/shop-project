@@ -59,10 +59,15 @@ const requestController = {
                 author: true
             }
         })
+
+        if (!request) {
+            res.status(400).json({ msg: "Pedido inexistente" })
+            return
+        }
     
         res.status(200).json(request)
     } catch (err) {
-        res.status(400).json({ msg: "Pedido inexistente" })
+        res.status(500).json(err)
     }
   },
 }
