@@ -76,7 +76,7 @@ const requestController = {
     const items = req.body.items
     const details = req.body.details
 
-    if (isNaN(id) || (items === "" || items === undefined)) {
+    if (isNaN(id) || items === "" || items === undefined) {
       res.status(400).json({ msg: "Informações insuficientes" })
       return
     }
@@ -95,6 +95,34 @@ const requestController = {
     } catch (err) {
       res.status(500).json(err)
     }
+  },
+
+  delete: async (req, res) => {
+    const id = parseInt(req.params.id)
+
+    if (isNaN(id)) {
+      res.status(400).json({ msg: "ID não especificado" })
+      return
+    }
+
+    const request = await prisma.request.findUnique({
+      where: {
+        id,
+      },
+    })
+
+    if (!request) {
+        res.status(400).json({ msg: "Pedido inexistente" })
+        return
+    }
+
+    await prisma.request.delete({
+        where: {
+            id
+        }
+    })
+
+    res.status(200).json({ msg: "Pedido deletado com sucesso" })
   },
 }
 
