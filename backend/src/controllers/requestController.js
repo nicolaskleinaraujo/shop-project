@@ -70,6 +70,32 @@ const requestController = {
       res.status(500).json(err)
     }
   },
+
+  update: async (req, res) => {
+    const id = parseInt(req.body.id)
+    const items = req.body.items
+    const details = req.body.details
+
+    if (isNaN(id) || items === "") {
+      res.status(400).json({ msg: "Informações insuficientes" })
+      return
+    }
+
+    try {
+      await prisma.request.update({
+        where: {
+          id,
+        },
+        data: {
+          items,
+          details,
+        },
+      })
+      res.status(200).json({ msg: "Pedido atualizado com sucesso" })
+    } catch (err) {
+      res.status(500).json(err)
+    }
+  },
 }
 
 module.exports = requestController
