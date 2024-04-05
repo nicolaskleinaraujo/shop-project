@@ -1,2 +1,2 @@
-# ladia-project
+# shop-project
  ...
