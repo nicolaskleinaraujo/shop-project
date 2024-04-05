@@ -74,18 +74,22 @@ const userController = {
       return
     }
 
-    const user = await prisma.user.findUnique({
-      where: {
-        id,
-      },
-    })
-
-    if (!user) {
-      res.status(400).json({ msg: "Usuario inexistente" })
-      return
+    try {
+      const user = await prisma.user.findUnique({
+        where: {
+          id,
+        },
+      })
+  
+      if (!user) {
+        res.status(400).json({ msg: "Usuario inexistente" })
+        return
+      }
+  
+      res.status(200).json(user)
+    } catch (err) {
+      res.status(500).json(err)
     }
-
-    res.status(200).json(user)
   },
 
   update: async (req, res) => {

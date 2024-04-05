@@ -45,29 +45,29 @@ const requestController = {
   getById: async (req, res) => {
     const id = parseInt(req.params.id)
 
-    if(isNaN(id)) {
-        res.status(400).json({ msg: "ID não especificado" })
-        return
+    if (isNaN(id)) {
+      res.status(400).json({ msg: "ID não especificado" })
+      return
     }
 
     try {
-        const request = await prisma.request.findUnique({
-            where: {
-                id
-            },
-            include: {
-                author: true
-            }
-        })
+      const request = await prisma.request.findUnique({
+        where: {
+          id,
+        },
+        include: {
+          author: true,
+        },
+      })
 
-        if (!request) {
-            res.status(400).json({ msg: "Pedido inexistente" })
-            return
-        }
-    
-        res.status(200).json(request)
+      if (!request) {
+        res.status(400).json({ msg: "Pedido inexistente" })
+        return
+      }
+
+      res.status(200).json(request)
     } catch (err) {
-        res.status(500).json(err)
+      res.status(500).json(err)
     }
   },
 }
