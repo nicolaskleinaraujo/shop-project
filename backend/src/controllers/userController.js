@@ -80,12 +80,12 @@ const userController = {
           id,
         },
       })
-  
+
       if (!user) {
         res.status(400).json({ msg: "Usuario inexistente" })
         return
       }
-  
+
       res.status(200).json(user)
     } catch (err) {
       res.status(500).json(err)
@@ -177,24 +177,29 @@ const userController = {
       return
     }
 
-    const user = await prisma.user.findUnique({
-      where: {
-        id,
-      },
-    })
+    try {
+      const user = await prisma.user.findUnique({
+        where: {
+          id,
+        },
+      })
 
-    if (!user) {
-      res.status(400).json({ msg: "Usuario inexistente" })
-      return
-    }
-    
-    await prisma.user.delete({
-      where: {
-        id
+      if (!user) {
+        res.status(400).json({ msg: "Usuario inexistente" })
+        return
       }
-    })
-    res.status(200).json({ msg: "Usuario deletado com sucesso" })
-  }
+
+      await prisma.user.delete({
+        where: {
+          id,
+        },
+      })
+      
+      res.status(200).json({ msg: "Usuario deletado com sucesso" })
+    } catch (err) {
+      res.status(500).json(err)
+    }
+  },
 }
 
 module.exports = userController
