@@ -1,6 +1,7 @@
 // Imports
 const prisma = require("../db/client")
 const bcrypt = require("bcryptjs")
+const jwt = require("jsonwebtoken")
 
 const userController = {
   create: async (req, res) => {
@@ -194,11 +195,50 @@ const userController = {
           id,
         },
       })
-      
+
       res.status(200).json({ msg: "Usuario deletado com sucesso" })
     } catch (err) {
       res.status(500).json(err)
     }
+  },
+
+  login: async (req, res) => {
+    const email = req.body.email
+    const password = req.body.password
+
+    if (email === "" || password === "") {
+      res.status(400).json({ msg: "Informações insuficientes" })
+      return
+    }
+
+    const user = await prisma.user.findUnique({
+      where: {
+        email,
+      },
+    })
+
+    if (!user) {
+      res.status(400).json({ msg: "Login incorreto" })
+      return
+    }
+
+    const testPassword = bcrypt.compareSync(password, user.password)
+
+    if (!testPassword) {
+      res.status(400).json({ msg: "Login incorreto" })
+      return
+    }
+
+    const token = jwt.sign(
+      {
+        id: user.id,
+        email: user.email,
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: "120h" }
+    )
+
+    res.status(200).json({ msg: "Loggado com sucesso", token })
   },
 }
 
