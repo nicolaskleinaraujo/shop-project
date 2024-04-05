@@ -2,9 +2,11 @@
 const express = require("express")
 const app = express()
 const cors = require("cors")
+const cookieParser = require("cookie-parser")
 const port = process.env.PORT || 3000
 
 // Configs
+app.use(cookieParser(process.env.COOKIE_PARSER_SECRET))
 app.use(express.json())
 app.use(
   cors({

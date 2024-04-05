@@ -244,7 +244,7 @@ const userController = {
         process.env.JWT_SECRET,
         { expiresIn: "120h" }
       )
-  
+
       res.status(200).json({ msg: "Logado com sucesso", token })
     } catch (err) {
       res.status(500).json(err)
