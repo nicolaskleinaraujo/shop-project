@@ -8,11 +8,13 @@ const requestController = {
     const items = req.body.items
     const details = req.body.details
 
+    // Checks if some info is missing
     if (isNaN(authorId) || items === "") {
       res.status(400).json({ msg: "Informações insuficientes" })
       return
     }
 
+    // Checks for existing user
     const user = await prisma.user.findUnique({
       where: {
         id: authorId,
@@ -37,6 +39,30 @@ const requestController = {
       res.status(200).json({ msg: "Pedido feito com sucesso" })
     } catch (err) {
       res.status(500).json(err)
+    }
+  },
+
+  getById: async (req, res) => {
+    const id = parseInt(req.params.id)
+
+    if(isNaN(id)) {
+        res.status(400).json({ msg: "ID não especificado" })
+        return
+    }
+
+    try {
+        const request = await prisma.request.findUnique({
+            where: {
+                id
+            },
+            include: {
+                author: true
+            }
+        })
+    
+        res.status(200).json(request)
+    } catch (err) {
+        res.status(400).json({ msg: "Pedido inexistente" })
     }
   },
 }
