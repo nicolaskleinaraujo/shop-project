@@ -1,4 +1,5 @@
 // Imports
+const { json } = require("body-parser")
 const prisma = require("../db/client")
 
 const itemController = {
@@ -84,6 +85,34 @@ const itemController = {
         },
       })
       res.status(200).json({ msg: `${name} atualizado com sucesso` })
+    } catch (err) {
+      res.status(500).json(err)
+    }
+  },
+
+  delete: async (req, res) => {
+    const id = parseInt(req.params.id)
+
+    if (isNaN(id)) {
+      res.status(400).json({ msg: "ID não especificado" })
+      return
+    }
+
+    try {
+      const item = await prisma.item.findUnique({
+        where: { id },
+      })
+
+      if (!item) {
+        res.status(400).json({ msg: "Item inexistente" })
+        return
+      }
+
+      await prisma.item.delete({
+        where: { id },
+      })
+
+      res.status(200).json({ msg: "item deletado com sucesso" })
     } catch (err) {
       res.status(500).json(err)
     }
