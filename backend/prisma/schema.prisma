@@ -16,6 +16,8 @@ model User {
   city     String
   street   String
   houseNum Int
+  jwt      String
+  isAdmin  Boolean   @default(false)
   requests Request[]
 }
 
