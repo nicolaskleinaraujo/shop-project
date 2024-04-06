@@ -19,6 +19,13 @@ model User {
   requests Request[]
 }
 
+model Item {
+  id          Int    @id @default(autoincrement())
+  name        String
+  description String
+  value       Int
+}
+
 model Request {
   id       Int     @id @default(autoincrement())
   slug     String  @unique
