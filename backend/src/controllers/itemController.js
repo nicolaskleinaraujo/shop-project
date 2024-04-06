@@ -31,6 +31,30 @@ const itemController = {
       res.status(500).json(err)
     }
   },
+
+  getById: async (req, res) => {
+    const id = parseInt(req.params.id)
+
+    if (isNaN(id)) {
+      res.status(400).json({ msg: "ID não especificado" })
+      return
+    }
+
+    try {
+      const item = await prisma.item.findUnique({
+        where: { id },
+      })
+
+      if (!item) {
+        res.status(400).json({ msg: "Item inexistente" })
+        return
+      }
+
+      res.status(200).json(item)
+    } catch (err) {
+      res.status(500).json(err)
+    }
+  },
 }
 
 module.exports = itemController
