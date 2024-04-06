@@ -5,7 +5,7 @@ const itemController = {
   create: async (req, res) => {
     const name = req.body.name
     const description = req.body.description
-    const value = parseInt(req.body.value)
+    const value = parseFloat(req.body.value)
 
     if (
       name === "" ||
@@ -19,7 +19,7 @@ const itemController = {
     }
 
     try {
-      prisma.item.create({
+      await prisma.item.create({
         data: {
           name,
           description,
