@@ -1,7 +1,6 @@
 // Imports
 const prisma = require("../db/client")
 const bcrypt = require("bcryptjs")
-const { json } = require("body-parser")
 const jwt = require("jsonwebtoken")
 
 const userController = {
