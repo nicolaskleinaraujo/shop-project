@@ -1,5 +1,4 @@
 // Imports
-const { json } = require("body-parser")
 const prisma = require("../db/client")
 
 const itemController = {
