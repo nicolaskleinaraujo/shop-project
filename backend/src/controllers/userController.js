@@ -49,6 +49,11 @@ const userController = {
     const salt = bcrypt.genSaltSync(10)
     const hash = bcrypt.hashSync(password, salt)
 
+    // Creating the JWT
+    const token = jwt.sign({ email: email }, process.env.JWT_SECRET, {
+      expiresIn: "120h",
+    })
+
     try {
       await prisma.user.create({
         data: {
@@ -59,7 +64,13 @@ const userController = {
           city,
           street,
           houseNum,
+          jwt: token,
         },
+      })
+
+      res.cookie("jwt", token, {
+        httpOnly: true,
+        maxAge: 120 * 60 * 60 * 1000, // 120 hours = 5 days
       })
       res.status(200).json({ msg: "Usuario criado com sucesso" })
     } catch (err) {
