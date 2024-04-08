@@ -246,19 +246,29 @@ const userController = {
         return
       }
 
-      const token = jwt.sign(
-        {
-          id: user.id,
-          email: user.email,
-        },
-        process.env.JWT_SECRET,
-        { expiresIn: "120h" }
-      )
+      res.status(200).json({ msg: "Logado com sucesso" })
+    } catch (err) {
+      res.status(500).json(err)
+    }
+  },
 
-      res.cookie("jwt", token, {
-        httpOnly: true,
-        maxAge: 120 * 60 * 60 * 1000, // 120 hours = 5 days
-      })
+  tryAuth: async (req, res) => {
+    const jwtCookie = req.cookies.jwt
+    const signature = req.signedCookies.jwt
+
+    if (!jwtCookie || !signature) {
+      res.status(400).json({ msg: "Não possui cookie jwt" })
+      return
+    }
+
+    try {
+      const decode = jwt.verify(jwtCookie, process.env.JWT_SECRET)
+
+      if (jwtCookie != signature || !decode) {
+        res.status(400).json({ msg: "Cookie não autenticado" })
+        return
+      }
+
       res.status(200).json({ msg: "Logado com sucesso" })
     } catch (err) {
       res.status(500).json(err)
