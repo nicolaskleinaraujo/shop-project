@@ -51,7 +51,7 @@ const userController = {
 
     // Creating the JWT
     const token = jwt.sign({ email: email }, process.env.JWT_SECRET, {
-      expiresIn: "1s",
+      expiresIn: "120h",
     })
 
     try {
@@ -247,6 +247,24 @@ const userController = {
         return
       }
 
+      const token = jwt.sign({ email: email }, process.env.JWT_SECRET, {
+        expiresIn: "120h",
+      })
+
+      await prisma.user.update({
+        where: {
+          email,
+        },
+        data: {
+          jwt: token,
+        },
+      })
+      
+      res.cookie("jwt", token, {
+        httpOnly: true,
+        signed: true,
+        maxAge: 120 * 60 * 60 * 1000, // 120 hours = 5 days
+      })
       res.status(200).json({ msg: "Logado com sucesso" })
     } catch (err) {
       res.status(500).json(err)
