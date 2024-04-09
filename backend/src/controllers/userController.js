@@ -70,6 +70,7 @@ const userController = {
 
       res.cookie("jwt", token, {
         httpOnly: true,
+        signed: true,
         maxAge: 120 * 60 * 60 * 1000, // 120 hours = 5 days
       })
       res.status(200).json({ msg: "Usuario criado com sucesso" })
