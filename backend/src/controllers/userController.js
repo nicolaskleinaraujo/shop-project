@@ -105,7 +105,7 @@ const userController = {
     }
   },
 
-  update: async (req, res, next) => {
+  update: async (req, res) => {
     const id = parseInt(req.body.id)
     const fullName = req.body.fullName
     const email = req.body.email

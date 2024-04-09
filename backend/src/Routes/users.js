@@ -6,7 +6,7 @@ const cookieAuth = require("../middlewares/cookieAuth")
 // Routes
 router.route("/user/create").post((req, res) => userController.create(req, res))
 router.route("/user/tryauth").get((req, res) => userController.tryAuth(req, res))
-router.route("/user/:id").get((req, res) => userController.getById(req, res))
+router.route("/user/:id").get(cookieAuth, (req, res) => userController.getById(req, res))
 router.route("/user/update").post(cookieAuth, (req, res) => userController.update(req, res))
 router.route("/user/:id").delete(cookieAuth, (req, res) => userController.delete(req, res))
 router.route("/user/login").post((req, res) => userController.login(req, res))
