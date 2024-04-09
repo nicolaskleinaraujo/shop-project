@@ -2,6 +2,7 @@
 const prisma = require("../db/client")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
+const cookieAuth = require("../middlewares/cookieAuth")
 
 const userController = {
   create: async (req, res) => {
@@ -105,7 +106,9 @@ const userController = {
     }
   },
 
-  update: async (req, res) => {
+  update: async (req, res, next) => {
+    cookieAuth(req, res, next)
+
     const id = parseInt(req.body.id)
     const fullName = req.body.fullName
     const email = req.body.email
