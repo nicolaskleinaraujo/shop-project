@@ -32,3 +32,5 @@ async function adminAuth(req, res, next) {
     res.status(500).json(err)
   }
 }
+
+module.exports = adminAuth
