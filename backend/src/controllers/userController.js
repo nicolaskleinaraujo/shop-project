@@ -51,7 +51,7 @@ const userController = {
 
     // Creating the JWT
     const token = jwt.sign({ email: email }, process.env.JWT_SECRET, {
-      expiresIn: "120h",
+      expiresIn: "1s",
     })
 
     try {
@@ -254,21 +254,20 @@ const userController = {
   },
 
   tryAuth: async (req, res) => {
-    const jwtCookie = req.cookies.jwt
-    const signature = req.signedCookies.jwt
+    const jwtCookie = req.signedCookies.jwt
 
-    if (!jwtCookie || !signature) {
+    if (!jwtCookie) {
       res.status(400).json({ msg: "Não possui cookie jwt" })
       return
     }
 
     try {
-      const decode = jwt.verify(jwtCookie, process.env.JWT_SECRET)
-
-      if (jwtCookie != signature || !decode) {
-        res.status(400).json({ msg: "Cookie não autenticado" })
-        return
-      }
+      jwt.verify(jwtCookie, process.env.JWT_SECRET, (err) => {
+        if (err) {
+          res.status(400).json({ msg: "Cookie não autenticado" })
+          return
+        }
+      })
 
       res.status(200).json({ msg: "Logado com sucesso" })
     } catch (err) {
