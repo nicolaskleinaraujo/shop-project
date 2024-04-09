@@ -2,11 +2,12 @@
 const router = require("express").Router()
 const requestController = require("../controllers/requestController")
 const cookieAuth = require("../middlewares/cookieAuth")
+const authorAuth = require("../middlewares/authorAuth")
 
 // Routes
 router.route("/request/create").post(cookieAuth, (req, res) => requestController.create(req, res))
-router.route("/request/:id").get((req, res) => requestController.getById(req, res))
-router.route("/request/update").post((req, res) => requestController.update(req, res))
-router.route("/request/:id").delete((req, res) => requestController.delete(req, res))
+router.route("/request/:id").get(cookieAuth, (req, res) => requestController.getById(req, res))
+router.route("/request/update").post(authorAuth, (req, res) => requestController.update(req, res))
+router.route("/request/:id").delete(authorAuth, (req, res) => requestController.delete(req, res))
 
 module.exports = router
