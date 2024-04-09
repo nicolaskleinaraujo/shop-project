@@ -5,6 +5,10 @@ const cors = require("cors")
 const cookieParser = require("cookie-parser")
 const port = process.env.PORT || 3000
 
+const users = require("./Routes/users")
+const requests = require("./Routes/requests")
+const items = require("./Routes/items")
+
 // Configs
 app.use(cookieParser(process.env.COOKIE_PARSER_SECRET))
 app.use(express.json())
@@ -19,14 +23,8 @@ app.use(
 app.get("/", (req, res) => {
   res.send("Bem-vindo a minha API, consulte o projeto para mais informações!")
 })
-
-const users = require("./Routes/users")
 app.use("/", users)
-
-const requests = require("./Routes/requests")
 app.use("/", requests)
-
-const items = require("./Routes/items")
 app.use("/", items)
 
 app.listen(port, () => {
