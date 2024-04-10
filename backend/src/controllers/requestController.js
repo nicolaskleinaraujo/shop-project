@@ -8,7 +8,7 @@ const requestController = {
     const items = req.body.items
     const details = req.body.details
 
-    // Checks if some info is missing
+    // Checks for missing info
     if (isNaN(authorId) || items === "") {
       res.status(400).json({ msg: "Informações insuficientes" })
       return
@@ -27,7 +27,9 @@ const requestController = {
     }
 
     try {
+      // Create slug based on user name and the actual date
       const slug = slugify(user.fullName + " " + Date.now(), { lower: true })
+
       await prisma.request.create({
         data: {
           authorId,
@@ -76,6 +78,7 @@ const requestController = {
     const items = req.body.items
     const details = req.body.details
 
+    // Checks for missing info
     if (isNaN(id) || items === "" || items === undefined) {
       res.status(400).json({ msg: "Informações insuficientes" })
       return
@@ -106,6 +109,7 @@ const requestController = {
     }
 
     try {
+      // Checks for existing request
       const request = await prisma.request.findUnique({
         where: {
           id,
