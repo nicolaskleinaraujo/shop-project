@@ -16,7 +16,7 @@ model User {
   city     String
   street   String
   houseNum Int
-  jwt      String
+  jwt      String    @unique
   isAdmin  Boolean   @default(false)
   requests Request[]
 }
@@ -29,10 +29,11 @@ model Item {
 }
 
 model Request {
-  id       Int     @id @default(autoincrement())
-  slug     String  @unique
-  author   User    @relation(fields: [authorId], references: [id])
-  authorId Int
-  items    String
-  details  String?
+  id        Int     @id @default(autoincrement())
+  slug      String  @unique
+  author    User    @relation(fields: [authorId], references: [id])
+  authorId  Int
+  items     String
+  details   String?
+  delivered Boolean @default(false)
 }
