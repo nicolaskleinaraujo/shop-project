@@ -10,6 +10,7 @@ router.route("/request/create").post(cookieAuth, (req, res) => requestController
 router.route("/request/:id").get(cookieAuth, (req, res) => requestController.getById(req, res))
 router.route("/request/update").post(authorAuth, (req, res) => requestController.update(req, res))
 router.route("/request/:id").delete(authorAuth, (req, res) => requestController.delete(req, res))
+router.route("/request").get(adminAuth, (req, res) => requestController.getRequests(req, res))
 router.route("/request/:id").post(adminAuth, (req, res) => requestController.setDelivered(req, res))
 
 module.exports = router
