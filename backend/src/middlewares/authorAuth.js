@@ -12,6 +12,7 @@ async function authorAuth(req, res, next) {
   }
 
   try {
+    // Check if the jwt have expired
     jwt.verify(jwtCookie, process.env.JWT_SECRET, (err) => {
       if (err) {
         res.status(400).json({ msg: "Cookie não autenticado" })
@@ -19,6 +20,7 @@ async function authorAuth(req, res, next) {
       }
     })
 
+    // Search and check if the user exist
     const user = await prisma.user.findFirst({
       where: { jwt: jwtCookie },
     })
@@ -28,6 +30,7 @@ async function authorAuth(req, res, next) {
       return
     }
 
+    // Search and check if the request exist
     const request = await prisma.request.findUnique({
       where: { id: requestId },
     })
@@ -36,6 +39,7 @@ async function authorAuth(req, res, next) {
       res.status(400).json({ msg: "Pedido inexistente" })
     }
 
+    // Checks if the user is the author of the request
     if (user.id != request.authorId) {
         res.status(400).json({ msg: "Não é dono do pedido" })
         return
