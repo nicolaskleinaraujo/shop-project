@@ -11,6 +11,7 @@ async function cookieAuth(req, res, next) {
   }
 
   try {
+    // Check if the jwt have expired
     jwt.verify(jwtCookie, process.env.JWT_SECRET, (err) => {
       if (err) {
         res.status(400).json({ msg: "Cookie não autenticado" })
@@ -18,6 +19,7 @@ async function cookieAuth(req, res, next) {
       }
     })
 
+    // Search and check if the user exist
     const user = await prisma.user.findFirst({
       where: {
         jwt: jwtCookie,
