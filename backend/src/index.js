@@ -8,7 +8,6 @@ const port = process.env.PORT || 3000
 const users = require("./Routes/users")
 const requests = require("./Routes/requests")
 const items = require("./Routes/items")
-const admin = require("./Routes/admin")
 
 // Configs
 app.use(cookieParser(process.env.COOKIE_PARSER_SECRET))
