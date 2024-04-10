@@ -13,7 +13,7 @@ const userController = {
     const street = req.body.street
     const houseNum = req.body.houseNum
 
-    // Checks if some info is missing
+    // Checks for missing info
     if (
       fullName === "" ||
       email === "" ||
@@ -115,7 +115,7 @@ const userController = {
     const street = req.body.street
     const houseNum = req.body.houseNum
 
-    // Checks if some info is missing
+    // Checks for missing info
     if (
       isNaN(id) ||
       fullName === "" ||
@@ -130,7 +130,7 @@ const userController = {
       return
     }
 
-    // Checks if the email or the number is already cadastered in other user
+    // Checks if the email or the number is already cadastered
     const user = await prisma.user.findUnique({
       where: {
         id,
@@ -191,6 +191,7 @@ const userController = {
     }
 
     try {
+      // Search and delete user based on his id
       const user = await prisma.user.findUnique({
         where: {
           id,
@@ -208,6 +209,7 @@ const userController = {
         },
       })
 
+      // Clear the jwt cookie
       res.clearCookie("jwt")
       res.status(200).json({ msg: "Usuario deletado com sucesso" })
     } catch (err) {
@@ -219,6 +221,7 @@ const userController = {
     const email = req.body.email
     const password = req.body.password
 
+    // Checks for missing info
     if (
       email === "" ||
       email === undefined ||
@@ -241,6 +244,7 @@ const userController = {
         return
       }
 
+      // Testing the password with the hashed password
       const testPassword = bcrypt.compareSync(password, user.password)
 
       if (!testPassword) {
@@ -248,6 +252,7 @@ const userController = {
         return
       }
 
+      // Creating a new jwt token
       const token = jwt.sign({ email: email }, process.env.JWT_SECRET, {
         expiresIn: "120h",
       })
@@ -281,6 +286,7 @@ const userController = {
     }
 
     try {
+      // Check if the jwt have expired
       jwt.verify(jwtCookie, process.env.JWT_SECRET, (err) => {
         if (err) {
           res.status(400).json({ msg: "Cookie não autenticado" })
