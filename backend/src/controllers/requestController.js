@@ -132,6 +132,37 @@ const requestController = {
       res.status(500).json(err)
     }
   },
+
+  setDelivered: async (req, res) => {
+    const id = parseInt(req.params.id)
+
+    if (isNaN(id)) {
+      res.status(400).json({ msg: "ID não especificado" })
+      return
+    }
+
+    try {
+      // Checks for existing request
+      const request = await prisma.request.findUnique({
+        where: { id }
+      })
+
+      if (!request) {
+        res.status(400).json({ msg: "Pedido inexistente" })
+      }
+
+      const currentState = !request.delivered
+
+      await prisma.request.update({
+        where: { id },
+        data: { delivered: currentState}
+      })
+
+      res.status(200).json({ msg: "Pedido atualizado com sucesso" })
+    } catch (err) {
+      res.status(500).json(err)
+    }
+  }
 }
 
 module.exports = requestController
