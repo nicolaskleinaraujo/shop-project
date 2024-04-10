@@ -133,6 +133,15 @@ const requestController = {
     }
   },
 
+  getRequests: async (req, res) => {
+    try {
+      const requests = await prisma.request.findMany()
+      res.status(200).json(requests)
+    } catch (err) {
+      res.status(500).json(err)
+    }
+  },
+
   setDelivered: async (req, res) => {
     const id = parseInt(req.params.id)
 
