@@ -26,7 +26,6 @@ app.get("/", (req, res) => {
 app.use("/", users)
 app.use("/", requests)
 app.use("/", items)
-app.use("/", admin)
 
 app.listen(port, () => {
   console.log("Server running!")
