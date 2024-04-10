@@ -116,6 +116,15 @@ const itemController = {
       res.status(500).json(err)
     }
   },
+
+  getAll: async (req, res) => {
+    try {
+      const items = await prisma.item.findMany()
+      res.status(200).json(items)
+    } catch (err) {
+      res.status(500).json(err)
+    }
+  }
 }
 
 module.exports = itemController
