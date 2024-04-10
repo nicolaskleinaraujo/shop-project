@@ -7,6 +7,7 @@ const itemController = {
     const description = req.body.description
     const value = parseFloat(req.body.value)
 
+    // Checks for missing info
     if (
       name === "" ||
       name === undefined ||
@@ -41,6 +42,7 @@ const itemController = {
     }
 
     try {
+      // Checks for existing item
       const item = await prisma.item.findUnique({
         where: { id },
       })
@@ -62,6 +64,7 @@ const itemController = {
     const description = req.body.description
     const value = parseFloat(req.body.value)
 
+    // Checks for missing info
     if (
       isNaN(id) ||
       name === "" ||
@@ -75,6 +78,7 @@ const itemController = {
     }
 
     try {
+      // Update item based on his id
       await prisma.item.update({
         where: { id },
         data: {
@@ -98,6 +102,7 @@ const itemController = {
     }
 
     try {
+      // Find and delete item by his id
       const item = await prisma.item.findUnique({
         where: { id },
       })
