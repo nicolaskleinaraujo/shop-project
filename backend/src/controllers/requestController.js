@@ -149,6 +149,7 @@ const requestController = {
 
       if (!request) {
         res.status(400).json({ msg: "Pedido inexistente" })
+        return
       }
 
       const currentState = !request.delivered
