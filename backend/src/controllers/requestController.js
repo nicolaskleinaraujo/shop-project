@@ -157,6 +157,27 @@ const requestController = {
     }
   },
 
+  getBySlug: async (req, res) => {
+    const slug = req.params.slug
+    const jwtCookie = req.signedCookies.jwt
+
+    if (!jwtCookie || !slug) {
+      res.status(400).json({ msg: "Informações insuficientes" })
+      return
+    }
+
+    try {
+      const slugRequest = await prisma.request.findUnique({
+        where: { slug },
+        include: { author }
+      })
+
+      res.status(200).json(slugRequest)
+    } catch (err) {
+      res.status(500).json(err)
+    }
+  },
+
   getRequests: async (req, res) => {
     try {
       const requests = await prisma.request.findMany()
