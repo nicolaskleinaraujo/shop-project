@@ -133,6 +133,30 @@ const requestController = {
     }
   },
 
+  getByUser: async (req, res) => {
+    const jwtCookie = req.signedCookies.jwt
+
+    if (!jwtCookie) {
+      res.status(400).json({ msg: "Não possui cookie jwt" })
+      return
+    }
+
+    try {
+      const userRequests = await prisma.request.findMany({
+        where: { author: { jwt: jwtCookie } },
+      })
+
+      if (!userRequests) {
+        res.status(400).json({ msg: "Não possui nenhum pedido" })
+        return
+      }
+
+      res.status(200).json(userRequests)
+    } catch (err) {
+      res.status(500).json(err)
+    }
+  },
+
   getRequests: async (req, res) => {
     try {
       const requests = await prisma.request.findMany()
@@ -153,7 +177,7 @@ const requestController = {
     try {
       // Checks for existing request
       const request = await prisma.request.findUnique({
-        where: { id }
+        where: { id },
       })
 
       if (!request) {
@@ -165,14 +189,14 @@ const requestController = {
 
       await prisma.request.update({
         where: { id },
-        data: { delivered: currentState}
+        data: { delivered: currentState },
       })
 
       res.status(200).json({ msg: "Pedido atualizado com sucesso" })
     } catch (err) {
       res.status(500).json(err)
     }
-  }
+  },
 }
 
 module.exports = requestController
