@@ -45,6 +45,7 @@ async function authorAuth(req, res, next) {
 
     if (!request) {
       res.status(400).json({ msg: "Pedido inexistente" })
+      return
     }
 
     // Checks if the user is the author of the request
