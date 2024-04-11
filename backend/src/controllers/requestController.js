@@ -169,9 +169,14 @@ const requestController = {
     try {
       const slugRequest = await prisma.request.findUnique({
         where: { slug },
-        include: { author }
+        include: { author: true },
       })
 
+      if (slugRequest.author.jwt != jwtCookie) {
+        res.status(400).json({ msg: "Usuario não é autor do pedido" })
+        return
+      }
+  
       res.status(200).json(slugRequest)
     } catch (err) {
       res.status(500).json(err)
