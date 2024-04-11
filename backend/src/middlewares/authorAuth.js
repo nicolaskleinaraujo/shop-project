@@ -4,11 +4,19 @@ const jwt = require("jsonwebtoken")
 
 async function authorAuth(req, res, next) {
   const jwtCookie = req.signedCookies.jwt
-  const requestId = parseInt(req.body.id)
+  const requestBody = parseInt(req.body.id)
+  const requestParams = parseInt(req.params.id)
 
-  if (!jwtCookie || !requestId) {
+  if (!jwtCookie || (isNaN(requestBody) && isNaN(requestParams))) {
     res.status(400).json({ msg: "Informações insuficientes" })
     return
+  }
+
+  // Assigning the right value to the ID
+  if (isNaN(requestBody)) {
+    var id = requestParams
+  } else if (isNaN(requestParams)) {
+    var id = requestBody
   }
 
   try {
@@ -21,7 +29,7 @@ async function authorAuth(req, res, next) {
     })
 
     // Search and check if the user exist
-    const user = await prisma.user.findFirst({
+    const user = await prisma.user.findUnique({
       where: { jwt: jwtCookie },
     })
 
@@ -32,7 +40,7 @@ async function authorAuth(req, res, next) {
 
     // Search and check if the request exist
     const request = await prisma.request.findUnique({
-      where: { id: requestId },
+      where: { id },
     })
 
     if (!request) {
@@ -41,8 +49,8 @@ async function authorAuth(req, res, next) {
 
     // Checks if the user is the author of the request
     if (user.id != request.authorId) {
-        res.status(400).json({ msg: "Não é dono do pedido" })
-        return
+      res.status(400).json({ msg: "Não é dono do pedido" })
+      return
     }
 
     next()
