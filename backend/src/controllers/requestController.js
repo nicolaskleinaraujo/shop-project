@@ -172,6 +172,11 @@ const requestController = {
         include: { author: true },
       })
 
+      if (!slugRequest) {
+        res.status(400).json({ msg: "Pedido inexistente" })
+        return
+      }
+
       if (slugRequest.author.jwt != jwtCookie) {
         res.status(400).json({ msg: "Usuario não é autor do pedido" })
         return
