@@ -1,9 +1,13 @@
+// CSS
 import './App.css'
+
+// Router
+import Router from './utils/Router'
 
 function App() {
   return (
     <>
-      <h1>Bem vindo a minha loja</h1>
+      <Router />
     </>
   )
 }
