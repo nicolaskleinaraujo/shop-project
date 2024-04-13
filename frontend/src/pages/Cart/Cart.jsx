@@ -43,13 +43,17 @@ const Cart = () => {
     <div className={styles.cart}>
       <h1>Seu carrinho</h1>
 
-      {items &&
-        items.map((item, index) => (
-          <div key={index}>
-            {item} | R$ {values[index]} | <button onClick={() => removeItem(index)}>deletar</button>
-          </div>
-        ))
-      }
+      <div className={styles.cart_items}>
+        {items &&
+          items.map((item, index) => (
+            <div key={index}>
+              <p>{item} | </p>
+              <p className={styles.cart_value}>R$ {values[index]} | </p>
+              <button onClick={() => removeItem(index)}>Remover</button>
+            </div>
+          ))
+        }
+      </div>
     </div>
   )
 }

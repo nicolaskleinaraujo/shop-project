@@ -1,0 +1,29 @@
+.cart {
+    text-align: center;
+}
+
+.cart_items div {
+    display: flex;
+    justify-content: center;
+    margin: 1em;
+}
+
+.cart_items div * {
+    margin: .3em;
+}
+
+.cart_value {
+    color: #40ad6c;
+}
+
+.cart_items div button {
+    border: 1px solid black;
+    border-radius: .3em;
+    padding: .2em;
+    transition: .3s;
+}
+
+.cart_items div button:hover {
+    color: white;
+    background-color: #ED1B22;
+}
