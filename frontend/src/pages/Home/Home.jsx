@@ -13,12 +13,12 @@ const Home = () => {
     setItems(res.data)
   }
 
-  const addToCart = (productName) => {
+  const addToCart = (productId) => {
     const cart = localStorage.getItem("cart")
     if (!cart) {
-      localStorage.setItem("cart", productName)
+      localStorage.setItem("cart", productId)
     } else if (cart) {
-      localStorage.setItem("cart", `${cart}, ${productName}`)
+      localStorage.setItem("cart", `${cart}, ${productId}`)
     }
   }
 
@@ -34,7 +34,7 @@ const Home = () => {
             <p className={styles.name}>{item.name}</p>
             <p className={styles.value}>R$ {item.value}</p>
             <p className={styles.description}>{item.description}</p>
-            <button onClick={() => addToCart(item.name)}>Adicionar ao carrinho</button>
+            <button onClick={() => addToCart(item.id)}>Adicionar ao carrinho</button>
           </div>
         ))}
     </div>
