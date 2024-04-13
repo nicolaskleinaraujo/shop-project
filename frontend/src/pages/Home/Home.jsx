@@ -31,9 +31,9 @@ const Home = () => {
       {items &&
         items.map((item) => (
           <div key={item.id}>
-            <p className={styles.name}>{item.name}</p>
-            <p className={styles.value}>R$ {item.value}</p>
-            <p className={styles.description}>{item.description}</p>
+            <p className={styles.home_name}>{item.name}</p>
+            <p className={styles.home_value}>R$ {item.value}</p>
+            <p className={styles.home_description}>{item.description}</p>
             <button onClick={() => addToCart(item.id)}>Adicionar ao carrinho</button>
           </div>
         ))}

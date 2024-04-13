@@ -18,15 +18,15 @@
     border-radius: .3em;
 }
 
-.name {
+.home_name {
     margin-bottom: .5em;
 }
 
-.value {
+.home_value {
     color: #40ad6c;
 }
 
-.description {
+.home_description {
     margin-bottom: .8em;
     max-height: 2em;
     overflow: hidden;
