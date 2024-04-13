@@ -12,6 +12,14 @@ const Cart = () => {
 
   const getItems = async () => {
     const storedCart = localStorage.getItem("cart")
+
+    if (storedCart.length === 0) {
+      setItems([])
+      setValues([])
+      setLoading(false)
+      return
+    }
+
     const itemsId = storedCart.split(", ")
 
     const promises = itemsId.map(async (itemId) => {
