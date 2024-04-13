@@ -2,6 +2,10 @@
     text-align: center;
 }
 
+.cart h1 {
+    margin-top: .5em;
+}
+
 .cart_items div {
     display: flex;
     justify-content: center;
