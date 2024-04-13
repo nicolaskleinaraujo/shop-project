@@ -6,6 +6,7 @@ import Navbar from "../components/Navbar/Navbar"
 
 // Pages
 import Home from "../pages/Home/Home"
+import Cart from "../pages/Cart/Cart"
 
 const Router = () => {
   return (
@@ -14,6 +15,7 @@ const Router = () => {
             <Navbar />
             <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/my-cart" element={<Cart />} />
             </Routes>
         </BrowserRouter>
     </>
