@@ -26,18 +26,27 @@ const Cart = () => {
     setValues(valuesArray)
   }
 
+  const removeItem = (index) => {
+    const storedCart = localStorage.getItem("cart")
+    const itemsId = storedCart.split(", ")
+    itemsId.splice(index, 1)
+
+    const newCart = itemsId.join(", ")
+    localStorage.setItem("cart", newCart)
+  }
+
   useEffect(() => {
     getItems()
   }, [])
 
   return (
-    <div>
-      <h1>Cart</h1>
+    <div className={styles.cart}>
+      <h1>Seu carrinho</h1>
 
       {items &&
         items.map((item, index) => (
           <div key={index}>
-            {item} | R$ {values[index]}
+            {item} | R$ {values[index]} | <button onClick={() => removeItem(index)}>deletar</button>
           </div>
         ))
       }
