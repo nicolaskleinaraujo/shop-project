@@ -13,13 +13,26 @@ const Home = () => {
         setItems(res.data)
     }
 
+    const addToCart = () => {
+        console.log("teste")
+    }
+
     useEffect(() => {
         getItems()
     }, [])
 
     return (
         <div>
-            <h1>Home</h1>
+            {items && (
+                items.map((item) => (
+                    <div key={item.id}>
+                        {item.name} <br />
+                        {item.value} <br />
+                        {item.description} <br />
+                        <button onClick={() => addToCart()}>Adicionar ao carrinho</button>
+                    </div>
+                ))
+            )}
         </div>
     )
 }
