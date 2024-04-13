@@ -26,9 +26,9 @@ const Home = () => {
             {items && (
                 items.map((item) => (
                     <div key={item.id}>
-                        <p>{item.name}</p>
-                        <p>{item.value}</p>
-                        <p>{item.description}</p>
+                        <p className={styles.name}>{item.name}</p>
+                        <p className={styles.value}>R$ {item.value}</p>
+                        <p className={styles.description}>{item.description}</p>
                         <button onClick={() => addToCart()}>Adicionar ao carrinho</button>
                     </div>
                 ))
