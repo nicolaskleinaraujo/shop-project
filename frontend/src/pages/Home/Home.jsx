@@ -13,8 +13,13 @@ const Home = () => {
         setItems(res.data)
     }
 
-    const addToCart = () => {
-        console.log("teste")
+    const addToCart = (productName) => {
+        const cart = localStorage.getItem("cart")
+        if (!cart) {
+            localStorage.setItem("cart", productName)
+        } else if (cart) {
+            localStorage.setItem("cart", `${cart}, ${productName}`)
+        }
     }
 
     useEffect(() => {
@@ -29,7 +34,7 @@ const Home = () => {
                         <p className={styles.name}>{item.name}</p>
                         <p className={styles.value}>R$ {item.value}</p>
                         <p className={styles.description}>{item.description}</p>
-                        <button onClick={() => addToCart()}>Adicionar ao carrinho</button>
+                        <button onClick={() => addToCart(item.name)}>Adicionar ao carrinho</button>
                     </div>
                 ))
             )}
