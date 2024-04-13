@@ -1,0 +1,19 @@
+.navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ED1B22;
+    padding: .5em;
+}
+
+.search {
+    margin-right: 2.5em;
+}
+
+.navbar div img {
+    vertical-align: middle;
+}
+
+.menu {
+    margin-left: 2.5em;
+}
