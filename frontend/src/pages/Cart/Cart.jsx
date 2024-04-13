@@ -8,12 +8,13 @@ import { useState, useEffect } from "react"
 const Cart = () => {
   const [items, setItems] = useState([])
   const [values, setValues] = useState([])
+  const [loading, setLoading] = useState(true)
 
-  const getItems = async() => {
+  const getItems = async () => {
     const storedCart = localStorage.getItem("cart")
     const itemsId = storedCart.split(", ")
 
-    const promises = itemsId.map(async(itemId) => {
+    const promises = itemsId.map(async (itemId) => {
       const res = await dbFetch.get(`/item/${itemId}`)
       return res.data
     })
@@ -24,6 +25,7 @@ const Cart = () => {
 
     setItems(itemsArray)
     setValues(valuesArray)
+    if (loading) { setLoading(false) }
   }
 
   const removeItem = (index) => {
@@ -33,11 +35,13 @@ const Cart = () => {
 
     const newCart = itemsId.join(", ")
     localStorage.setItem("cart", newCart)
+
+    setLoading(true)
   }
 
   useEffect(() => {
     getItems()
-  }, [])
+  }, [loading])
 
   return (
     <div className={styles.cart}>
@@ -51,8 +55,7 @@ const Cart = () => {
               <p className={styles.cart_value}>R$ {values[index]} | </p>
               <button onClick={() => removeItem(index)}>Remover</button>
             </div>
-          ))
-        }
+          ))}
       </div>
     </div>
   )
