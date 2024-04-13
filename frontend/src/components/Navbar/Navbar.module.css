@@ -15,5 +15,9 @@
 }
 
 .menu {
-    margin-left: 2.5em;
+    margin-left: 2em;
+}
+
+.menu a:last-child {
+    margin-left: .5em;
 }
