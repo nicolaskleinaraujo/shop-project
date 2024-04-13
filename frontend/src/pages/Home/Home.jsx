@@ -22,13 +22,13 @@ const Home = () => {
     }, [])
 
     return (
-        <div>
+        <div className={styles.home}>
             {items && (
                 items.map((item) => (
                     <div key={item.id}>
-                        {item.name} <br />
-                        {item.value} <br />
-                        {item.description} <br />
+                        <p>{item.name}</p>
+                        <p>{item.value}</p>
+                        <p>{item.description}</p>
                         <button onClick={() => addToCart()}>Adicionar ao carrinho</button>
                     </div>
                 ))

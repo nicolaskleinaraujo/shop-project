@@ -1,0 +1,13 @@
+.home {
+    display: grid;
+    grid-auto-rows: 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 0.3em;
+}
+
+.home div {
+    background-color: rgb(228, 227, 227);
+    padding: 0.2em;
+    overflow: hidden;
+    border-radius: 0.3em;
+}
