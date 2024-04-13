@@ -11,7 +11,7 @@ const Navbar = () => {
             <div><Link to="/"><img src="https://via.placeholder.com/50x50" alt="Logo do Site" /></Link></div>
             <div className={styles.menu}>
                 <Link to="/my-cart">CA</Link> 
-                <Link to="/">US</Link>
+                <Link to="/login">US</Link>
             </div>
         </nav>
     )
