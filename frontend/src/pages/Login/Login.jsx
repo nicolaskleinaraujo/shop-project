@@ -4,7 +4,7 @@ import styles from "./Login.module.css"
 // Modules
 import dbFetch from "../../axios/config"
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 
 const Login = () => {
   const navigate = useNavigate()
@@ -27,9 +27,10 @@ const Login = () => {
   }
 
   return (
-    <div>
+    <div className={styles.login}>
       <form onSubmit={handleLogin}>
         <h1>Login</h1>
+        <p>Faça seu login para fazer seus pedidos</p>
 
         <input
           type="email"
@@ -46,6 +47,8 @@ const Login = () => {
         />
 
         <input type="submit" value="Logar" />
+
+        <p>Não possui conta? <Link to="/">Criar</Link></p>
       </form>
     </div>
   )
