@@ -1,0 +1,39 @@
+.register {
+    display: flex;
+    height: 80vh;
+    text-align: center;
+}
+
+.register form {
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+    height: 65vh;
+    margin: auto;
+    justify-content: center;
+    padding: 1em;
+    background-color: rgb(236, 235, 235);
+    border-radius: .4em;
+}
+
+.register form h1,
+.register form p {
+    margin-bottom: .8em;
+}
+
+.register form input,
+.register form button {
+    width: 65vw;
+    margin: 0em auto .5em;
+    border: 1px solid black;
+    padding: .5em;
+    border-radius: .3em;
+}
+
+.register form p:last-child {
+    margin-top: 1.5em;
+}
+
+.register form p a {
+    color: black;
+}

@@ -19,7 +19,7 @@ const Register = () => {
     const [houseNumber, setHouseNumber] = useState("")
 
   return (
-    <div>
+    <div className={styles.register}>
         <form>
             <h1>Criar conta</h1>
             <p>Crie sua conta para fazer seus pedidos</p>
