@@ -48,7 +48,7 @@ const Login = () => {
 
         <input type="submit" value="Logar" />
 
-        <p>Não possui conta? <Link to="/">Criar</Link></p>
+        <p>Não possui conta? <Link to="/register">Criar</Link></p>
       </form>
     </div>
   )
