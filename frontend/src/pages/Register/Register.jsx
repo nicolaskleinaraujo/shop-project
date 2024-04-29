@@ -7,20 +7,41 @@ import { useState } from "react"
 import { useNavigate, Link } from "react-router-dom"
 
 const Register = () => {
+    const navigate = useNavigate()
     const [step, setStep] = useState(0)
 
     const [fullName, setFullName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
-    const [number, setNumber] = useState("")
+    const [number, setNumber] = useState()
     const [city, setCity] = useState("")
     const [street, setStreet] = useState("")
-    const [houseNumber, setHouseNumber] = useState("")
+    const [houseNum, setHouseNum] = useState()
+
+    const handleRegister = async(e) => {
+        e.preventDefault()
+
+        try {
+            await dbFetch.post("/user/create", {
+                fullName,
+                email,
+                password,
+                number: parseInt(number),
+                city,
+                street,
+                houseNum: parseInt(houseNum),
+            })
+
+            navigate("/")
+        } catch (err) {
+            console.log(err)
+        }
+    }
 
   return (
     <div className={styles.register}>
-        <form>
+        <form onSubmit={handleRegister}>
             <h1>Criar conta</h1>
             <p>Crie sua conta para fazer seus pedidos</p>
 
@@ -75,8 +96,8 @@ const Register = () => {
                     <input 
                         type="number" 
                         placeholder="N° da Casa" 
-                        onChange={(e) => setHouseNumber(e.target.value)} 
-                        value={houseNumber}
+                        onChange={(e) => setHouseNum(e.target.value)} 
+                        value={houseNum}
                     />
 
                     <button onClick={() => setStep(0)}>Voltar</button>
