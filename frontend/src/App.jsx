@@ -3,14 +3,20 @@ import './App.css'
 
 // Modules
 import dbFetch from './axios/config'
-import { useEffect } from 'react'
+import { useEffect, useContext } from 'react'
+
+// Context
+import { UserContext } from './context/UserContext'
 
 // Router
 import Router from './utils/Router'
 
 function App() {
+  const { setUserId } = useContext(UserContext)
+
   const tryAuth = async() => {
-    await dbFetch.get("/user/tryauth")
+    const res = await dbFetch.get("/user/tryauth")
+    setUserId(res.data.id)
   }
 
   useEffect(() => {
