@@ -3,9 +3,14 @@ import styles from "./Cart.module.css"
 
 // Modules
 import dbFetch from "../../axios/config"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
+
+// Context
+import { UserContext } from "../../context/UserContext"
 
 const Cart = () => {
+  const { userId } = useContext(UserContext)
+
   const [items, setItems] = useState([])
   const [values, setValues] = useState([])
   const [loading, setLoading] = useState(true)
@@ -47,6 +52,15 @@ const Cart = () => {
     setLoading(true)
   }
 
+  const createRequest = async() => {
+    
+
+    await dbFetch.post("/request/create", {
+      id: userId,
+      items: localStorage.getItem("cart"),
+    })
+  }
+
   useEffect(() => {
     getItems()
   }, [loading])
@@ -63,7 +77,9 @@ const Cart = () => {
               <p className={styles.cart_value}>R$ {values[index]} | </p>
               <button onClick={() => removeItem(index)}>Remover</button>
             </div>
-          ))}
+        ))}
+
+        <button onClick={() => createRequest()}>Efetuar Pedido</button>
       </div>
     </div>
   )
