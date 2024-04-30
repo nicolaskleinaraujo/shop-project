@@ -15,7 +15,7 @@ const Login = () => {
     e.preventDefault()
 
     try {
-      const res = await dbFetch.post("/user/login", {
+      await dbFetch.post("/user/login", {
         email,
         password,
       })
