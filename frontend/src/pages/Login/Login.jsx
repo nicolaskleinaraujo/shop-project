@@ -3,11 +3,16 @@ import styles from "./Login.module.css"
 
 // Modules
 import dbFetch from "../../axios/config"
-import { useState } from "react"
+import { useState, useContext } from "react"
 import { useNavigate, Link } from "react-router-dom"
+
+// Context
+import { UserContext } from "../../context/UserContext"
 
 const Login = () => {
   const navigate = useNavigate()
+  const { setUserId } = useContext(UserContext)
+
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
@@ -15,11 +20,12 @@ const Login = () => {
     e.preventDefault()
 
     try {
-      await dbFetch.post("/user/login", {
+      const res = await dbFetch.post("/user/login", {
         email,
         password,
       })
 
+      setUserId(res.data.id)
       navigate("/")
     } catch (err) {
       console.log(err)
