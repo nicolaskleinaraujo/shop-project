@@ -1,5 +1,5 @@
 // Modules
-import { Children, createContext, useState } from "react"
+import { createContext, useState } from "react"
 
 // Context
 export const UserContext = createContext()
