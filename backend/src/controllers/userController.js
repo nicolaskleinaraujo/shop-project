@@ -271,7 +271,7 @@ const userController = {
         signed: true,
         maxAge: 120 * 60 * 60 * 1000, // 120 hours = 5 days
       })
-      res.status(200).json({ msg: "Logado com sucesso" })
+      res.status(200).json({ msg: "Logado com sucesso", id: user.id })
     } catch (err) {
       res.status(500).json(err)
     }
@@ -294,7 +294,17 @@ const userController = {
         }
       })
 
-      res.status(200).json({ msg: "Logado com sucesso" })
+      // Checks if user exist
+      const user = await prisma.user.findUnique({
+        where: { jwt: jwtCookie }
+      })
+
+      if (!user) {
+        res.status(400).json({ msg: "Usuario inexistente" })
+        return
+      }
+
+      res.status(200).json({ msg: "Logado com sucesso", id: user.id })
     } catch (err) {
       res.status(500).json(err)
     }
