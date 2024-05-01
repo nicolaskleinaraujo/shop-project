@@ -60,10 +60,12 @@ const Cart = () => {
       await dbFetch.post("/request/create", {
         id: userId,
         items: requestItems,
+        details,
       })
 
       localStorage.removeItem("cart")
       setItems("")
+      setDetails("")
     } catch (err) {
       console.log(err)
     }
@@ -90,6 +92,7 @@ const Cart = () => {
         <textarea 
           cols="30" 
           rows="10" 
+          placeholder="Observações..." 
           onChange={(e) => setDetails(e.target.value)} 
           value={details}
         ></textarea>
