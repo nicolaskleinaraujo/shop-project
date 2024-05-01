@@ -13,6 +13,7 @@ const Cart = () => {
 
   const [items, setItems] = useState([])
   const [values, setValues] = useState([])
+  const [details, setDetails] = useState("")
   const [loading, setLoading] = useState(true)
 
   const getItems = async () => {
@@ -85,6 +86,13 @@ const Cart = () => {
               <button onClick={() => removeItem(index)}>Remover</button>
             </div>
         ))}
+
+        <textarea 
+          cols="30" 
+          rows="10" 
+          onChange={(e) => setDetails(e.target.value)} 
+          value={details}
+        ></textarea>
 
         <button onClick={() => createRequest()}>Efetuar Pedido</button>
       </div>
