@@ -1,0 +1,17 @@
+.footer {
+    font-size: .8em;
+    text-align: center;
+    padding: 1em .5em;
+    color: white;
+    background-color: #ED1B22;
+}
+
+.footer p {
+    margin: .8em 0;
+}
+
+.footer a {
+    color: white;
+    text-decoration: underline;
+    font-size: 1em;
+}
