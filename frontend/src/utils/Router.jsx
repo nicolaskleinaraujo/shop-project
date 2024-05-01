@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 // Components
 import Navbar from "../components/Navbar/Navbar"
+import Footer from "../components/Footer/Footer"
 
 // Pages
 import Home from "../pages/Home/Home"
@@ -21,6 +22,7 @@ const Router = () => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
             </Routes>
+            <Footer />
         </BrowserRouter>
     </>
   )
