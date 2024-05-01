@@ -11,6 +11,7 @@ import Cart from "../pages/Cart/Cart"
 import Login from "../pages/Login/Login"
 import Register from "../pages/Register/Register"
 import RequestByUser from "../pages/RequestByUser/RequestByUser"
+import RequestBySlug from "../pages/RequestBySlug/RequestBySlug"
 
 const Router = () => {
   return (
@@ -23,6 +24,7 @@ const Router = () => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/requests" element={<RequestByUser />} />
+                <Route path="/request/:slug" element={<RequestBySlug />} />
             </Routes>
             <Footer />
         </BrowserRouter>
