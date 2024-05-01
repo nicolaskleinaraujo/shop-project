@@ -4,6 +4,7 @@ import styles from "./RequestByUser.module.css"
 // Modules
 import dbFetch from "../../axios/config"
 import { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
 
 const RequestByUser = () => {
     const [requests, setRequests] = useState([])
@@ -25,7 +26,7 @@ const RequestByUser = () => {
 
             {requests && (
                 requests.map((request) => (
-                    <p key={request.id}>{request.items}</p>
+                    <p key={request.id}>{request.items} - <Link to={`/request/${request.slug}`}>VER MAIS</Link></p>
                 ))
             )}
         </div>
