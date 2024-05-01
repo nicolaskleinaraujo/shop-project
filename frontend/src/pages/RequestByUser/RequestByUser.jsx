@@ -22,8 +22,6 @@ const RequestByUser = () => {
         <div>
             <h1>RequestByUser</h1>
 
-            <button onClick={() => console.log(items)}>TESTE</button>
-
             {requests && (
                 requests.map((request) => (
                     <p key={request.id}>{request.items} - <Link to={`/request/${request.slug}`}>VER MAIS</Link></p>
