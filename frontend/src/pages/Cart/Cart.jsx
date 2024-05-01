@@ -53,11 +53,11 @@ const Cart = () => {
   }
 
   const createRequest = async() => {
-    
+    const requestItems = items.join(", ")
 
     await dbFetch.post("/request/create", {
       id: userId,
-      items: localStorage.getItem("cart"),
+      items: requestItems,
     })
   }
 
