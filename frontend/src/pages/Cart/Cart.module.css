@@ -20,14 +20,24 @@
     color: #40ad6c;
 }
 
-.cart_items div button {
+.cart_items div button,
+.cart_request button {
     border: 1px solid black;
     border-radius: .3em;
     padding: .2em;
     transition: .3s;
 }
 
-.cart_items div button:hover {
+.cart_items div button:hover,
+.cart_request button:hover {
     color: white;
     background-color: #ED1B22;
+}
+
+.cart_request textarea {
+    display: block;
+    margin: 1.2em auto;
+    border: 1px solid black;
+    border-radius: .3em;
+    text-indent: .2em;
 }

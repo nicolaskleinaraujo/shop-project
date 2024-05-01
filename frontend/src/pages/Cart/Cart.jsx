@@ -88,10 +88,12 @@ const Cart = () => {
               <button onClick={() => removeItem(index)}>Remover</button>
             </div>
         ))}
+      </div>
 
+      <div className={styles.cart_request}>
         <textarea 
-          cols="30" 
-          rows="10" 
+          cols="20" 
+          rows="4" 
           placeholder="Observações..." 
           onChange={(e) => setDetails(e.target.value)} 
           value={details}
