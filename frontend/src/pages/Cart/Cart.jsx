@@ -55,10 +55,17 @@ const Cart = () => {
   const createRequest = async() => {
     const requestItems = items.join(", ")
 
-    await dbFetch.post("/request/create", {
-      id: userId,
-      items: requestItems,
-    })
+    try {
+      await dbFetch.post("/request/create", {
+        id: userId,
+        items: requestItems,
+      })
+
+      localStorage.removeItem("cart")
+      setItems("")
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   useEffect(() => {
