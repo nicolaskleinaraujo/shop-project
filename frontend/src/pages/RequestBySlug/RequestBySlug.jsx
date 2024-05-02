@@ -23,18 +23,20 @@ const RequestBySlug = () => {
     }, [])
 
     return (
-        <div>
+        <div className={styles.request_by_slug}>
             <h1>Pedido {request.id}</h1>
 
-            {items &&
-                items.map((item, index) => (
-                    <p key={index}>{item}</p>
-                ))
-            }
+            <div>
+                {items &&
+                    items.map((item, index) => (
+                        <p key={index}>{item}</p>
+                    ))
+                }
 
-            <p>{request.value}</p>
+                <p className={styles.request_by_slug_value}>R${request.value}</p>
 
-            { request.details && <p>{request.details}</p> }
+                { request.details && <p>OBS: {request.details}</p> }
+            </div>
         </div>
     )
 }
