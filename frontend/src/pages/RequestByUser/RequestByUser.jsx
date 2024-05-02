@@ -30,15 +30,15 @@ const RequestByUser = () => {
     }, [loading])
 
     return (
-        <div>
+        <div className={styles.request_by_user}>
             <h1>Pedidos</h1>
 
             {requests && (
                 requests.map((request) => (
                     <div key={request.id}>
-                        <p>{request.items} | {request.value}</p>
+                        <p>{request.items} | R${request.value}</p>
 
-                        { request.details && <p>{request.details}</p> }
+                        { request.details && <p>OBS: {request.details}</p> }
 
                         <p>
                             <Link to={`/request/${request.slug}`}>Ver Pedido</Link> | 

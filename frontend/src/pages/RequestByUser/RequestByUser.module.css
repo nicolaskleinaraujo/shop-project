@@ -1,0 +1,30 @@
+.request_by_user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.request_by_user h1 {
+    margin: .5em;
+}
+
+.request_by_user div {
+    text-align: left;
+}
+
+.request_by_user div p {
+    margin: .3em;
+}
+
+.request_by_user div p a {
+    color: black;
+}
+
+.request_by_user div p button {
+    border: 1px solid black;
+    border-radius: .3em;
+    padding: .2em;
+    transition: .3s;
+    margin-left: .2em;
+}
