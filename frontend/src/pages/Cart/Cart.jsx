@@ -4,12 +4,14 @@ import styles from "./Cart.module.css"
 // Modules
 import dbFetch from "../../axios/config"
 import { useState, useEffect, useContext } from "react"
+import { useNavigate } from "react-router-dom"
 
 // Context
 import { UserContext } from "../../context/UserContext"
 
 const Cart = () => {
   const { userId } = useContext(UserContext)
+  const navigate = useNavigate()
 
   const [items, setItems] = useState([])
   const [values, setValues] = useState([])
@@ -66,6 +68,8 @@ const Cart = () => {
       localStorage.removeItem("cart")
       setItems("")
       setDetails("")
+
+      navigate("/requests")
     } catch (err) {
       console.log(err)
     }
