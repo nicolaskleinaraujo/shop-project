@@ -57,12 +57,14 @@ const Cart = () => {
 
   const createRequest = async() => {
     const requestItems = items.join(", ")
+    const requestValue = values.reduce((accumulator, current) => accumulator + current, 0)
 
     try {
       await dbFetch.post("/request/create", {
         id: userId,
         items: requestItems,
         details,
+        value: requestValue,
       })
 
       localStorage.removeItem("cart")
