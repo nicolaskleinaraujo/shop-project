@@ -7,9 +7,10 @@ const requestController = {
     const authorId = parseInt(req.body.id)
     const items = req.body.items
     const details = req.body.details
+    const value = parseFloat(req.body.value)
 
     // Checks for missing info
-    if (isNaN(authorId) || items === "") {
+    if (isNaN(authorId) || items === "" || isNaN(price)) {
       res.status(400).json({ msg: "Informações insuficientes" })
       return
     }
@@ -35,6 +36,7 @@ const requestController = {
           authorId,
           items,
           details,
+          value,
           slug,
         },
       })
