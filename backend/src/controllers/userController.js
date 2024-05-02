@@ -277,6 +277,15 @@ const userController = {
     }
   },
 
+  leave: async (req, res) => {
+    try {
+      res.clearCookie("jwt")
+      res.status(200).json({ msg: "Sessão Finalizada" })
+    } catch (err) {
+      res.status(500).json(err)
+    }
+  },
+
   tryAuth: async (req, res) => {
     const jwtCookie = req.signedCookies.jwt
 
