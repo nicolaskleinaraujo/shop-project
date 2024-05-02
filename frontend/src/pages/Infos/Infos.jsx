@@ -1,12 +1,95 @@
 // CSS
 import styles from "./Infos.module.css"
 
+// Modules
+import dbFetch from "../../axios/config"
+import { useState, useEffect } from "react"
+
 const Infos = () => {
-  return (
-    <div>
-        <h1>Infos</h1>
-    </div>
-  )
+    const [step, setStep] = useState(0)
+
+    const [fullName, setFullName] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+
+    const [number, setNumber] = useState()
+    const [city, setCity] = useState("")
+    const [street, setStreet] = useState("")
+    const [houseNum, setHouseNum] = useState()
+
+    const updateInfos = async(e) => {
+        e.preventDefault()
+
+        console.log("teste")
+    }
+
+    return (
+        <div className={styles.infos}>
+            <form onSubmit={updateInfos}>
+                <h1>Infos</h1>
+
+                {step === 0 ? (
+                    <>
+                        <input 
+                            type="text" 
+                            placeholder="Nome completo" 
+                            onChange={(e) => setFullName(e.target.value)} 
+                            value={fullName} 
+                        />
+
+                        <input 
+                            type="email" 
+                            placeholder="Email" 
+                            onChange={(e) => setEmail(e.target.value)} 
+                            value={email} 
+                        />
+
+                        <input 
+                            type="password" 
+                            placeholder="Senha" 
+                            onChange={(e) => setPassword(e.target.value)} 
+                            value={password} 
+                        />
+
+                        <button onClick={() => setStep(1)}>Continuar</button>
+                    </>
+                ) : (
+                    <>
+                        <input 
+                            type="number" 
+                            placeholder="N° de Telefone" 
+                            onChange={(e) => setNumber(e.target.value)} 
+                            value={number} 
+                        />
+
+                        <input 
+                            type="text" 
+                            placeholder="Cidade" 
+                            onChange={(e) => setCity(e.target.value)} 
+                            value={city}
+                        />
+
+                        <input 
+                            type="text" 
+                            placeholder="Rua" 
+                            onChange={(e) => setStreet(e.target.value)} 
+                            value={street}
+                        />
+
+                        <input 
+                            type="number" 
+                            placeholder="N° da Casa" 
+                            onChange={(e) => setHouseNum(e.target.value)} 
+                            value={houseNum}
+                        />
+
+                        <input type="submit" value="Atualizar" />
+                        <button onClick={() => setStep(0)}>Voltar</button>
+                    </>
+                )}
+            </form>
+        </div>
+    )
 }
 
 export default Infos
