@@ -4,18 +4,28 @@ import styles from "./User.module.css"
 // Modules
 import dbFetch from "../../axios/config"
 import { useEffect, useState, useContext } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 // Context
 import { UserContext } from '../../context/UserContext'
 
 const User = () => {
     const { userId } = useContext(UserContext)
+    const navigate = useNavigate()
     const [admin, setAdmin] = useState(false)
 
     const isAdmin = async() => {
         const res = await dbFetch.get(`/user/${userId}`)
         setAdmin(res.data.isAdmin)
+    }
+
+    const deleteAccount = async() => {
+        try {
+            await dbFetch.delete(`/user/${userId}`)
+            navigate("/register")
+        } catch (err) {
+            console.log(err)
+        }
     }
 
     useEffect(() => {
@@ -28,6 +38,7 @@ const User = () => {
             <Link to="/requests">Pedidos</Link>
             <Link to="/infos">Mudar Informações</Link>
             { admin && <Link to="/admin">Página de Admin</Link> }
+            <button onClick={() => deleteAccount()}>Deletar Conta</button>
         </div>
     )
 }
