@@ -1,0 +1,27 @@
+.user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.user h1 {
+    margin: .5em;
+}
+
+.user a {
+    color: black;
+    margin: .5em;
+}
+
+.user button {
+    border: 1px solid black;
+    border-radius: .3em;
+    padding: .2em;
+    transition: .3s;
+    margin-top: .3em;
+}
+
+.user button:hover {
+    color: white;
+    background-color: #ED1B22;
+}

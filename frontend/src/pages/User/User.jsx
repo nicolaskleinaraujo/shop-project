@@ -33,11 +33,11 @@ const User = () => {
     }, [])
 
     return (
-        <div>
+        <div className={styles.user}>
             <h1>Perfil</h1>
             <Link to="/requests">Pedidos</Link>
-            <Link to="/infos">Mudar Informações</Link>
             { admin && <Link to="/admin">Página de Admin</Link> }
+            <Link to="/infos">Atualizar Dados</Link>
             <button onClick={() => deleteAccount()}>Deletar Conta</button>
         </div>
     )
