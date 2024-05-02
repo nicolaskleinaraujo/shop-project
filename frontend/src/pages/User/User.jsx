@@ -20,11 +20,13 @@ const User = () => {
     }
 
     const deleteAccount = async() => {
-        try {
-            await dbFetch.delete(`/user/${userId}`)
-            navigate("/register")
-        } catch (err) {
-            console.log(err)
+        if (confirm("Deseja deletar sua conta?")) {
+            try {
+                await dbFetch.delete(`/user/${userId}`)
+                navigate("/register")
+            } catch (err) {
+                console.log(err)
+            }
         }
     }
 
