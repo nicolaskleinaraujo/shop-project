@@ -14,6 +14,14 @@ const RequestByUser = () => {
         setRequests(res.data)
     }
 
+    const cancelRequest = async(id) => {
+        try {
+            await dbFetch.delete(`/request/delete/${id}`)
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
     useEffect(() => {
         getRequests()
     }, [])
@@ -24,7 +32,16 @@ const RequestByUser = () => {
 
             {requests && (
                 requests.map((request) => (
-                    <p key={request.id}>{request.items} - <Link to={`/request/${request.slug}`}>VER MAIS</Link></p>
+                    <div key={request.id}>
+                        <p>{request.items} | {request.value}</p>
+
+                        { request.details && <p>{request.details}</p> }
+
+                        <p>
+                            <Link to={`/request/${request.slug}`}>Ver Pedido</Link> | 
+                            <button onClick={() => cancelRequest(request.id)}>Cancelar</button>
+                        </p>
+                    </div>
                 ))
             )}
         </div>
