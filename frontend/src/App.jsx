@@ -3,7 +3,7 @@ import './App.css'
 
 // Modules
 import dbFetch from './axios/config'
-import { useEffect, useContext } from 'react'
+import { useLayoutEffect, useContext } from 'react'
 
 // Context
 import { UserContext } from './context/UserContext'
@@ -19,7 +19,7 @@ function App() {
     setUserId(res.data.id)
   }
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     tryAuth()
   }, [])
 
