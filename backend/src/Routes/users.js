@@ -11,7 +11,7 @@ router.route("/user/:id").get(cookieAuth, (req, res) => userController.getById(r
 router.route("/user/update").post(cookieAuth, (req, res) => userController.update(req, res))
 router.route("/user/:id").delete(cookieAuth, (req, res) => userController.delete(req, res))
 router.route("/user/login").post((req, res) => userController.login(req, res))
-router.route("/user/leave").get(cookieAuth, (req, res) => userController.leave(req, res))
+router.route("/user/leave").post(cookieAuth, (req, res) => userController.leave(req, res))
 router.route("/user").get(adminAuth, (req, res) => userController.getUsers(req, res))
 
 module.exports = router
