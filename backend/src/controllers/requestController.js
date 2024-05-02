@@ -79,9 +79,10 @@ const requestController = {
     const id = parseInt(req.body.id)
     const items = req.body.items
     const details = req.body.details
+    const value = parseFloat(req.body.value)
 
     // Checks for missing info
-    if (isNaN(id) || items === "" || items === undefined) {
+    if (isNaN(id) || items === "" || items === undefined || isNaN(value)) {
       res.status(400).json({ msg: "Informações insuficientes" })
       return
     }
@@ -94,6 +95,7 @@ const requestController = {
         data: {
           items,
           details,
+          value,
         },
       })
       res.status(200).json({ msg: "Pedido atualizado com sucesso" })
