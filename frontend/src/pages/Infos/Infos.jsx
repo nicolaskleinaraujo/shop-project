@@ -4,12 +4,14 @@ import styles from "./Infos.module.css"
 // Modules
 import dbFetch from "../../axios/config"
 import { useState, useEffect, useContext } from "react"
+import { useNavigate } from "react-router-dom"
 
 // Context
 import { UserContext } from "../../context/UserContext"
 
 const Infos = () => {
     const { userId } = useContext(UserContext)
+    const navigate = useNavigate()
     const [step, setStep] = useState(0)
 
     const [fullName, setFullName] = useState("")
@@ -37,7 +39,22 @@ const Infos = () => {
     const updateInfos = async(e) => {
         e.preventDefault()
 
-        console.log("teste")
+        try {
+            await dbFetch.post("/user/update", {
+                id: userId,
+                fullName,
+                email,
+                password,
+                number: parseInt(number),
+                city,
+                street,
+                houseNum: parseInt(houseNum),
+            })
+
+            navigate("/")
+        } catch (err) {
+            console.log(err)
+        }
     }
 
     useEffect(() => {
