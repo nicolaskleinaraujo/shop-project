@@ -10,9 +10,14 @@ const RequestBySlug = () => {
     const { slug } = useParams()
 
     const [request, setRequest] = useState([])
+    const [items, setItems] = useState([])
+    
     const getRequest = async() => {
         const res = await dbFetch.get(`/request/slug/${slug}`)
+        const itemsArray = res.data.items
+
         setRequest(res.data)
+        setItems(itemsArray.split(", "))
     }
 
     useEffect(() => {
@@ -22,7 +27,11 @@ const RequestBySlug = () => {
     return (
         <div>
             <h1>Request By Slug</h1>
-            <button onClick={() => console.log(request)}>teste</button>
+            {items &&
+                items.map((item, index) => (
+                    <p key={index}>{item}</p>
+                ))
+            }
         </div>
     )
 }
