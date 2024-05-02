@@ -35,5 +35,6 @@ model Request {
   authorId  Int
   items     String
   details   String?
+  value     Float
   delivered Boolean @default(false)
 }
