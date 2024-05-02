@@ -14,10 +14,8 @@ const RequestBySlug = () => {
     
     const getRequest = async() => {
         const res = await dbFetch.get(`/request/slug/${slug}`)
-        const itemsArray = res.data.items
-
         setRequest(res.data)
-        setItems(itemsArray.split(", "))
+        setItems(res.data.items.split(", "))
     }
 
     useEffect(() => {
@@ -26,12 +24,17 @@ const RequestBySlug = () => {
 
     return (
         <div>
-            <h1>Request By Slug</h1>
+            <h1>Pedido {request.id}</h1>
+
             {items &&
                 items.map((item, index) => (
                     <p key={index}>{item}</p>
                 ))
             }
+
+            <p>{request.value}</p>
+
+            { request.details && <p>{request.details}</p> }
         </div>
     )
 }
