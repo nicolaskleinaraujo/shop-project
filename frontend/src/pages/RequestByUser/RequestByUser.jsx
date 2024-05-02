@@ -7,16 +7,19 @@ import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 
 const RequestByUser = () => {
+    const [loading, setLoading] = useState(true)
     const [requests, setRequests] = useState([])
 
     const getRequests = async() => {
         const res = await dbFetch.get("/request/user")
         setRequests(res.data)
+        if (loading) { setLoading(false) }
     }
 
     const cancelRequest = async(id) => {
         try {
             await dbFetch.delete(`/request/delete/${id}`)
+            setLoading(true)
         } catch (err) {
             console.log(err)
         }
@@ -24,11 +27,11 @@ const RequestByUser = () => {
 
     useEffect(() => {
         getRequests()
-    }, [])
+    }, [loading])
 
     return (
         <div>
-            <h1>RequestByUser</h1>
+            <h1>Pedidos</h1>
 
             {requests && (
                 requests.map((request) => (
