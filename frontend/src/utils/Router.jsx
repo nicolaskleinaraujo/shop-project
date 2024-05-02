@@ -13,6 +13,7 @@ import Register from "../pages/Register/Register"
 import RequestByUser from "../pages/RequestByUser/RequestByUser"
 import RequestBySlug from "../pages/RequestBySlug/RequestBySlug"
 import User from "../pages/User/User"
+import Infos from "../pages/Infos/Infos"
 
 const Router = () => {
   return (
@@ -27,6 +28,7 @@ const Router = () => {
                 <Route path="/requests" element={<RequestByUser />} />
                 <Route path="/request/:slug" element={<RequestBySlug />} />
                 <Route path="/user" element={<User />} />
+                <Route path="/infos" element={<Infos />} />
             </Routes>
             <Footer />
         </BrowserRouter>
