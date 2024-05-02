@@ -10,7 +10,7 @@ const requestController = {
     const value = parseFloat(req.body.value)
 
     // Checks for missing info
-    if (isNaN(authorId) || items === "" || isNaN(price)) {
+    if (isNaN(authorId) || items === "" || isNaN(value)) {
       res.status(400).json({ msg: "Informações insuficientes" })
       return
     }
