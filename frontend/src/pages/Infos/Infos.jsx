@@ -3,9 +3,13 @@ import styles from "./Infos.module.css"
 
 // Modules
 import dbFetch from "../../axios/config"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
+
+// Context
+import { UserContext } from "../../context/UserContext"
 
 const Infos = () => {
+    const { userId } = useContext(UserContext)
     const [step, setStep] = useState(0)
 
     const [fullName, setFullName] = useState("")
@@ -17,11 +21,28 @@ const Infos = () => {
     const [street, setStreet] = useState("")
     const [houseNum, setHouseNum] = useState()
 
+    const getInfos = async() => {
+        const res = await dbFetch.get(`/user/${userId}`)
+
+        setFullName(res.data.fullName)
+        setEmail(res.data.email)
+        setPassword(res.data.password)
+
+        setNumber(res.data.number)
+        setCity(res.data.city)
+        setStreet(res.data.street)
+        setHouseNum(res.data.houseNum)
+    }
+
     const updateInfos = async(e) => {
         e.preventDefault()
 
         console.log("teste")
     }
+
+    useEffect(() => {
+        getInfos()
+    }, [])
 
     return (
         <div className={styles.infos}>
