@@ -6,8 +6,8 @@ import { Link } from "react-router-dom"
 
 const Admin = () => {
   return (
-    <div>
-        <h1>Admin</h1>
+    <div className={styles.admin}>
+        <h1>Página de Admin</h1>
 
         <Link to="/all-users">Ver Usuarios</Link>
         <Link to="/all-requests">Ver Pedidos</Link>

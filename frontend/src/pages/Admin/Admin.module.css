@@ -1,0 +1,14 @@
+.admin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.admin h1 {
+    margin: .5em;
+}
+
+.admin a {
+    margin: .3em;
+    color: black;
+}
