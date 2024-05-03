@@ -149,11 +149,14 @@ const userController = {
       },
     })
 
-    if (searchEmail != null || searchNumber != null) {
-      if (searchEmail.id != user.id || searchNumber.id != user.id) {
-        res.status(400).json({ msg: "Email ou numero já cadastrado" })
-        return
-      }
+    if (searchEmail != null && searchEmail.id != user.id) {
+      res.status(400).json({ msg: "Email já cadastrado" })
+      return
+    }
+
+    if (searchNumber != null && searchNumber.id != user.id) {
+      res.status(400).json({ msg: "Numero já cadastrado" })
+      return
     }
 
     // Hashing the password
