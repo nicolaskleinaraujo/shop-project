@@ -14,6 +14,7 @@ import RequestByUser from "../pages/RequestByUser/RequestByUser"
 import RequestBySlug from "../pages/RequestBySlug/RequestBySlug"
 import User from "../pages/User/User"
 import Infos from "../pages/Infos/Infos"
+import Admin from "../pages/Admin/Admin"
 
 const Router = () => {
   return (
@@ -29,6 +30,7 @@ const Router = () => {
                 <Route path="/request/:slug" element={<RequestBySlug />} />
                 <Route path="/user" element={<User />} />
                 <Route path="/infos" element={<Infos />} />
+                <Route path="/admin" element={<Admin />} />
             </Routes>
             <Footer />
         </BrowserRouter>
