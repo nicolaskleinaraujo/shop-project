@@ -28,7 +28,6 @@ const Infos = () => {
 
         setFullName(res.data.fullName)
         setEmail(res.data.email)
-        setPassword(res.data.password)
 
         setNumber(res.data.number)
         setCity(res.data.city)
