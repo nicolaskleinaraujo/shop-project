@@ -90,6 +90,7 @@ const Infos = () => {
                             placeholder="Senha" 
                             onChange={(e) => setPassword(e.target.value)} 
                             value={password} 
+                            required 
                         />
 
                         <button onClick={() => setStep(1)}>Continuar</button>
