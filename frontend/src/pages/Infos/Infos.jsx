@@ -38,6 +38,10 @@ const Infos = () => {
     const updateInfos = async(e) => {
         e.preventDefault()
 
+        if (password === "") {
+            return
+        }
+
         try {
             await dbFetch.post("/user/update", {
                 id: userId,
