@@ -1,5 +1,6 @@
 // Modules
 import { BrowserRouter, Routes, Route } from "react-router-dom"
+import AdminRoute from "./AdminRoute"
 
 // Components
 import Navbar from "../components/Navbar/Navbar"
@@ -30,7 +31,10 @@ const Router = () => {
                 <Route path="/request/:slug" element={<RequestBySlug />} />
                 <Route path="/user" element={<User />} />
                 <Route path="/infos" element={<Infos />} />
-                <Route path="/admin" element={<Admin />} />
+
+                <Route element={<AdminRoute />} >
+                  <Route path="/admin" element={<Admin />} />
+                </Route>
             </Routes>
             <Footer />
         </BrowserRouter>
