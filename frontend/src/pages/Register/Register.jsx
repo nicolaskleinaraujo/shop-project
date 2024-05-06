@@ -3,11 +3,15 @@ import styles from "./Register.module.css"
 
 // Modules
 import dbFetch from "../../axios/config"
-import { useState } from "react"
+import { useState, useContext } from "react"
 import { useNavigate, Link } from "react-router-dom"
+
+// Context
+import { UserContext } from "../../context/UserContext"
 
 const Register = () => {
     const navigate = useNavigate()
+    const { setUserId } = useContext(UserContext)
     const [step, setStep] = useState(0)
 
     const [fullName, setFullName] = useState("")
@@ -23,7 +27,7 @@ const Register = () => {
         e.preventDefault()
 
         try {
-            await dbFetch.post("/user/create", {
+            const res = await dbFetch.post("/user/create", {
                 fullName,
                 email,
                 password,
@@ -33,6 +37,7 @@ const Register = () => {
                 houseNum: parseInt(houseNum),
             })
 
+            setUserId(res.data.id)
             navigate("/")
         } catch (err) {
             console.log(err)
