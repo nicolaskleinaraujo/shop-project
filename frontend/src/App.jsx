@@ -19,7 +19,8 @@ function App() {
   const tryAuth = async() => {
     const res = await dbFetch.get("/user/tryauth")
     setUserId(res.data.id)
-    const admin = await dbFetch.get(`/user/${userId}`)
+
+    const admin = await dbFetch.get(`/user/${res.data.id}`)
     setAdmin(admin.data.isAdmin)
   }
 
