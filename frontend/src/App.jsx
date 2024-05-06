@@ -13,7 +13,7 @@ import { AdminContext } from "./context/AdminContext"
 import Router from './utils/Router'
 
 function App() {
-  const { userId, setUserId } = useContext(UserContext)
+  const { setUserId } = useContext(UserContext)
   const { setAdmin } = useContext(AdminContext)
 
   const tryAuth = async() => {
