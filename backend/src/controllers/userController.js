@@ -55,7 +55,7 @@ const userController = {
     })
 
     try {
-      await prisma.user.create({
+      const user = await prisma.user.create({
         data: {
           fullName,
           email,
@@ -73,7 +73,7 @@ const userController = {
         signed: true,
         maxAge: 120 * 60 * 60 * 1000, // 120 hours = 5 days
       })
-      res.status(200).json({ msg: "Usuario criado com sucesso" })
+      res.status(200).json({ msg: "Usuario criado com sucesso", id: user.id })
     } catch (err) {
       res.status(500).json(err)
     }
