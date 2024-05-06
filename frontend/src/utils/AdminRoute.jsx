@@ -23,3 +23,5 @@ const AdminRoute = () => {
 
     return auth ? <Outlet /> : <Navigate to="/" />
 }
+
+export default AdminRoute
