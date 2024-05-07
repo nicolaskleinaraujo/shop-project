@@ -8,10 +8,12 @@ import { useNavigate, Link } from "react-router-dom"
 
 // Context
 import { UserContext } from "../../context/UserContext"
+import { AdminContext } from "../../context/AdminContext"
 
 const Register = () => {
     const navigate = useNavigate()
     const { setUserId } = useContext(UserContext)
+    const { setAdmin } = useContext(AdminContext)
     const [step, setStep] = useState(0)
 
     const [fullName, setFullName] = useState("")
@@ -37,6 +39,7 @@ const Register = () => {
                 houseNum: parseInt(houseNum),
             })
 
+            setAdmin(res.data.isAdmin)
             setUserId(res.data.id)
             navigate("/")
         } catch (err) {
