@@ -8,19 +8,22 @@ import { Link } from "react-router-dom"
 
 const AllRequests = () => {
     const [requests, setRequests] = useState([])
+    const [loading, setLoading] = useState(true)
 
     const getAllRequests = async() => {
         const res = await dbFetch.get("/request")
         setRequests(res.data)
+        if (loading) {setLoading(false)}
     }
 
     const delivered = async(id) => {
         await dbFetch.post(`/request/delivered/${id}`)
+        setLoading(true)
     }
     
     useEffect(() => {
         getAllRequests()
-    }, [])
+    }, [loading])
 
     return (
         <div className={styles.all_requests}>
