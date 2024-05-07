@@ -73,7 +73,7 @@ const userController = {
         signed: true,
         maxAge: 120 * 60 * 60 * 1000, // 120 hours = 5 days
       })
-      res.status(200).json({ msg: "Usuario criado com sucesso", id: user.id })
+      res.status(200).json({ msg: "Usuario criado com sucesso", id: user.id, isAdmin: user.isAdmin })
     } catch (err) {
       res.status(500).json(err)
     }
@@ -273,7 +273,7 @@ const userController = {
         signed: true,
         maxAge: 120 * 60 * 60 * 1000, // 120 hours = 5 days
       })
-      res.status(200).json({ msg: "Logado com sucesso", id: user.id })
+      res.status(200).json({ msg: "Logado com sucesso", id: user.id, isAdmin: user.isAdmin })
     } catch (err) {
       res.status(500).json(err)
     }
@@ -315,7 +315,7 @@ const userController = {
         return
       }
 
-      res.status(200).json({ msg: "Logado com sucesso", id: user.id })
+      res.status(200).json({ msg: "Logado com sucesso", id: user.id, isAdmin: user.isAdmin })
     } catch (err) {
       res.status(500).json(err)
     }
