@@ -21,6 +21,7 @@ import AllUsers from "../pages/AllUsers/AllUsers"
 import AllRequests from "../pages/AllRequests/AllRequests"
 import Items from "../pages/Items/Items"
 import UpdateItem from "../pages/UpdateItem/UpdateItem"
+import CreateItem from "../pages/CreateItem/CreateItem"
 
 const Router = () => {
   return (
@@ -46,6 +47,7 @@ const Router = () => {
                   <Route path="/all-requests" element={<AllRequests />} />
                   <Route path="/items" element={<Items />} />
                   <Route path="/update-item/:id" element={<UpdateItem />} />
+                  <Route path="/create-item" element={<CreateItem />} /> 
                 </Route>
             </Routes>
             <Footer />
