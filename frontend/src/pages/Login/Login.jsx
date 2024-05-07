@@ -8,10 +8,12 @@ import { useNavigate, Link } from "react-router-dom"
 
 // Context
 import { UserContext } from "../../context/UserContext"
+import { AdminContext } from "../../context/AdminContext"
 
 const Login = () => {
   const navigate = useNavigate()
   const { setUserId } = useContext(UserContext)
+  const { setAdmin } = useContext(AdminContext)
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -26,6 +28,7 @@ const Login = () => {
       })
 
       setUserId(res.data.id)
+      setAdmin(res.data.isAdmin)
       navigate("/")
     } catch (err) {
       console.log(err)
