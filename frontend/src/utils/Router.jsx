@@ -20,6 +20,7 @@ import Admin from "../pages/Admin/Admin"
 import AllUsers from "../pages/AllUsers/AllUsers"
 import AllRequests from "../pages/AllRequests/AllRequests"
 import Items from "../pages/Items/Items"
+import UpdateItem from "../pages/UpdateItem/UpdateItem"
 
 const Router = () => {
   return (
@@ -44,7 +45,7 @@ const Router = () => {
                   <Route path="/all-users" element={<AllUsers />} />
                   <Route path="/all-requests" element={<AllRequests />} />
                   <Route path="/items" element={<Items />} />
-                  <Route path="/update-item/:id" />
+                  <Route path="/update-item/:id" element={<UpdateItem />} />
                 </Route>
             </Routes>
             <Footer />
