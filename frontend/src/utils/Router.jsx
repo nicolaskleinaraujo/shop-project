@@ -44,6 +44,7 @@ const Router = () => {
                   <Route path="/all-users" element={<AllUsers />} />
                   <Route path="/all-requests" element={<AllRequests />} />
                   <Route path="/items" element={<Items />} />
+                  <Route path="/update-item/:id" />
                 </Route>
             </Routes>
             <Footer />
