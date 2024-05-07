@@ -1,12 +1,46 @@
 // CSS
 import styles from "./CreateItem.module.css"
 
+// Modules
+import dbFetch from "../../axios/config"
+import { useState } from "react"
+
 const CreateItem = () => {
-  return (
-    <div>
-        <h1>Create Item</h1>
-    </div>
-  )
+    const [name, setName] = useState("")
+    const [description, setDescription] = useState("")
+    const [value, setValue] = useState()
+
+    return (
+        <div>
+            <form>
+                <h1>Create Item</h1>
+
+                <input 
+                    type="text" 
+                    placeholder="Nome do Produto" 
+                    onChange={(e) => setName(e.target.value)} 
+                    value={name} 
+                />
+
+                <input 
+                    type="text" 
+                    placeholder="Descrição do Produto" 
+                    onChange={(e) => setDescription(e.target.value)} 
+                    value={description} 
+                />
+
+                <input 
+                    type="number" 
+                    placeholder="Valor do Produto" 
+                    onChange={(e) => setValue(e.target.value)} 
+                    value={value} 
+                />
+
+                <input type="submit" value="Criar" />
+            </form>
+            
+        </div>
+    )
 }
 
 export default CreateItem
