@@ -1,0 +1,29 @@
+.update_item {
+    display: flex;
+    height: 80vh;
+    text-align: center;
+}
+
+.update_item form {
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+    height: 50vh;
+    margin: auto;
+    justify-content: center;
+    padding: 1em;
+    background-color: rgb(236, 235, 235);
+    border-radius: .4em;
+}
+
+.update_item h1 {
+    margin-bottom: .8em;
+}
+
+.update_item input {
+    width: 65vw;
+    margin: 0em auto .5em;
+    border: 1px solid black;
+    padding: .5em;
+    border-radius: .3em;
+}
