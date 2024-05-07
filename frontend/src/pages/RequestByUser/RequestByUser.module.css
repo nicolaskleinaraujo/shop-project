@@ -10,7 +10,8 @@
 }
 
 .request_by_user div {
-    text-align: left;
+    text-align: center;
+    margin: .4em;
 }
 
 .request_by_user div p {

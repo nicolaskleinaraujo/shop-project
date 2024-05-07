@@ -10,7 +10,7 @@
 }
 
 .all_requests div {
-    text-align: left;
+    text-align: center;
     margin-bottom: .8em;
 }
 
@@ -28,4 +28,9 @@
     padding: .2em;
     transition: .3s;
     margin: 0 .2em;
+}
+
+.all_requests div p button:hover {
+    color: white;
+    background-color: #ED1B22;
 }
