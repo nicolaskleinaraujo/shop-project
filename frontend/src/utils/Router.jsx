@@ -1,5 +1,6 @@
 // Modules
 import { BrowserRouter, Routes, Route } from "react-router-dom"
+import CookieRoute from "./CookieRoute"
 import AdminRoute from "./AdminRoute"
 
 // Components
@@ -25,13 +26,16 @@ const Router = () => {
             <Navbar />
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/my-cart" element={<Cart />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
-                <Route path="/requests" element={<RequestByUser />} />
-                <Route path="/request/:slug" element={<RequestBySlug />} />
-                <Route path="/user" element={<User />} />
-                <Route path="/infos" element={<Infos />} />
+
+                <Route element={<CookieRoute />} >
+                  <Route path="/my-cart" element={<Cart />} />
+                  <Route path="/requests" element={<RequestByUser />} />
+                  <Route path="/request/:slug" element={<RequestBySlug />} />
+                  <Route path="/user" element={<User />} />
+                  <Route path="/infos" element={<Infos />} />
+                </Route>
 
                 <Route element={<AdminRoute />} >
                   <Route path="/admin" element={<Admin />} />
