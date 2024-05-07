@@ -10,9 +10,17 @@ const CreateItem = () => {
     const [description, setDescription] = useState("")
     const [value, setValue] = useState()
 
+    const handleCreate = async() => {
+        await dbFetch.post("/item/create", {
+            name,
+            description,
+            value: parseFloat(value),
+        })
+    }
+
     return (
         <div className={styles.create_item}>
-            <form>
+            <form onSubmit={handleCreate}>
                 <h1>Criar Item</h1>
 
                 <input 
