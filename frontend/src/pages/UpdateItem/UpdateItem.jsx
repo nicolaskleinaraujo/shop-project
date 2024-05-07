@@ -28,7 +28,7 @@ const UpdateItem = () => {
             id: parseInt(id),
             name,
             description,
-            value: parseInt(value),
+            value: parseFloat(value),
         })
 
         navigate("/items")
