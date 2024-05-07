@@ -329,6 +329,26 @@ const userController = {
       res.status(500).json(err)
     }
   },
+
+  changeAdmin: async (req, res) => {
+    const id = parseInt(req.body.id)
+    const isAdmin = req.body.isAdmin
+
+    if (isNaN(id) || isAdmin === null || isAdmin === "") {
+      res.status(400).json({ msg: "Informações insuficientes" })
+      return
+    }
+
+    try {
+      await prisma.user.update({
+        where: { id },
+        data: { isAdmin }
+      })
+      res.status(200).json({ msg: "Admin mudado com sucesso" })
+    } catch (err) {
+      res.status(500).json(err)
+    }
+  },
 }
 
 module.exports = userController
