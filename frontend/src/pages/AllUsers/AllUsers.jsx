@@ -18,16 +18,15 @@ const AllUsers = () => {
     }, [])
 
     return (
-        <div>
-            <h1>All Users</h1>
+        <div className={styles.all_users}>
+            <h1>Usuarios</h1>
 
             {users && (
                 users.map((user) => (
-                    <div>
+                    <div key={user.id}>
                         <p>{user.fullName}</p>
                         <button>Deletar</button>
                         {!user.isAdmin && <button>Tornar Admin</button>}
-                        <hr />
                     </div>
                 ))
             )}
