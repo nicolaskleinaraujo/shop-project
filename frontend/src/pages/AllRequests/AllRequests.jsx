@@ -19,8 +19,8 @@ const AllRequests = () => {
     }, [])
 
     return (
-        <div>
-            <h1>All Requests</h1>
+        <div className={styles.all_requests}>
+            <h1>Todos os Pedidos</h1>
 
             { requests && 
                 requests.map((request) => (

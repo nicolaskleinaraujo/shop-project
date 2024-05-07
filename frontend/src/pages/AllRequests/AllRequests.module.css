@@ -1,0 +1,31 @@
+.all_requests {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.all_requests h1 {
+    margin: .5em;
+}
+
+.all_requests div {
+    text-align: left;
+    margin-bottom: .8em;
+}
+
+.all_requests div p {
+    margin: .3em;
+}
+
+.all_requests div p a {
+    color: black;
+}
+
+.all_requests div p button {
+    border: 1px solid black;
+    border-radius: .3em;
+    padding: .2em;
+    transition: .3s;
+    margin: 0 .2em;
+}
