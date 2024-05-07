@@ -13,6 +13,10 @@ const AllRequests = () => {
         const res = await dbFetch.get("/request")
         setRequests(res.data)
     }
+
+    const delivered = async(id) => {
+
+    }
     
     useEffect(() => {
         getAllRequests()
@@ -31,8 +35,11 @@ const AllRequests = () => {
 
                         <p>
                             <Link to={`/request/${request.slug}`}>Ver Pedido</Link> | 
-                            <button>Cancelar</button>
-                            <button>Entregue</button>
+                            { !request.delivered ? (
+                                <button>Marcar Entregue</button>
+                            ) : (
+                                <button>Desmarcar Entregue</button>
+                            )}
                         </p>
                     </div>
                 ))
