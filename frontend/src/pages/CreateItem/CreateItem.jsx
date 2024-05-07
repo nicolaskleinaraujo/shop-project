@@ -11,9 +11,9 @@ const CreateItem = () => {
     const [value, setValue] = useState()
 
     return (
-        <div>
+        <div className={styles.create_item}>
             <form>
-                <h1>Create Item</h1>
+                <h1>Criar Item</h1>
 
                 <input 
                     type="text" 
