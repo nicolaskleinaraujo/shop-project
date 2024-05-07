@@ -11,7 +11,8 @@ const Admin = () => {
 
         <Link to="/all-users">Ver Usuarios</Link>
         <Link to="/all-requests">Ver Pedidos</Link>
-        <Link to="/create-item">Items</Link>
+        <Link to="/items">Gerenciar Items</Link>
+        <Link to="/create-item">Adicionar Novo Item</Link>
     </div>
   )
 }
