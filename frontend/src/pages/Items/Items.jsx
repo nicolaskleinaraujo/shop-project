@@ -28,14 +28,14 @@ const Items = () => {
     }, [loading])
 
     return (
-        <div>
+        <div className={styles.items}>
             <h1>Items</h1>
 
             { items &&
                 items.map((item) => (
                     <div key={item.id}>
                         <p>{item.name} | {item.value}</p>
-                        <Link to={`/update/${item.id}`}>Atualizar</Link>
+                        <Link to={`/update/${item.id}`}>Atualizar</Link> |
                         <button onClick={() => deleteItem(item.id)}>Deletar</button>
                     </div>
                 ))

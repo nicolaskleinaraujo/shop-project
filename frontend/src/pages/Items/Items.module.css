@@ -1,0 +1,35 @@
+.items {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.items h1 {
+    margin: .5em;
+}
+
+.items div {
+    text-align: center;
+    margin: .4em;
+}
+
+.items div p {
+    margin-bottom: .3em;
+}
+
+.items div a {
+    color: black;
+}
+
+.items div button {
+    border: 1px solid black;
+    border-radius: .3em;
+    padding: .2em;
+    transition: .3s;
+    margin-left: .2em;
+}
+
+.items div button:hover {
+    color: white;
+    background-color: #ED1B22;
+}
