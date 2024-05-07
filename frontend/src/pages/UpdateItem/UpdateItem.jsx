@@ -62,6 +62,8 @@ const UpdateItem = () => {
                     placeholder="Valor do Produto" 
                     onChange={(e) => setValue(e.target.value)} 
                     value={value} 
+                    step={0.01} 
+                    min={0} 
                 />
 
                 <input type="submit" value="Atualizar" />
