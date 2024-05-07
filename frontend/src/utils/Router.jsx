@@ -16,6 +16,7 @@ import RequestBySlug from "../pages/RequestBySlug/RequestBySlug"
 import User from "../pages/User/User"
 import Infos from "../pages/Infos/Infos"
 import Admin from "../pages/Admin/Admin"
+import AllUsers from "../pages/AllUsers/AllUsers"
 
 const Router = () => {
   return (
@@ -34,6 +35,7 @@ const Router = () => {
 
                 <Route element={<AdminRoute />} >
                   <Route path="/admin" element={<Admin />} />
+                  <Route path="/all-users" element={<AllUsers />} />
                 </Route>
             </Routes>
             <Footer />
