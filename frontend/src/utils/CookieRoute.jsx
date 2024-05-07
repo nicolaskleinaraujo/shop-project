@@ -8,7 +8,7 @@ import { UserContext } from "../context/UserContext"
 const AdminRoute = () => {
     const { userId } = useContext(UserContext)
 
-    return userId != 0 ? <Outlet /> : <Navigate to="/" />
+    return userId != 0 ? <Outlet /> : <Navigate to="/login" />
 }
 
 export default AdminRoute
