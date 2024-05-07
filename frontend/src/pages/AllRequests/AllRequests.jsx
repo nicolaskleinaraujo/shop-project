@@ -15,7 +15,7 @@ const AllRequests = () => {
     }
 
     const delivered = async(id) => {
-
+        await dbFetch.post(`/request/delivered/${id}`)
     }
     
     useEffect(() => {
@@ -36,9 +36,9 @@ const AllRequests = () => {
                         <p>
                             <Link to={`/request/${request.slug}`}>Ver Pedido</Link> | 
                             { !request.delivered ? (
-                                <button>Marcar Entregue</button>
+                                <button onClick={() => delivered(request.id)}>Marcar Entregue</button>
                             ) : (
-                                <button>Desmarcar Entregue</button>
+                                <button onClick={() => delivered(request.id)}>Desmarcar Entregue</button>
                             )}
                         </p>
                     </div>
