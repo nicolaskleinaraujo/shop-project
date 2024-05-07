@@ -7,21 +7,22 @@ import { Link } from "react-router-dom"
 
 // Context
 import { UserContext } from "../../context/UserContext"
+import { FaUser, FaShoppingCart, FaSearch } from "react-icons/fa"
 
 const Navbar = () => {
     const { userId } = useContext(UserContext)
 
     return (
         <nav className={styles.navbar}>
-            <div className={styles.search}>PESQ</div>
+            <div className={styles.search}><FaSearch /></div>
             <div><Link to="/"><img src="https://via.placeholder.com/50x50" alt="Logo do Site" /></Link></div>
             <div className={styles.menu}>
-                <Link to="/my-cart">CA</Link>
+                <Link to="/my-cart"><FaShoppingCart /></Link>
 
                 {userId != 0 ? (
-                    <Link to="/user">US</Link>
+                    <Link to="/user"><FaUser /></Link>
                 ) : (
-                    <Link to="/login">US</Link>
+                    <Link to="/login"><FaUser /></Link>
                 )}
             </div>
         </nav>
