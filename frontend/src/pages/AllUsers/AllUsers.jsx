@@ -15,6 +15,16 @@ const AllUsers = () => {
         if (loading) {setLoading(false)}
     }
 
+    const changeAdmin = async(id, state) => {
+        if (confirm("Deseja mudar o admin deste usuario?")) {
+            await dbFetch.post("/user/admin/change", {
+                id,
+                isAdmin: state,
+            })
+            setLoading(true)
+        }
+    }
+
     useEffect(() => {
         getAllUsers()
     }, [loading])
@@ -29,9 +39,9 @@ const AllUsers = () => {
                         <p>{user.fullName}</p>
 
                         {!user.isAdmin ? (
-                            <button>Tornar Admin</button>
+                            <button onClick={() => changeAdmin(user.id, true)}>Tornar Admin</button>
                         ) : (
-                            <button>Remover Admin</button>
+                            <button onClick={() => changeAdmin(user.id, false)}>Remover Admin</button>
                         )}
                     </div>
                 ))
