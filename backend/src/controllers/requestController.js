@@ -194,7 +194,9 @@ const requestController = {
 
   getRequests: async (req, res) => {
     try {
-      const requests = await prisma.request.findMany()
+      const requests = await prisma.request.findMany({
+        include: { author: true }
+      })
       res.status(200).json(requests)
     } catch (err) {
       res.status(500).json(err)
