@@ -13,5 +13,6 @@ router.route("/user/:id").delete(cookieAuth, (req, res) => userController.delete
 router.route("/user/login").post((req, res) => userController.login(req, res))
 router.route("/user/leave").post(cookieAuth, (req, res) => userController.leave(req, res))
 router.route("/user").get(adminAuth, (req, res) => userController.getUsers(req, res))
+router.route("/user/admin/change").post(adminAuth, (req, res) => userController.changeAdmin(req, res))
 
 module.exports = router
