@@ -4,10 +4,11 @@ import styles from "./UpdateItem.module.css"
 // Modules
 import dbFetch from "../../axios/config"
 import { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 
 const UpdateItem = () => {
     const { id } = useParams()
+    const navigate = useNavigate()
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
     const [value, setValue] = useState()
@@ -19,14 +20,27 @@ const UpdateItem = () => {
         setValue(res.data.value)
     }
 
+    const handleUpdate = async(e) => {
+        e.preventDefault()
+
+        await dbFetch.post(`/item/update`, {
+            id,
+            name,
+            description,
+            value,
+        })
+
+        navigate("/items")
+    }
+
     useEffect(() => {
         getItem()
     }, [])
 
     return (
         <div className={styles.update_item}>
-            <form>
-                <h1>Update Item</h1>
+            <form onSubmit={handleUpdate}>
+                <h1>Atualizar Item</h1>
 
                 <input 
                     type="text" 
