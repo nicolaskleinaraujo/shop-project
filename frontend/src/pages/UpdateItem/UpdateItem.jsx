@@ -9,6 +9,7 @@ import { useParams, useNavigate } from "react-router-dom"
 const UpdateItem = () => {
     const { id } = useParams()
     const navigate = useNavigate()
+    
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
     const [value, setValue] = useState()
@@ -24,10 +25,10 @@ const UpdateItem = () => {
         e.preventDefault()
 
         await dbFetch.post(`/item/update`, {
-            id,
+            id: parseInt(id),
             name,
             description,
-            value,
+            value: parseInt(value),
         })
 
         navigate("/items")
