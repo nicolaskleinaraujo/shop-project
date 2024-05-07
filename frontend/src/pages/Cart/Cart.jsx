@@ -21,7 +21,7 @@ const Cart = () => {
   const getItems = async () => {
     const storedCart = localStorage.getItem("cart")
 
-    if (storedCart.length === 0) {
+    if (storedCart === null || storedCart.length === 0) {
       setItems([])
       setValues([])
       setLoading(false)
@@ -85,28 +85,36 @@ const Cart = () => {
     <div className={styles.cart}>
       <h1>Seu carrinho</h1>
 
-      <div className={styles.cart_items}>
-        {items &&
-          items.map((item, index) => (
-            <div key={index}>
-              <p>{item} | </p>
-              <p className={styles.cart_value}>R$ {values[index]} | </p>
-              <button onClick={() => removeItem(index)}>Remover</button>
-            </div>
-        ))}
-      </div>
+      {items.length === 0 ? (
+        <>
+          <p>Seu carrinho esta vazio.</p>
+          <p>Adicione items para efetuar um pedido!</p>
+        </>
+      ) : (
+        <>
+          <div className={styles.cart_items}>
+            {items.map((item, index) => (
+              <div key={index}>
+                <p>{item} | </p>
+                <p className={styles.cart_value}>R$ {values[index]} | </p>
+                <button onClick={() => removeItem(index)}>Remover</button>
+              </div>
+            ))}
+          </div>
 
-      <div className={styles.cart_request}>
-        <textarea 
-          cols="20" 
-          rows="4" 
-          placeholder="Observações..." 
-          onChange={(e) => setDetails(e.target.value)} 
-          value={details}
-        ></textarea>
+          <div className={styles.cart_request}>
+            <textarea 
+              cols="20" 
+              rows="4" 
+              placeholder="Observações..." 
+              onChange={(e) => setDetails(e.target.value)} 
+              value={details}
+            ></textarea>
 
-        <button onClick={() => createRequest()}>Efetuar Pedido</button>
-      </div>
+            <button onClick={() => createRequest()}>Efetuar Pedido</button>
+          </div>
+        </>
+      )}
     </div>
   )
 }

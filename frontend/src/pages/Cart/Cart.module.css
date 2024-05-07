@@ -6,6 +6,10 @@
     margin-top: .5em;
 }
 
+.cart p {
+    margin: .5em;
+}
+
 .cart_items div {
     display: flex;
     justify-content: center;
