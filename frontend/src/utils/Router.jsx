@@ -19,6 +19,7 @@ import Infos from "../pages/Infos/Infos"
 import Admin from "../pages/Admin/Admin"
 import AllUsers from "../pages/AllUsers/AllUsers"
 import AllRequests from "../pages/AllRequests/AllRequests"
+import Items from "../pages/Items/Items"
 
 const Router = () => {
   return (
@@ -42,6 +43,7 @@ const Router = () => {
                   <Route path="/admin" element={<Admin />} />
                   <Route path="/all-users" element={<AllUsers />} />
                   <Route path="/all-requests" element={<AllRequests />} />
+                  <Route path="/items" element={<Items />} />
                 </Route>
             </Routes>
             <Footer />
