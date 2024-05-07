@@ -15,13 +15,6 @@ const AllUsers = () => {
         if (loading) {setLoading(false)}
     }
 
-    const deleteAccount = async(id) => {
-        if (confirm("Deseja mesmo deletar? AÇÃO IRREVERSIVEL!")) {
-            await dbFetch.delete(`/user/${id}`)
-            setLoading(true)
-        }
-    }
-
     useEffect(() => {
         getAllUsers()
     }, [loading])
@@ -34,8 +27,6 @@ const AllUsers = () => {
                 users.map((user) => (
                     <div key={user.id}>
                         <p>{user.fullName}</p>
-
-                        <button onClick={() => deleteAccount(user.id)}>Deletar</button>
 
                         {!user.isAdmin ? (
                             <button>Tornar Admin</button>
