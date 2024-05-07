@@ -25,8 +25,14 @@ const AllUsers = () => {
                 users.map((user) => (
                     <div key={user.id}>
                         <p>{user.fullName}</p>
+
                         <button>Deletar</button>
-                        {!user.isAdmin && <button>Tornar Admin</button>}
+
+                        {!user.isAdmin ? (
+                            <button>Tornar Admin</button>
+                        ) : (
+                            <button>Remover Admin</button>
+                        )}
                     </div>
                 ))
             )}
