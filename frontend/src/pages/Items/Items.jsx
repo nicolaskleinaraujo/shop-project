@@ -4,6 +4,7 @@ import styles from "./Items.module.css"
 // Modules
 import dbFetch from "../../axios/config"
 import { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
 
 const Items = () => {
     const [items, setItems] = useState([])
@@ -25,7 +26,7 @@ const Items = () => {
                 items.map((item) => (
                     <div key={item.id}>
                         <p>{item.name} | {item.value}</p>
-                        <button>Atualizar</button>
+                        <Link to={`/update/${item.id}`}>Atualizar</Link>
                         <button>Deletar</button>
                     </div>
                 ))
