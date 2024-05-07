@@ -32,9 +32,11 @@ const AllRequests = () => {
             { requests && 
                 requests.map((request) => (
                     <div key={request.id}>
-                        <p>{request.items} | R${request.value}</p>
+                        <p>{request.items} | {request.author.fullName}</p>
 
                         { request.details && <p>OBS: {request.details}</p> }
+
+                        <p>{request.author.street} - {request.author.houseNum} | {request.author.city}</p>
 
                         <p>
                             <Link to={`/request/${request.slug}`}>Ver Pedido</Link> | 
