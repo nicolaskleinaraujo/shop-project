@@ -7,16 +7,25 @@ import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 
 const Items = () => {
+    const [loading, setLoading] = useState(true)
     const [items, setItems] = useState([])
 
     const getItems = async() => {
         const res = await dbFetch.get("/item/items")
         setItems(res.data)
+        if (loading) { setLoading(false) }
+    }
+
+    const deleteItem = async(id) => {
+        if (confirm("Deseja mesmo deletar este item?")) {
+            await dbFetch.delete(`/item/${id}`)
+            setLoading(true)
+        }
     }
 
     useEffect(() => {
         getItems()
-    }, [])
+    }, [loading])
 
     return (
         <div>
@@ -27,7 +36,7 @@ const Items = () => {
                     <div key={item.id}>
                         <p>{item.name} | {item.value}</p>
                         <Link to={`/update/${item.id}`}>Atualizar</Link>
-                        <button>Deletar</button>
+                        <button onClick={() => deleteItem(item.id)}>Deletar</button>
                     </div>
                 ))
             }
