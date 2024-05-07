@@ -7,7 +7,7 @@
 }
 
 .search {
-    margin-right: 2.5em;
+    margin: 0 3.1em 0 1.5em;
 }
 
 .navbar div img {
@@ -15,9 +15,15 @@
 }
 
 .menu {
-    margin-left: 2em;
+    margin-left: 1.5em;
+}
+
+.menu a:first-child {
+    margin-left: .8em;
+    color: black;
 }
 
 .menu a:last-child {
-    margin-left: .5em;
+    color: black;
+    margin-left: 1.5em;
 }
