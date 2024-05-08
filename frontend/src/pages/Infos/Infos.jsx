@@ -67,7 +67,7 @@ const Infos = () => {
     return (
         <div className={styles.infos}>
             <form onSubmit={updateInfos}>
-                <h1>Infos</h1>
+                <h1>Atualizar Dados</h1>
 
                 {step === 0 ? (
                     <>

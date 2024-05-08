@@ -1,6 +1,6 @@
 .infos {
     display: flex;
-    height: 75vh;
+    min-height: 83vh;
     text-align: center;
 }
 
