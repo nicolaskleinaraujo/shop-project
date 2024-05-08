@@ -1,7 +1,9 @@
 .request_by_slug {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
+    min-height: 83vh;
 }
 
 .request_by_slug h1 {
