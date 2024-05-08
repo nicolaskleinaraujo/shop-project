@@ -104,7 +104,7 @@ const Cart = () => {
               </div>
             ))}
 
-            <p>Total: <span className={styles.cart_value}>R$ {totalValue}</span></p>
+            <p>Total: <span className={styles.cart_value}>R$ {totalValue.toFixed(2)}</span></p>
           </div>
 
           <div className={styles.cart_request}>
