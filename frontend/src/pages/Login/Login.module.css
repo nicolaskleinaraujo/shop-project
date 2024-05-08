@@ -1,6 +1,6 @@
 .login {
     display: flex;
-    height: 80vh;
+    min-height: 83vh;
     text-align: center;
 }
 
