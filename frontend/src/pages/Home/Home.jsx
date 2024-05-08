@@ -43,6 +43,7 @@ const Home = () => {
         <div className={styles.home_search}>
           <input 
             type="text" 
+            placeholder="Pesquise por produtos" 
             onChange={(e) => searchItems(e.target.value)} 
           />
         </div>

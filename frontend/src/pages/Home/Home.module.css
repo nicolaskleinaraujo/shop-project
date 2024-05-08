@@ -6,6 +6,22 @@
     min-height: 83vh;
 }
 
+.home_search {
+    display: block;
+    position: absolute;
+    width: 15em;
+    left: 11vw;
+    transition: .3s;
+}
+
+.home_search input {
+    width: 16em;
+    margin: 0em auto .5em;
+    border: 1px solid black;
+    padding: .5em;
+    border-radius: .3em;
+}
+
 .home div {
     display: flex;
     flex-direction: column;
