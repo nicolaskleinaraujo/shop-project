@@ -16,6 +16,7 @@ const Cart = () => {
   const [items, setItems] = useState([])
   const [values, setValues] = useState([])
   const [details, setDetails] = useState("")
+  const [totalValue, setTotalValue] = useState()
   const [loading, setLoading] = useState(true)
 
   const getItems = async () => {
@@ -41,6 +42,10 @@ const Cart = () => {
 
     setItems(itemsArray)
     setValues(valuesArray)
+
+    const valueCalc = values.reduce((accumulator, current) => accumulator + current, 0)
+    setTotalValue(valueCalc)
+
     if (loading) { setLoading(false) }
   }
 
@@ -57,14 +62,13 @@ const Cart = () => {
 
   const createRequest = async() => {
     const requestItems = items.join(", ")
-    const requestValue = values.reduce((accumulator, current) => accumulator + current, 0)
 
     try {
       await dbFetch.post("/request/create", {
         id: userId,
         items: requestItems,
         details,
-        value: requestValue,
+        value: totalValue,
       })
 
       localStorage.removeItem("cart")
@@ -96,10 +100,11 @@ const Cart = () => {
             {items.map((item, index) => (
               <div key={index}>
                 <p>{item} | </p>
-                <p className={styles.cart_value}>R$ {values[index]} | </p>
                 <button onClick={() => removeItem(index)}>Remover</button>
               </div>
             ))}
+
+            <p>Total: <span className={styles.cart_value}>R$ {totalValue}</span></p>
           </div>
 
           <div className={styles.cart_request}>
