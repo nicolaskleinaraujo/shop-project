@@ -1,14 +1,18 @@
 .cart {
+    display: flex;
+    flex-direction: column;
     text-align: center;
-    min-height: 81vh;
+    justify-content: center;
+    align-items: center;
+    min-height: 83vh;
 }
 
 .cart h1 {
-    margin-top: .5em;
+    margin-bottom: .5em;
 }
 
 .cart p {
-    margin: .5em;
+    margin-bottom: .5em;
 }
 
 .cart_items div {
