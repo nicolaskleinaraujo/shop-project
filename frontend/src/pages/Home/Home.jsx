@@ -12,8 +12,11 @@ import { SearchContext } from "../../context/SearchContext"
 
 const Home = () => {
   const [items, setItems] = useState([])
+  
   const { search } = useContext(SearchContext)
+  const [searchValue, setSearchValue] = useState("")
   const [searchResults, setSearchResults] = useState([])
+
   const { userId } = useContext(UserContext)
 
   const getItems = async () => {
@@ -38,7 +41,7 @@ const Home = () => {
 
   useEffect(() => {
     getItems()
-  }, [search])
+  }, [searchValue == ""])
 
   return (
     <div className={styles.home}>
@@ -47,7 +50,8 @@ const Home = () => {
           <input 
             type="text" 
             placeholder="Pesquise por produtos" 
-            onChange={(e) => searchItems(e.target.value)} 
+            onChange={(e) => { setSearchValue(e.target.value), searchItems(searchValue) }} 
+            value={searchValue} 
           />
         </div>
       }
