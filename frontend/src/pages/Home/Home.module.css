@@ -10,7 +10,8 @@
     display: block;
     position: absolute;
     width: 15em;
-    left: 11vw;
+    left: 50%;
+    transform: translateX(-50%);
     transition: .3s;
 }
 
