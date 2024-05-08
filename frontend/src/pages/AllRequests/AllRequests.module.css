@@ -1,8 +1,10 @@
 .all_requests {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     text-align: center;
+    min-height: 83vh;
 }
 
 .all_requests h1 {
