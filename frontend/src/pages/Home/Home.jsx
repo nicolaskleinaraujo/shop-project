@@ -11,17 +11,17 @@ import { SearchContext } from "../../context/SearchContext"
 const Home = () => {
   const [items, setItems] = useState([])
   const { search } = useContext(SearchContext)
-  const [searchValue, setSearchValue] = useState([])
+  const [searchResults, setSearchResults] = useState([])
 
   const getItems = async () => {
-    setSearchValue([])
+    setSearchResults([])
     const res = await dbFetch.get("/item/items")
     setItems(res.data)
   }
 
   const searchItems = (e) => {
-    const value = items.filter((item) => item.name.toLowerCase().includes(e.toLowerCase()))
-    setSearchValue(value)
+    const res = items.filter((item) => item.name.toLowerCase().includes(e.toLowerCase()))
+    setSearchResults(res)
   }
 
   const addToCart = (productId) => {
@@ -49,7 +49,7 @@ const Home = () => {
       }
 
       {items &&
-        searchValue.length === 0 ? (
+        searchResults.length === 0 ? (
 
           items.map((item) => (
             <div key={item.id}>
@@ -62,7 +62,7 @@ const Home = () => {
 
         ) : (
 
-          searchValue.map((item) => (
+          searchResults.map((item) => (
             <div key={item.id}>
               <p className={styles.home_name}>{item.name}</p>
               <p className={styles.home_value}>R$ {item.value}</p>
