@@ -8,6 +8,7 @@
 
 .search {
     margin: 0 3.1em 0 1.5em;
+    cursor: pointer;
 }
 
 .navbar div img {

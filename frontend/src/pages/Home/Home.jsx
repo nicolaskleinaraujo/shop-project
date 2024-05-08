@@ -53,7 +53,7 @@ const Home = () => {
         searchResults.length === 0 ? (
 
           items.map((item) => (
-            <div key={item.id}>
+            <div key={item.id} className={styles.home_items}>
               <p className={styles.home_name}>{item.name}</p>
               <p className={styles.home_value}>R$ {item.value}</p>
               <p className={styles.home_description}>{item.description}</p>
@@ -64,7 +64,7 @@ const Home = () => {
         ) : (
 
           searchResults.map((item) => (
-            <div key={item.id}>
+            <div key={item.id} className={styles.home_items}>
               <p className={styles.home_name}>{item.name}</p>
               <p className={styles.home_value}>R$ {item.value}</p>
               <p className={styles.home_description}>{item.description}</p>
