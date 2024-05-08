@@ -1,8 +1,10 @@
 .request_by_user {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     text-align: center;
+    min-height: 83vh;
 }
 
 .request_by_user h1 {
