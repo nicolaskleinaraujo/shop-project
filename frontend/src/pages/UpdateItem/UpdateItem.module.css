@@ -1,8 +1,7 @@
 .update_item {
     display: flex;
-    height: 80vh;
-    text-align: center;
     min-height: 83vh;
+    text-align: center;
 }
 
 .update_item form {

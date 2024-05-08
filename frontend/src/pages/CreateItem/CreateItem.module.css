@@ -1,8 +1,7 @@
 .create_item {
     display: flex;
-    height: 80vh;
-    text-align: center;
     min-height: 83vh;
+    text-align: center;
 }
 
 .create_item form {
