@@ -9,11 +9,12 @@ import { useContext, useEffect, useState } from "react"
 import { SearchContext } from "../../context/SearchContext"
 
 const Home = () => {
-  const { search } = useContext(SearchContext)
   const [items, setItems] = useState([])
+  const { search } = useContext(SearchContext)
   const [searchValue, setSearchValue] = useState([])
 
   const getItems = async () => {
+    setSearchValue([])
     const res = await dbFetch.get("/item/items")
     setItems(res.data)
   }
@@ -34,7 +35,7 @@ const Home = () => {
 
   useEffect(() => {
     getItems()
-  }, [])
+  }, [search])
 
   return (
     <div className={styles.home}>
@@ -48,14 +49,30 @@ const Home = () => {
       }
 
       {items &&
-        items.map((item) => (
-          <div key={item.id}>
-            <p className={styles.home_name}>{item.name}</p>
-            <p className={styles.home_value}>R$ {item.value}</p>
-            <p className={styles.home_description}>{item.description}</p>
-            <button onClick={() => addToCart(item.id)}>Adicionar ao carrinho</button>
-          </div>
-        ))}
+        searchValue.length === 0 ? (
+
+          items.map((item) => (
+            <div key={item.id}>
+              <p className={styles.home_name}>{item.name}</p>
+              <p className={styles.home_value}>R$ {item.value}</p>
+              <p className={styles.home_description}>{item.description}</p>
+              <button onClick={() => addToCart(item.id)}>Adicionar ao carrinho</button>
+            </div>
+          ))
+
+        ) : (
+
+          searchValue.map((item) => (
+            <div key={item.id}>
+              <p className={styles.home_name}>{item.name}</p>
+              <p className={styles.home_value}>R$ {item.value}</p>
+              <p className={styles.home_description}>{item.description}</p>
+              <button onClick={() => addToCart(item.id)}>Adicionar ao carrinho</button>
+            </div>
+          ))
+
+        )
+      }
     </div>
   )
 }
