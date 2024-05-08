@@ -1,7 +1,9 @@
 .all_users {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
+    min-height: 83vh;
 }
 
 .all_users h1 {
