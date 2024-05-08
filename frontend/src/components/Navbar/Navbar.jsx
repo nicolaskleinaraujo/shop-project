@@ -28,8 +28,6 @@ const Navbar = () => {
                 ) : (
                     <Link to="/login"><FaUser /></Link>
                 )}
-
-                <button onClick={() => console.log(search)}>TESTE</button>
             </div>
         </nav>
     )
