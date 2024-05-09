@@ -14,6 +14,7 @@ const Register = () => {
     const navigate = useNavigate()
     const { setUserId } = useContext(UserContext)
     const { setAdmin } = useContext(AdminContext)
+    const [loading, setLoading] = useState(false)
     const [step, setStep] = useState(0)
 
     const [fullName, setFullName] = useState("")
@@ -27,6 +28,7 @@ const Register = () => {
 
     const handleRegister = async(e) => {
         e.preventDefault()
+        setLoading(true)
 
         try {
             const res = await dbFetch.post("/user/create", {
@@ -44,6 +46,7 @@ const Register = () => {
             navigate("/")
         } catch (err) {
             console.log(err)
+            setLoading(false)
         }
     }
 
@@ -53,67 +56,73 @@ const Register = () => {
             <h1>Criar conta</h1>
             <p>Crie sua conta para fazer seus pedidos</p>
 
-            {step === 0 ? (
-                <>
-                    <input 
-                        type="text" 
-                        placeholder="Nome completo" 
-                        onChange={(e) => setFullName(e.target.value)} 
-                        value={fullName}
-                    />
+            {loading ? (
+                <img src="/loading.svg" alt="Carregando" />
+            ) : (
+                step === 0 ? (
+                    <>
+                        <input 
+                            type="text" 
+                            placeholder="Nome completo" 
+                            onChange={(e) => setFullName(e.target.value)} 
+                            value={fullName}
+                        />
 
-                    <input
-                        type="email"
-                        placeholder="Email"
-                        onChange={(e) => setEmail(e.target.value)}
-                        value={email}
-                    />
+                        <input
+                            type="email"
+                            placeholder="Email"
+                            onChange={(e) => setEmail(e.target.value)}
+                            value={email}
+                        />
 
-                    <input
-                        type="password"
-                        placeholder="Senha"
-                        onChange={(e) => setPassword(e.target.value)}
-                        value={password}
-                    />
+                        <input
+                            type="password"
+                            placeholder="Senha"
+                            onChange={(e) => setPassword(e.target.value)}
+                            value={password}
+                        />
 
-                    <button onClick={() => setStep(1)}>Continuar</button>
-                </>
-            ): (
-                <>
-                    <input 
-                        type="number" 
-                        placeholder="N° de Telefone" 
-                        onChange={(e) => setNumber(e.target.value)} 
-                        value={number}
-                    />
+                        <button onClick={() => setStep(1)}>Continuar</button>
 
-                    <input 
-                        type="text" 
-                        placeholder="Cidade" 
-                        onChange={(e) => setCity(e.target.value)} 
-                        value={city}
-                    />
+                        <p>Já possui conta? <Link to="/login">Logar</Link></p>
+                    </>
+                ) : (
+                    <>
+                        <input 
+                            type="number" 
+                            placeholder="N° de Telefone" 
+                            onChange={(e) => setNumber(e.target.value)} 
+                            value={number}
+                        />
 
-                    <input 
-                        type="text" 
-                        placeholder="Rua" 
-                        onChange={(e) => setStreet(e.target.value)} 
-                        value={street}
-                    />
+                        <input 
+                            type="text" 
+                            placeholder="Cidade" 
+                            onChange={(e) => setCity(e.target.value)} 
+                            value={city}
+                        />
 
-                    <input 
-                        type="number" 
-                        placeholder="N° da Casa" 
-                        onChange={(e) => setHouseNum(e.target.value)} 
-                        value={houseNum}
-                    />
+                        <input 
+                            type="text" 
+                            placeholder="Rua" 
+                            onChange={(e) => setStreet(e.target.value)} 
+                            value={street}
+                        />
 
-                    <button onClick={() => setStep(0)}>Voltar</button>
-                    <input type="submit" value="Criar" />
-                </>
-            )}
+                        <input 
+                            type="number" 
+                            placeholder="N° da Casa" 
+                            onChange={(e) => setHouseNum(e.target.value)} 
+                            value={houseNum}
+                        />
 
-            <p>Já possui conta? <Link to="/login">Logar</Link></p>
+                        <button onClick={() => setStep(0)}>Voltar</button>
+                        <input type="submit" value="Criar" />
+
+                        <p>Já possui conta? <Link to="/login">Logar</Link></p>
+                    </>
+                ))
+            }
       </form>
     </div>
   )

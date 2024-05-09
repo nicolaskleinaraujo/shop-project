@@ -21,6 +21,10 @@
     margin-bottom: .8em;
 }
 
+.register form img {
+    width: 14em;
+}
+
 .register form input,
 .register form button {
     width: 65vw;
