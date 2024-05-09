@@ -29,7 +29,9 @@ const AllRequests = () => {
         <div className={styles.all_requests}>
             <h1>Todos os Pedidos</h1>
 
-            { requests && 
+            {loading ? (
+                <img src="/loading.svg" alt="Carregando" />
+            ) : (
                 requests.map((request) => (
                     <div key={request.id}>
                         <p>{request.items} | {request.author.fullName}</p>
@@ -47,7 +49,7 @@ const AllRequests = () => {
                             )}
                         </p>
                     </div>
-                ))
+                )))
             }
         </div>
     )

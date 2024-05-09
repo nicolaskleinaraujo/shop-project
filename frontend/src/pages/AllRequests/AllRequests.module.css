@@ -11,6 +11,10 @@
     margin: .5em;
 }
 
+.all_requests img {
+    width: 14em;
+}
+
 .all_requests div {
     text-align: center;
     margin-bottom: .8em;
