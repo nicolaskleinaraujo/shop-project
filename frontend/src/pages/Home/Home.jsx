@@ -18,11 +18,13 @@ const Home = () => {
   const [searchResults, setSearchResults] = useState([])
 
   const { userId } = useContext(UserContext)
+  const [loading, setLoading] = useState(true)
 
   const getItems = async () => {
     setSearchResults([])
     const res = await dbFetch.get("/item/items")
     setItems(res.data)
+    if (loading) { setLoading(false) }
   }
 
   const searchItems = (e) => {
@@ -64,7 +66,9 @@ const Home = () => {
         </div>
       }
 
-      {items &&
+      {loading ? (
+        <img src="./loading.svg" alt="Carregando" />
+      ) : (
         searchResults.length === 0 ? (
 
           items.map((item) => (
@@ -87,7 +91,7 @@ const Home = () => {
             </div>
           ))
 
-        )
+        ))
       }
     </div>
   )
