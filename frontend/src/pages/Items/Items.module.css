@@ -16,7 +16,7 @@
 
 .items div {
     text-align: center;
-    margin: .4em;
+    margin: .8em;
 }
 
 .items div p {
@@ -45,5 +45,12 @@
     .items div a,
     .items div button {
         font-size: 1.3em;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .items div a,
+    .items div button {
+        font-size: 2em;
     }
 }
