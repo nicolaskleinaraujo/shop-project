@@ -20,6 +20,10 @@
     margin-bottom: .8em;
 }
 
+.create_item img {
+    width: 14em;
+}
+
 .create_item form input {
     width: 65vw;
     margin: 0em auto .5em;
