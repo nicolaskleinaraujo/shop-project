@@ -100,3 +100,17 @@
         font-size: 1.3em;
     }
 }
+
+@media screen and (min-width: 1200px) {
+    .home {
+        grid-auto-rows: 16em;
+    }
+
+    .home_welcome {
+        padding: 5.4em;
+    }
+
+    .home_welcome a {
+        font-size: 1.7em;
+    }
+}
