@@ -33,6 +33,10 @@
     border-radius: .3em;
 }
 
+.login form p:last-child {
+    margin-top: 1.5em;
+}
+
 .login form p a {
     color: black;
 }
