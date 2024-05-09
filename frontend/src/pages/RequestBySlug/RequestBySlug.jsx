@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom"
 
 const RequestBySlug = () => {
     const { slug } = useParams()
+    const [loading, setLoading] = useState(true)
 
     const [request, setRequest] = useState([])
     const [items, setItems] = useState([])
@@ -16,6 +17,7 @@ const RequestBySlug = () => {
         const res = await dbFetch.get(`/request/slug/${slug}`)
         setRequest(res.data)
         setItems(res.data.items.split(", "))
+        if (loading) { setLoading(false) }
     }
 
     useEffect(() => {
@@ -26,17 +28,22 @@ const RequestBySlug = () => {
         <div className={styles.request_by_slug}>
             <h1>Pedido {request.id}</h1>
 
-            <div>
-                {items &&
-                    items.map((item, index) => (
-                        <p key={index}>{item}</p>
-                    ))
-                }
+            {loading ? (
+                <img src="/loading.svg" alt="Carregando" />
+            ) : (
+                <div>
+                    {items &&
+                        items.map((item, index) => (
+                            <p key={index}>{item}</p>
+                        ))
+                    }
 
-                <p className={styles.request_by_slug_value}>R${request.value}</p>
+                    <p className={styles.request_by_slug_value}>R${request.value}</p>
 
-                { request.details && <p>OBS: {request.details}</p> }
-            </div>
+                    { request.details && <p>OBS: {request.details}</p> }
+                </div>
+            )}
+            
         </div>
     )
 }
