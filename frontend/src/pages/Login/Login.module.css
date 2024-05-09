@@ -21,6 +21,10 @@
     margin-bottom: .8em;
 }
 
+.login form img {
+    width: 14em;
+}
+
 .login form input {
     width: 65vw;
     margin: 0em auto .5em;

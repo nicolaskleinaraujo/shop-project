@@ -12,6 +12,7 @@ import { AdminContext } from "../../context/AdminContext"
 
 const Login = () => {
   const navigate = useNavigate()
+  const [loading, setLoading] = useState(false)
   const { setUserId } = useContext(UserContext)
   const { setAdmin } = useContext(AdminContext)
 
@@ -20,6 +21,7 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault()
+    setLoading(true)
 
     try {
       const res = await dbFetch.post("/user/login", {
@@ -32,6 +34,7 @@ const Login = () => {
       navigate("/")
     } catch (err) {
       console.log(err)
+      setLoading(false)
     }
   }
 
@@ -41,23 +44,32 @@ const Login = () => {
         <h1>Login</h1>
         <p>Faça seu login para fazer seus pedidos</p>
 
-        <input
-          type="email"
-          placeholder="Email"
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
-        />
+        {loading ? (
+          <img src="/loading.svg" alt="Carregando" />
+        ) : (
+          <>
+            <input
+              type="email"
+              placeholder="Email"
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+            />
 
-        <input
-          type="password"
-          placeholder="Senha"
-          onChange={(e) => setPassword(e.target.value)}
-          value={password}
-        />
+            <input
+              type="password"
+              placeholder="Senha"
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
+            />
 
-        <input type="submit" value="Logar" />
+            <input type="submit" value="Logar" />
 
-        <p>Não possui conta? <Link to="/register">Criar</Link></p>
+            <p>Não possui conta? <Link to="/register">Criar</Link></p>
+          </>
+        )}
+        
+
+        
       </form>
     </div>
   )
