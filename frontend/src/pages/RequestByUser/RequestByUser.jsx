@@ -33,7 +33,9 @@ const RequestByUser = () => {
         <div className={styles.request_by_user}>
             <h1>Pedidos</h1>
 
-            {requests && (
+            {loading ? (
+                <img src="./loading.svg" alt="Carregando" />
+            ) : (
                 requests.map((request) => (
                     <div key={request.id}>
                         <p>{request.items} | R${request.value}</p>

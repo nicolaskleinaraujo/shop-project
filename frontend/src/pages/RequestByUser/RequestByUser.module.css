@@ -11,6 +11,10 @@
     margin: .5em;
 }
 
+.request_by_user img {
+    width: 14em;
+}
+
 .request_by_user div {
     text-align: center;
     margin: .4em;
