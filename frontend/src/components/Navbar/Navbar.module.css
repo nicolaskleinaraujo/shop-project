@@ -28,3 +28,28 @@
     color: black;
     margin-left: 1.5em;
 }
+
+@media screen and (min-width: 800px) {
+    .navbar {
+        padding: .8em;
+    }
+
+    .search svg,
+    .menu svg {
+        font-size: 1.4em;
+    }
+
+    .search {
+        margin: 0 3.3em 0 1.7em;
+    }
+
+    .menu a:first-child {
+        margin-left: 1em;
+        color: black;
+    }
+    
+    .menu a:last-child {
+        color: black;
+        margin-left: 1.7em;
+    }
+}
