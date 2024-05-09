@@ -52,3 +52,9 @@
 .register form p a {
     color: black;
 }
+
+@media screen and (min-width: 1200px) {
+    .register form {
+        height: 81vh;
+    }
+}
