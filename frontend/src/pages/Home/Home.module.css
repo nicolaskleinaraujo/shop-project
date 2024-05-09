@@ -86,3 +86,17 @@
     color: white;
     background-color: #ED1B22;
 }
+
+@media screen and (min-width: 800px) {
+    .home {
+        grid-auto-rows: 12em;
+    }
+
+    .home_welcome {
+        padding: 5em;
+    }
+
+    .home_welcome a {
+        font-size: 1.3em;
+    }
+}
