@@ -11,13 +11,13 @@ import { UserContext } from "../../context/UserContext"
 
 const Cart = () => {
   const { userId } = useContext(UserContext)
+  const [loading, setLoading] = useState(true)
   const navigate = useNavigate()
 
   const [items, setItems] = useState([])
   const [values, setValues] = useState([])
   const [details, setDetails] = useState("")
   const [totalValue, setTotalValue] = useState()
-  const [loading, setLoading] = useState(true)
 
   const getItems = async () => {
     const storedCart = localStorage.getItem("cart")
@@ -89,37 +89,41 @@ const Cart = () => {
     <div className={styles.cart}>
       <h1>Seu carrinho</h1>
 
-      {items.length === 0 ? (
-        <>
-          <p>Seu carrinho esta vazio.</p>
-          <p>Adicione items para efetuar um pedido!</p>
-        </>
+      {loading ? (
+        <img src="./loading.svg" alt="Carregando" />
       ) : (
-        <>
-          <div className={styles.cart_items}>
-            {items.map((item, index) => (
-              <div key={index}>
-                <p>{item} | </p>
-                <button onClick={() => removeItem(index)}>Remover</button>
-              </div>
-            ))}
+        items.length === 0 ? (
+          <>
+            <p>Seu carrinho esta vazio.</p>
+            <p>Adicione items para efetuar um pedido!</p>
+          </>
+        ) : (
+          <>
+            <div className={styles.cart_items}>
+              {items.map((item, index) => (
+                <div key={index}>
+                  <p>{item} | </p>
+                  <button onClick={() => removeItem(index)}>Remover</button>
+                </div>
+              ))}
 
-            <p>Total: <span className={styles.cart_value}>R$ {totalValue.toFixed(2)}</span></p>
-          </div>
+              <p>Total: <span className={styles.cart_value}>R$ {totalValue.toFixed(2)}</span></p>
+            </div>
 
-          <div className={styles.cart_request}>
-            <textarea 
-              cols="20" 
-              rows="4" 
-              placeholder="Observações..." 
-              onChange={(e) => setDetails(e.target.value)} 
-              value={details}
-            ></textarea>
+            <div className={styles.cart_request}>
+              <textarea 
+                cols="20" 
+                rows="4" 
+                placeholder="Observações..." 
+                onChange={(e) => setDetails(e.target.value)} 
+                value={details}
+              ></textarea>
 
-            <button onClick={() => createRequest()}>Efetuar Pedido</button>
-          </div>
-        </>
-      )}
+              <button onClick={() => createRequest()}>Efetuar Pedido</button>
+            </div>
+          </>
+        ))
+      }
     </div>
   )
 }
