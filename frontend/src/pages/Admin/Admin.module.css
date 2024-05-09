@@ -20,3 +20,9 @@
         font-size: 1.3em;
     }
 }
+
+@media screen and (min-width: 1200px) {
+    .admin a {
+        font-size: 2em;
+    }
+}
