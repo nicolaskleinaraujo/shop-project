@@ -43,6 +43,10 @@
         margin: 0 3.3em 0 1.7em;
     }
 
+    .navbar div img {
+        width: 3.1em;
+    }
+
     .menu a:first-child {
         margin-left: 1em;
         color: black;
@@ -51,5 +55,34 @@
     .menu a:last-child {
         color: black;
         margin-left: 1.7em;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .navbar {
+        padding: 1.2em;
+    }
+
+    .search svg,
+    .menu svg {
+        font-size: 1.8em;
+    }
+
+    .search {
+        margin: 0 3.7em 0 2em;
+    }
+
+    .navbar div img {
+        width: 3.5em;
+    }
+
+    .menu a:first-child {
+        margin-left: 1.4em;
+        color: black;
+    }
+    
+    .menu a:last-child {
+        color: black;
+        margin-left: 2em;
     }
 }
