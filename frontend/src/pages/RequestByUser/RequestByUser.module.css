@@ -34,4 +34,10 @@
     padding: .2em;
     transition: .3s;
     margin-left: .2em;
+    cursor: pointer;
+}
+
+.request_by_user div p button:hover {
+    color: white;
+    background-color: #ED1B22;
 }

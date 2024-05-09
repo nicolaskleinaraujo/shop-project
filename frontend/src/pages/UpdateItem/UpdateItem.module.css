@@ -33,6 +33,10 @@
     transition: .3s;
 }
 
+.update_item input:last-child {
+    cursor: pointer;
+}
+
 .update_item input:hover:last-child {
     color: white;
     background-color: #ED1B22;

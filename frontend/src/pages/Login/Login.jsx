@@ -62,7 +62,7 @@ const Login = () => {
               value={password}
             />
 
-            <input type="submit" value="Logar" />
+            <input type="submit" value="Logar" className={styles.login_submit} />
 
             <p>Não possui conta? <Link to="/register">Criar</Link></p>
           </>

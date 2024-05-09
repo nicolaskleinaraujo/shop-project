@@ -34,6 +34,7 @@
     padding: .2em;
     transition: .3s;
     margin: 0 .2em;
+    cursor: pointer;
 }
 
 .all_requests div p button:hover {

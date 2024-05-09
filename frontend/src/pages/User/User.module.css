@@ -21,6 +21,7 @@
     padding: .2em;
     transition: .3s;
     margin-top: .5em;
+    cursor: pointer;
 }
 
 .user button:hover {

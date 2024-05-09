@@ -82,7 +82,7 @@ const Register = () => {
                             value={password}
                         />
 
-                        <button onClick={() => setStep(1)}>Continuar</button>
+                        <button onClick={() => setStep(1)} className={styles.register_btn}>Continuar</button>
 
                         <p>Já possui conta? <Link to="/login">Logar</Link></p>
                     </>
@@ -116,9 +116,9 @@ const Register = () => {
                             value={houseNum}
                         />
 
-                        <button onClick={() => setStep(0)}>Voltar</button>
-                        <input type="submit" value="Criar" />
-
+                        <input type="submit" value="Criar" className={styles.register_btn} />
+                        <button onClick={() => setStep(0)} className={styles.register_btn}>Voltar</button>
+                        
                         <p>Já possui conta? <Link to="/login">Logar</Link></p>
                     </>
                 ))

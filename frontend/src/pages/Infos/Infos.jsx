@@ -101,7 +101,7 @@ const Infos = () => {
                                 required 
                             />
 
-                            <button onClick={() => setStep(1)}>Continuar</button>
+                            <button onClick={() => setStep(1)} className={styles.infos_btn}>Continuar</button>
                         </>
                     ) : (
                         <>
@@ -133,8 +133,8 @@ const Infos = () => {
                                 value={houseNum}
                             />
 
-                            <input type="submit" value="Atualizar" />
-                            <button onClick={() => setStep(0)}>Voltar</button>
+                            <input type="submit" value="Atualizar" className={styles.infos_btn} />
+                            <button onClick={() => setStep(0)} className={styles.infos_btn}>Voltar</button>
                         </>
                     ))
                 }

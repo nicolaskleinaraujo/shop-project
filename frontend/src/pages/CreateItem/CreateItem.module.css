@@ -33,6 +33,10 @@
     transition: .3s;
 }
 
+.create_item form input:last-child {
+    cursor: pointer;
+}
+
 .create_item form input:hover:last-child {
     color: white;
     background-color: #ED1B22;
