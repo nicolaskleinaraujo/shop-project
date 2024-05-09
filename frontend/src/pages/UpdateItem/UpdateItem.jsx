@@ -8,6 +8,7 @@ import { useParams, useNavigate } from "react-router-dom"
 
 const UpdateItem = () => {
     const { id } = useParams()
+    const [loading, setLoading] = useState(true)
     const navigate = useNavigate()
     
     const [name, setName] = useState("")
@@ -19,10 +20,12 @@ const UpdateItem = () => {
         setName(res.data.name)
         setDescription(res.data.description)
         setValue(res.data.value)
+        if (loading) { setLoading(false) }
     }
 
     const handleUpdate = async(e) => {
         e.preventDefault()
+        setLoading(true)
 
         await dbFetch.post(`/item/update`, {
             id: parseInt(id),
@@ -43,30 +46,36 @@ const UpdateItem = () => {
             <form onSubmit={handleUpdate}>
                 <h1>Atualizar Item</h1>
 
-                <input 
-                    type="text" 
-                    placeholder="Nome do Produto" 
-                    onChange={(e) => setName(e.target.value)} 
-                    value={name} 
-                />
+                {loading ? (
+                    <img src="/loading.svg" alt="Carregando" />
+                ) : (
+                    <>
+                        <input 
+                            type="text" 
+                            placeholder="Nome do Produto" 
+                            onChange={(e) => setName(e.target.value)} 
+                            value={name} 
+                        />
 
-                <input 
-                    type="text" 
-                    placeholder="Descrição do Produto" 
-                    onChange={(e) => setDescription(e.target.value)} 
-                    value={description} 
-                />
+                        <input 
+                            type="text" 
+                            placeholder="Descrição do Produto" 
+                            onChange={(e) => setDescription(e.target.value)} 
+                            value={description} 
+                        />
 
-                <input 
-                    type="number" 
-                    placeholder="Valor do Produto" 
-                    onChange={(e) => setValue(e.target.value)} 
-                    value={value} 
-                    step={0.01} 
-                    min={0} 
-                />
+                        <input 
+                            type="number" 
+                            placeholder="Valor do Produto" 
+                            onChange={(e) => setValue(e.target.value)} 
+                            value={value} 
+                            step={0.01} 
+                            min={0} 
+                        />
 
-                <input type="submit" value="Atualizar" />
+                        <input type="submit" value="Atualizar" />
+                    </>
+                )}
             </form>
         </div>
     )
