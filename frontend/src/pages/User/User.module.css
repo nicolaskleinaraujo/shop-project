@@ -28,3 +28,10 @@
     color: white;
     background-color: #ED1B22;
 }
+
+@media screen and (min-width: 800px) {
+    .user a,
+    .user button {
+        font-size: 1.3em;
+    }
+}
