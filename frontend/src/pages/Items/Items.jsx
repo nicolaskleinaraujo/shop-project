@@ -31,14 +31,16 @@ const Items = () => {
         <div className={styles.items}>
             <h1>Items</h1>
 
-            { items &&
+            {loading ? (
+                <img src="/loading.svg" alt="Carregando" />
+            ) : (
                 items.map((item) => (
                     <div key={item.id}>
                         <p>{item.name} | {item.value}</p>
                         <Link to={`/update-item/${item.id}`}>Atualizar</Link> |
                         <button onClick={() => deleteItem(item.id)}>Deletar</button>
                     </div>
-                ))
+                )))
             }
         </div>
     )

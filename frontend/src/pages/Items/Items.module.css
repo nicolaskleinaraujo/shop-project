@@ -10,6 +10,10 @@
     margin: .5em;
 }
 
+.items img {
+    width: 14em;
+}
+
 .items div {
     text-align: center;
     margin: .4em;
