@@ -14,3 +14,9 @@
     margin: .3em;
     color: black;
 }
+
+@media screen and (min-width: 800px) {
+    .admin a {
+        font-size: 1.3em;
+    }
+}
