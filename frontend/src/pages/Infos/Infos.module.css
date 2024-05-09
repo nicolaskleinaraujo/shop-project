@@ -21,6 +21,10 @@
     margin-bottom: .8em;
 }
 
+.infos form img {
+    width: 14em;
+}
+
 .infos form input,
 .infos form button {
     width: 65vw;

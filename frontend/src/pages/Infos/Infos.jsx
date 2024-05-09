@@ -12,6 +12,7 @@ import { UserContext } from "../../context/UserContext"
 const Infos = () => {
     const { userId } = useContext(UserContext)
     const navigate = useNavigate()
+    const [loading, setLoading] = useState(true)
     const [step, setStep] = useState(0)
 
     const [fullName, setFullName] = useState("")
@@ -33,6 +34,8 @@ const Infos = () => {
         setCity(res.data.city)
         setStreet(res.data.street)
         setHouseNum(res.data.houseNum)
+
+        setLoading(false)
     }
 
     const updateInfos = async(e) => {
@@ -41,6 +44,8 @@ const Infos = () => {
         if (password === "") {
             return
         }
+
+        setLoading(true)
 
         try {
             await dbFetch.post("/user/update", {
@@ -69,66 +74,70 @@ const Infos = () => {
             <form onSubmit={updateInfos}>
                 <h1>Atualizar Dados</h1>
 
-                {step === 0 ? (
-                    <>
-                        <input 
-                            type="text" 
-                            placeholder="Nome completo" 
-                            onChange={(e) => setFullName(e.target.value)} 
-                            value={fullName} 
-                        />
-
-                        <input 
-                            type="email" 
-                            placeholder="Email" 
-                            onChange={(e) => setEmail(e.target.value)} 
-                            value={email} 
-                        />
-
-                        <input 
-                            type="password" 
-                            placeholder="Senha" 
-                            onChange={(e) => setPassword(e.target.value)} 
-                            value={password} 
-                            required 
-                        />
-
-                        <button onClick={() => setStep(1)}>Continuar</button>
-                    </>
+                {loading ? (
+                    <img src="/loading.svg" alt="Carregando" />
                 ) : (
-                    <>
-                        <input 
-                            type="number" 
-                            placeholder="N° de Telefone" 
-                            onChange={(e) => setNumber(e.target.value)} 
-                            value={number} 
-                        />
+                    step === 0 ? (
+                        <>
+                            <input 
+                                type="text" 
+                                placeholder="Nome completo" 
+                                onChange={(e) => setFullName(e.target.value)} 
+                                value={fullName} 
+                            />
 
-                        <input 
-                            type="text" 
-                            placeholder="Cidade" 
-                            onChange={(e) => setCity(e.target.value)} 
-                            value={city}
-                        />
+                            <input 
+                                type="email" 
+                                placeholder="Email" 
+                                onChange={(e) => setEmail(e.target.value)} 
+                                value={email} 
+                            />
 
-                        <input 
-                            type="text" 
-                            placeholder="Rua" 
-                            onChange={(e) => setStreet(e.target.value)} 
-                            value={street}
-                        />
+                            <input 
+                                type="password" 
+                                placeholder="Senha" 
+                                onChange={(e) => setPassword(e.target.value)} 
+                                value={password} 
+                                required 
+                            />
 
-                        <input 
-                            type="number" 
-                            placeholder="N° da Casa" 
-                            onChange={(e) => setHouseNum(e.target.value)} 
-                            value={houseNum}
-                        />
+                            <button onClick={() => setStep(1)}>Continuar</button>
+                        </>
+                    ) : (
+                        <>
+                            <input 
+                                type="number" 
+                                placeholder="N° de Telefone" 
+                                onChange={(e) => setNumber(e.target.value)} 
+                                value={number} 
+                            />
 
-                        <input type="submit" value="Atualizar" />
-                        <button onClick={() => setStep(0)}>Voltar</button>
-                    </>
-                )}
+                            <input 
+                                type="text" 
+                                placeholder="Cidade" 
+                                onChange={(e) => setCity(e.target.value)} 
+                                value={city}
+                            />
+
+                            <input 
+                                type="text" 
+                                placeholder="Rua" 
+                                onChange={(e) => setStreet(e.target.value)} 
+                                value={street}
+                            />
+
+                            <input 
+                                type="number" 
+                                placeholder="N° da Casa" 
+                                onChange={(e) => setHouseNum(e.target.value)} 
+                                value={houseNum}
+                            />
+
+                            <input type="submit" value="Atualizar" />
+                            <button onClick={() => setStep(0)}>Voltar</button>
+                        </>
+                    ))
+                }
             </form>
         </div>
     )
