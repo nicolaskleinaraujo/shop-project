@@ -33,7 +33,9 @@ const AllUsers = () => {
         <div className={styles.all_users}>
             <h1>Usuarios</h1>
 
-            {users && (
+            {loading ? (
+                <img src="/loading.svg" alt="Carregando" />
+            ) : (
                 users.map((user) => (
                     <div key={user.id}>
                         <p>{user.fullName}</p>

@@ -10,6 +10,10 @@
     margin: .5em;
 }
 
+.all_users img {
+    width: 14em;
+}
+
 .all_users div {
     display: flex;
     margin: .5em;
