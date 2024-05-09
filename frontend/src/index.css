@@ -9,3 +9,19 @@
 h1 {
     font-family: "Neuton", serif;
 }
+
+@media screen and (min-width: 800px) {
+    h1 {
+        font-size: 2.5em;
+    }
+
+    p,
+    textarea {
+        font-size: 1.3em;
+    }
+
+    button,
+    input {
+        font-size: 0.8em;
+    }
+}
