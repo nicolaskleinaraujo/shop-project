@@ -36,7 +36,7 @@ function App() {
 
   return (
     <>
-      <ToastContainer position="bottom-right" autoClose={1500} pauseOnHover={false} />
+      <ToastContainer position="bottom-right" autoClose={1500} pauseOnHover={false} closeOnClick />
       <Router />
     </>
   )
