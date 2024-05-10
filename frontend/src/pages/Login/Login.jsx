@@ -5,6 +5,7 @@ import styles from "./Login.module.css"
 import dbFetch from "../../axios/config"
 import { useState, useContext } from "react"
 import { useNavigate, Link } from "react-router-dom"
+import { toast } from 'react-toastify';
 
 // Context
 import { UserContext } from "../../context/UserContext"
@@ -31,9 +32,10 @@ const Login = () => {
 
       setUserId(res.data.id)
       setAdmin(res.data.isAdmin)
+      toast.success(res.data.msg)
       navigate("/")
     } catch (err) {
-      console.log(err)
+      toast.error(err.response.data.msg)
       setLoading(false)
     }
   }
