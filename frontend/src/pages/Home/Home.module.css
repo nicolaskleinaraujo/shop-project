@@ -19,11 +19,11 @@
     position: absolute;
     top: 7%;
     background-color: #ED1B22;
-    width: 15em;
+    width: 15vw;
 }
 
 .home_search input {
-    width: 16em;
+    width: 73vw;
     margin: auto;
     border: 1px solid black;
     padding: .5em;
@@ -84,13 +84,9 @@
 @media screen and (min-width: 800px) {
     .home_search {
         top: 8%;
-        width: 23vw;
-        height: 4em;
     }
 
     .home_search input {
-        width: 28em;
-        height: 2.3em;
         font-size: 1.3em;
     }
 
@@ -107,7 +103,6 @@
 @media screen and (min-width: 1200px) {
     .home_search {
         top: 11%;
-        height: 5.7em;
     }
 
     .home_search input {
@@ -115,7 +110,7 @@
     }
 
     .home_welcome {
-        padding: 5.4em;
+        padding: 7em;
     }
 
     .home_welcome a {
