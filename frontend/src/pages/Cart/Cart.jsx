@@ -5,6 +5,7 @@ import styles from "./Cart.module.css"
 import dbFetch from "../../axios/config"
 import { useState, useEffect, useContext } from "react"
 import { useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
 
 // Context
 import { UserContext } from "../../context/UserContext"
@@ -64,7 +65,7 @@ const Cart = () => {
     const requestItems = items.join(", ")
 
     try {
-      await dbFetch.post("/request/create", {
+      const res = await dbFetch.post("/request/create", {
         id: userId,
         items: requestItems,
         details,
@@ -75,9 +76,10 @@ const Cart = () => {
       setItems("")
       setDetails("")
 
+      toast.success(res.data.msg)
       navigate("/requests")
     } catch (err) {
-      console.log(err)
+      toast.error(err.response.data.msg)
     }
   }
 
