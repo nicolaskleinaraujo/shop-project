@@ -5,6 +5,7 @@ import styles from "./Infos.module.css"
 import dbFetch from "../../axios/config"
 import { useState, useEffect, useContext } from "react"
 import { useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
 
 // Context
 import { UserContext } from "../../context/UserContext"
@@ -42,13 +43,14 @@ const Infos = () => {
         e.preventDefault()
 
         if (password === "") {
+            toast.error("Coloque uma senha")
             return
         }
 
         setLoading(true)
 
         try {
-            await dbFetch.post("/user/update", {
+            const res = await dbFetch.post("/user/update", {
                 id: userId,
                 fullName,
                 email,
@@ -59,9 +61,11 @@ const Infos = () => {
                 houseNum: parseInt(houseNum),
             })
 
+            toast.success(res.data.msg)
             navigate("/")
         } catch (err) {
-            console.log(err)
+            setLoading(false)
+            toast.error(err.response.data.msg)
         }
     }
 
