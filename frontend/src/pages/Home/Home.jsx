@@ -5,6 +5,7 @@ import styles from "./Home.module.css"
 import dbFetch from "../../axios/config"
 import { useContext, useEffect, useState } from "react"
 import { Link } from "react-router-dom"
+import { toast } from "react-toastify"
 
 // Context
 import { UserContext } from "../../context/UserContext"
@@ -39,6 +40,8 @@ const Home = () => {
     } else if (cart) {
       localStorage.setItem("cart", `${cart}, ${productId}`)
     }
+
+    toast.success("Item adicionado ao carrinho", { autoClose: 500 })
   }
 
   useEffect(() => {
