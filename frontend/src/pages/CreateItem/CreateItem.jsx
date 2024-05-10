@@ -26,8 +26,10 @@ const CreateItem = () => {
                 value: parseFloat(value),
             })
 
+            toast.success(res.data.msg)
             navigate("/items")
         } catch (err) {
+            toast.error(err.response.data.msg)
             setLoading(false)
         }
         
