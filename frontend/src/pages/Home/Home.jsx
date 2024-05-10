@@ -58,7 +58,7 @@ const Home = () => {
         </div>
       }
 
-      {userId === 0 &&
+      {!loading && userId === 0 &&
         <div className={styles.home_welcome}>
           <h1>Loja de Doces</h1>
           <p>Bem vindo a minha loja de doces. Para testar todas as features do projeto, primeiramente crie uma conta!</p>
