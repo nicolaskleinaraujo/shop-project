@@ -31,12 +31,13 @@ const User = () => {
     const deleteAccount = async() => {
         if (confirm("Deseja deletar sua conta?")) {
             try {
-                await dbFetch.delete(`/user/${userId}`)
+                const res = await dbFetch.delete(`/user/${userId}`)
                 setUserId(0)
                 setAdmin(false)
+                toast.success(res.data.msg)
                 navigate("/register")
             } catch (err) {
-                console.log(err)
+                toast.error(err.response.data.msg)
             }
         }
     }
