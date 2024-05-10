@@ -20,10 +20,14 @@ function App() {
 
   const tryAuth = async() => {
     const res = await dbFetch.get("/user/tryauth")
-    setUserId(res.data.id)
 
-    const admin = await dbFetch.get(`/user/${res.data.id}`)
-    setAdmin(admin.data.isAdmin)
+    if (res.status == 200) {
+      setUserId(res.data.id)
+      const admin = await dbFetch.get(`/user/${res.data.id}`)
+      setAdmin(admin.data.isAdmin)
+
+      toast.success("Logado com sucesso!")
+    }
   }
 
   useLayoutEffect(() => {
@@ -32,7 +36,7 @@ function App() {
 
   return (
     <>
-      <ToastContainer position="top-right" autoClose={3000} />
+      <ToastContainer position="bottom-right" autoClose={1500} pauseOnHover={false} />
       <Router />
     </>
   )
