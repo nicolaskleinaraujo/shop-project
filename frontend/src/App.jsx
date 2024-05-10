@@ -1,9 +1,11 @@
 // CSS
 import './App.css'
+import 'react-toastify/dist/ReactToastify.css';
 
 // Modules
 import dbFetch from './axios/config'
 import { useLayoutEffect, useContext } from 'react'
+import { ToastContainer, toast } from 'react-toastify';
 
 // Context
 import { UserContext } from './context/UserContext'
@@ -30,6 +32,7 @@ function App() {
 
   return (
     <>
+      <ToastContainer />
       <Router />
     </>
   )
