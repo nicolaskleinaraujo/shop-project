@@ -4,22 +4,33 @@ import styles from "./CreateItem.module.css"
 // Modules
 import dbFetch from "../../axios/config"
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
 
 const CreateItem = () => {
+    const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
     
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
-    const [value, setValue] = useState()
+    const [value, setValue] = useState(0.01)
 
-    const handleCreate = async() => {
+    const handleCreate = async(e) => {
+        e.preventDefault()
         setLoading(true)
 
-        await dbFetch.post("/item/create", {
-            name,
-            description,
-            value: parseFloat(value),
-        })
+        try {
+            const res = await dbFetch.post("/item/create", {
+                name,
+                description,
+                value: parseFloat(value),
+            })
+
+            navigate("/items")
+        } catch (err) {
+            setLoading(false)
+        }
+        
     }
 
     return (
