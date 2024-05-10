@@ -5,6 +5,7 @@ import styles from "./UpdateItem.module.css"
 import dbFetch from "../../axios/config"
 import { useState, useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
 
 const UpdateItem = () => {
     const { id } = useParams()
@@ -27,14 +28,20 @@ const UpdateItem = () => {
         e.preventDefault()
         setLoading(true)
 
-        await dbFetch.post(`/item/update`, {
-            id: parseInt(id),
-            name,
-            description,
-            value: parseFloat(value),
-        })
-
-        navigate("/items")
+        try {
+            const res = await dbFetch.post(`/item/update`, {
+                id: parseInt(id),
+                name,
+                description,
+                value: parseFloat(value),
+            })
+            
+            toast.success(res.data.msg)
+            navigate("/items")
+        } catch (err) {
+            toast.error(err.response.data.msg)
+            setLoading(false)
+        }
     }
 
     useEffect(() => {
