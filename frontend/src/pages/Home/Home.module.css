@@ -82,40 +82,36 @@
 }
 
 @media screen and (min-width: 800px) {
-    .home {
-        grid-auto-rows: 12em;
-    }
-
     .home_search {
-        width: 23em;
+        top: 8%;
+        width: 23vw;
         height: 4em;
     }
 
     .home_search input {
-        width: 24em;
-        height: 3.5em;
-    }
-
-    .home_search input::placeholder {
+        width: 28em;
+        height: 2.3em;
         font-size: 1.3em;
     }
 
     .home_welcome {
-        padding: 5em;
+        padding: 6em;
     }
 
+    .home button,
     .home_welcome a {
         font-size: 1.3em;
     }
 }
 
 @media screen and (min-width: 1200px) {
-    .home {
-        grid-auto-rows: 16em;
+    .home_search {
+        top: 11%;
+        height: 5.7em;
     }
 
     .home_search input {
-        font-size: .9em;
+        font-size: 2em;
     }
 
     .home_welcome {
