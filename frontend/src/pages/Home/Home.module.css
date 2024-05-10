@@ -16,6 +16,8 @@
 }
 
 .home_search {
+    position: absolute;
+    top: 7%;
     background-color: #ED1B22;
     width: 15em;
 }
