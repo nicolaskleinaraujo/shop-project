@@ -5,6 +5,7 @@ import styles from "./User.module.css"
 import dbFetch from "../../axios/config"
 import { useContext } from "react"
 import { Link, useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
 
 // Context
 import { UserContext } from '../../context/UserContext'
@@ -16,10 +17,15 @@ const User = () => {
     const navigate = useNavigate()
 
     const leaveAccount = async() => {
-        await dbFetch.post("/user/leave")
-        setUserId(0)
-        setAdmin(false)
-        navigate("/login")
+        try {
+            const res = await dbFetch.post("/user/leave")
+            setUserId(0)
+            setAdmin(false)
+            toast.success(res.data.msg)
+            navigate("/login")
+        } catch (err) {
+            toast.error(err.response.data.msg)
+        }
     }
 
     const deleteAccount = async() => {
