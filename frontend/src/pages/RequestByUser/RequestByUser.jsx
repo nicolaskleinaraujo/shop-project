@@ -34,7 +34,7 @@ const RequestByUser = () => {
 
     return (
         <div className={styles.request_by_user}>
-            <h1>Pedidos</h1>
+            <h1>Meus Pedidos</h1>
 
             {loading ? (
                 <img src="./loading.svg" alt="Carregando" />
