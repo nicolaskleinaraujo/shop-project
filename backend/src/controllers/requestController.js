@@ -148,6 +148,7 @@ const requestController = {
     try {
       const userRequests = await prisma.request.findMany({
         where: { author: { jwt: jwtCookie } },
+        orderBy: { id: 'desc' }
       })
 
       if (!userRequests) {
