@@ -14,6 +14,7 @@ app.use(cookieParser(process.env.COOKIE_PARSER_SECRET))
 app.use(express.json())
 app.use(
   cors({
+    origin: "https://nk-shop-project.netlify.app",
     credentials: true,
   })
 )
