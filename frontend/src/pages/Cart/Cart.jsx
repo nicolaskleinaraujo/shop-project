@@ -49,6 +49,8 @@ const Cart = () => {
   }
 
   const removeItem = (index) => {
+    setLoading(true)
+
     const storedCart = localStorage.getItem("cart")
     const itemsId = storedCart.split(", ")
     itemsId.splice(index, 1)
@@ -56,7 +58,7 @@ const Cart = () => {
     const newCart = itemsId.join(", ")
     localStorage.setItem("cart", newCart)
 
-    setLoading(true)
+    setUpdate(true)
   }
 
   const createRequest = async() => {
