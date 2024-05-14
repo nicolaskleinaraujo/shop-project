@@ -13,6 +13,12 @@
     padding: .5em;
     border-radius: .3em;
     margin: .5em;
+    border: .2em solid #ed1b224d;
+    transition: .2s linear;
+}
+
+.home div:hover {
+    border: .2em solid #ED1B22;
 }
 
 .home_search {
@@ -48,10 +54,6 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-}
-
-.home_items {
-    background-color: rgb(236, 235, 235);
 }
 
 .home_name {
