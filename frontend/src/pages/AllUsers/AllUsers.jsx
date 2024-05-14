@@ -13,7 +13,7 @@ const AllUsers = () => {
     const getAllUsers = async() => {
         const res = await dbFetch.get("/user")
         setUsers(res.data)
-        if (loading) {setLoading(false)}
+        if (loading) { setLoading(false) }
         if (update) { setUpdate(false) }
     }
 
