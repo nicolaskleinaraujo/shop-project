@@ -22,6 +22,7 @@
 
 .update_item img {
     width: 14em;
+    margin: auto;
 }
 
 .update_item input {
