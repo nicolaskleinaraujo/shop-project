@@ -8,12 +8,14 @@ import { Link } from "react-router-dom"
 
 const Items = () => {
     const [loading, setLoading] = useState(true)
+    const [update, setUpdate] = useState(false)
     const [items, setItems] = useState([])
 
     const getItems = async() => {
         const res = await dbFetch.get("/item/items")
         setItems(res.data)
         if (loading) { setLoading(false) }
+        if (update) { setUpdate(false) }
     }
 
     const deleteItem = async(id) => {
@@ -25,7 +27,7 @@ const Items = () => {
 
     useEffect(() => {
         getItems()
-    }, [loading])
+    }, [update === true])
 
     return (
         <div className={styles.items}>
