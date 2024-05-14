@@ -14,15 +14,17 @@ const AllUsers = () => {
         const res = await dbFetch.get("/user")
         setUsers(res.data)
         if (loading) {setLoading(false)}
+        if (update) { setUpdate(false) }
     }
 
     const changeAdmin = async(id, state) => {
         if (confirm("Deseja mudar o admin deste usuario?")) {
+            setLoading(true)
             await dbFetch.post("/user/admin/change", {
                 id,
                 isAdmin: state,
             })
-            setLoading(true)
+            setUpdate(true)
         }
     }
 
