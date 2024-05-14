@@ -7,6 +7,7 @@ import { useState, useEffect } from "react"
 
 const AllUsers = () => {
     const [loading, setLoading] = useState(true)
+    const [update, setUpdate] = useState(false)
     const [users, setUsers] = useState([])
 
     const getAllUsers = async() => {
@@ -27,7 +28,7 @@ const AllUsers = () => {
 
     useEffect(() => {
         getAllUsers()
-    }, [loading])
+    }, [update === true])
 
     return (
         <div className={styles.all_users}>
