@@ -19,7 +19,9 @@ const AllRequests = () => {
     }
 
     const delivered = async(id) => {
+        setLoading(true)
         await dbFetch.post(`/request/delivered/${id}`)
+        setUpdate(true)
     }
     
     useEffect(() => {
