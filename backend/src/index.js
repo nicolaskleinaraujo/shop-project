@@ -10,7 +10,7 @@ const requests = require("./Routes/requests")
 const items = require("./Routes/items")
 
 // Configs
-app.use(cookieParser(process.env.COOKIE_PARSER_SECRET))
+app.use(cookieParser(process.env.COOKIE_PARSER_SECRET, { secure: true }))
 app.use(express.json())
 app.use(
   cors({
