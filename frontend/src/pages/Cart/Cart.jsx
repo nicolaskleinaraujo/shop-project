@@ -16,7 +16,6 @@ const Cart = () => {
   const navigate = useNavigate()
 
   const [items, setItems] = useState([])
-  const [values, setValues] = useState([])
   const [details, setDetails] = useState("")
   const [totalValue, setTotalValue] = useState()
 
@@ -25,7 +24,6 @@ const Cart = () => {
 
     if (storedCart === null || storedCart.length === 0) {
       setItems([])
-      setValues([])
       setLoading(false)
       return
     }
@@ -40,11 +38,9 @@ const Cart = () => {
 
     const itemsArray = results.map((result) => result.name)
     const valuesArray = results.map((result) => result.value)
+    const valueCalc = valuesArray.reduce((accumulator, current) => accumulator + current, 0)
 
     setItems(itemsArray)
-    setValues(valuesArray)
-
-    const valueCalc = values.reduce((accumulator, current) => accumulator + current, 0)
     setTotalValue(valueCalc)
 
     if (loading) { setLoading(false) }
