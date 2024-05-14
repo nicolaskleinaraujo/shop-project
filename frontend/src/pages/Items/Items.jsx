@@ -20,8 +20,9 @@ const Items = () => {
 
     const deleteItem = async(id) => {
         if (confirm("Deseja mesmo deletar este item?")) {
-            await dbFetch.delete(`/item/${id}`)
             setLoading(true)
+            await dbFetch.delete(`/item/${id}`)
+            setUpdate(true)
         }
     }
 
