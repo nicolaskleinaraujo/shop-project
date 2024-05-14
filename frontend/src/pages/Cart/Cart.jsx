@@ -13,6 +13,7 @@ import { UserContext } from "../../context/UserContext"
 const Cart = () => {
   const { userId } = useContext(UserContext)
   const [loading, setLoading] = useState(true)
+  const [update, setUpdate] = useState(false)
   const navigate = useNavigate()
 
   const [items, setItems] = useState([])
@@ -81,7 +82,7 @@ const Cart = () => {
 
   useEffect(() => {
     getItems()
-  }, [loading])
+  }, [update === true])
 
   return (
     <div className={styles.cart}>
