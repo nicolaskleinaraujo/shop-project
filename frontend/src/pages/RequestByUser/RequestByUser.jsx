@@ -15,12 +15,14 @@ const RequestByUser = () => {
         const res = await dbFetch.get("/request/user")
         setRequests(res.data)
         if (loading) { setLoading(false) }
+        if (update) { setUpdate(false) }
     }
 
     const cancelRequest = async(id) => {
+        setLoading(true)
         try {
             await dbFetch.delete(`/request/delete/${id}`)
-            setLoading(true)
+            setUpdate(true)
         } catch (err) {
             console.log(err)
         }
