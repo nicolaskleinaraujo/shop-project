@@ -323,7 +323,14 @@ const userController = {
 
   getUsers: async (req, res) => {
     try {
-      const users = await prisma.user.findMany()
+      const users = await prisma.user.findMany({
+        select: { 
+          id: true,
+          fullName: true,
+          isAdmin: true,
+        },
+      })
+      
       res.status(200).json(users)
     } catch (err) {
       res.status(500).json(err)
