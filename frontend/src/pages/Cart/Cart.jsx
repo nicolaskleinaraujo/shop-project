@@ -62,6 +62,7 @@ const Cart = () => {
   }
 
   const createRequest = async() => {
+    setLoading(true)
     const requestItems = items.join(", ")
 
     try {
