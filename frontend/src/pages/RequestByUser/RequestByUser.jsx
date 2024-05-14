@@ -8,6 +8,7 @@ import { Link } from "react-router-dom"
 
 const RequestByUser = () => {
     const [loading, setLoading] = useState(true)
+    const [update, setUpdate] = useState(false)
     const [requests, setRequests] = useState([])
 
     const getRequests = async() => {
@@ -27,7 +28,7 @@ const RequestByUser = () => {
 
     useEffect(() => {
         getRequests()
-    }, [loading])
+    }, [update === true])
 
     return (
         <div className={styles.request_by_user}>
