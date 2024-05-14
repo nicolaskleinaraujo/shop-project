@@ -45,6 +45,7 @@ const Cart = () => {
     setTotalValue(valueCalc)
 
     if (loading) { setLoading(false) }
+    if (update) { setUpdate(false) }
   }
 
   const removeItem = (index) => {
