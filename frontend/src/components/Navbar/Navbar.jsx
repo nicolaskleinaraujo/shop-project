@@ -35,7 +35,7 @@ const Navbar = () => {
 
             )}
 
-            <div><Link to="/"><img src="https://via.placeholder.com/50x50" alt="Logo do Site" /></Link></div>
+            <div><Link to="/"><img src="/project-logo.png" alt="Logo do Site" /></Link></div>
             
             <div className={styles.menu}>
                 <Link to="/my-cart"><FaShoppingCart /></Link>
