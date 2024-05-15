@@ -15,24 +15,9 @@
 }
 
 .all_users div {
-    display: flex;
-    margin: .5em;
+    width: 55vw;
 }
 
-.all_users div p,
-.all_users div button {
-    margin: .3em;
-}
-
-.all_users div button {
-    border: 1px solid black;
-    border-radius: .3em;
-    padding: .2em;
-    transition: .3s;
-    cursor: pointer;
-}
-
-.all_users div button:hover {
-    color: white;
-    background-color: #ED1B22;
+.all_users div p:first-child {
+    margin-bottom: .5em;
 }
