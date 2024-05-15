@@ -6,21 +6,6 @@
     min-height: 83vh;
 }
 
-.home div {
-    width: 80vw;
-    text-align: center;
-    box-shadow: 2px 3px 5px 0px rgba(0,0,0,0.39);
-    padding: .5em;
-    border-radius: .3em;
-    margin: .5em;
-    border: .2em solid #ed1b224d;
-    transition: .2s linear;
-}
-
-.home div:hover {
-    border: .2em solid #ED1B22;
-}
-
 .home_search {
     position: absolute;
     top: 7%;
@@ -36,18 +21,6 @@
     border-radius: .3em;
 }
 
-.home_welcome {
-    background-color: rgb(248, 245, 245);
-}
-
-.home_welcome p {
-    margin: .3em;
-}
-
-.home a {
-    color: black;
-}
-
 .home img {
     position: absolute;
     width: 14em;
@@ -56,46 +29,12 @@
     transform: translate(-50%, -50%);
 }
 
-.home_name {
-    margin-bottom: .5em;
-}
-
-.home_value {
-    color: #40ad6c;
-}
-
-.home_description {
-    margin-bottom: .8em;
-}
-
-.home_items button {
-    border: 1px solid black;
-    border-radius: .3em;
-    padding: .2em;
-    transition: .3s;
-    cursor: pointer;
-}
-
-.home_items button:hover {
-    color: white;
-    background-color: #ED1B22;
-}
-
 @media screen and (min-width: 800px) {
     .home_search {
         top: 8%;
     }
 
     .home_search input {
-        font-size: 1.3em;
-    }
-
-    .home_welcome {
-        padding: 6em;
-    }
-
-    .home button,
-    .home_welcome a {
         font-size: 1.3em;
     }
 }
@@ -107,13 +46,5 @@
 
     .home_search input {
         font-size: 2em;
-    }
-
-    .home_welcome {
-        padding: 7em;
-    }
-
-    .home_welcome a {
-        font-size: 1.7em;
     }
 }
