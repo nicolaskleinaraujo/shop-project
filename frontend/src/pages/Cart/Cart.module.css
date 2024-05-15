@@ -20,29 +20,23 @@
 }
 
 .cart_items div {
-    display: flex;
-    justify-content: center;
-    margin: 1em;
-}
-
-.cart_items div * {
-    margin: .3em;
+    width: 55vw;
+    margin: .8em;
 }
 
 .cart_value {
     color: #40ad6c;
 }
 
-.cart_items div button,
 .cart_request button {
     border: 1px solid black;
     border-radius: .3em;
     padding: .2em;
     transition: .3s;
     cursor: pointer;
+    margin-bottom: 1em;
 }
 
-.cart_items div button:hover,
 .cart_request button:hover {
     color: white;
     background-color: #ED1B22;
