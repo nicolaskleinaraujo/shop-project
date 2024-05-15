@@ -4,7 +4,6 @@ import styles from "./AllRequests.module.css"
 // Modules
 import dbFetch from "../../axios/config"
 import { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
 
 // Components
 import Box from "../../components/Box/Box"

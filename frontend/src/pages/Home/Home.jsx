@@ -4,7 +4,6 @@ import styles from "./Home.module.css"
 // Modules
 import dbFetch from "../../axios/config"
 import { useContext, useEffect, useState } from "react"
-import { Link } from "react-router-dom"
 import { toast } from "react-toastify"
 
 // Components
