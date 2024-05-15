@@ -6,6 +6,9 @@ import dbFetch from "../../axios/config"
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 
+// Components
+import Box from "../../components/Box/Box"
+
 const RequestByUser = () => {
     const [loading, setLoading] = useState(true)
     const [update, setUpdate] = useState(false)
@@ -40,16 +43,19 @@ const RequestByUser = () => {
                 <img src="./loading.svg" alt="Carregando" />
             ) : (
                 requests.map((request) => (
-                    <div key={request.id}>
-                        <p>{request.items} | R${request.value}</p>
+                    <Box 
+                        key={request.id}
 
-                        { request.details && <p>OBS: {request.details}</p> }
+                        name={request.items}
+                        value={request.value}
+                        desc={request.details}
 
-                        <p>
-                            <Link to={`/request/${request.slug}`}>Ver Pedido</Link> | 
-                            <button onClick={() => cancelRequest(request.id)}>Cancelar</button>
-                        </p>
-                    </div>
+                        linkText="Ver Pedido"
+                        link={`/request/${request.slug}`}
+
+                        btnText="Cancelar"
+                        btnAction={() => cancelRequest(request.id)}
+                    />
                 ))
             )}
         </div>
