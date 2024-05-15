@@ -7,7 +7,9 @@ import { Link } from "react-router-dom"
 const Box = (props) => {
     return (
         <div className={styles.box}>
-            {props.title && <p className={styles.box_title}>{props.title}</p>}
+            {props.title && <h1 className={styles.box_title}>{props.title}</h1>}
+
+            {props.name && <p className={styles.box_name}>{props.name}</p>}
 
             {props.value && <p className={styles.box_value}>R$ {props.value}</p>}
 

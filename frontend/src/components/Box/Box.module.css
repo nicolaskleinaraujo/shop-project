@@ -16,13 +16,17 @@
     border: .2em solid #ED1B22;
 }
 
+.box_title {
+    margin-bottom: .2em;
+}
+
 .box_value {
     margin-top: .5em;
     color: #40ad6c;
 }
 
 .box_desc {
-    margin-bottom: .7em;
+    margin: 0 .2em .7em .2em;
 }
 
 .box_btn {
@@ -37,4 +41,21 @@
 .box_btn:hover {
     color: white;
     background-color: #ED1B22;
+}
+
+.box_link {
+    color: black;
+    margin-bottom: .3em;
+}
+
+@media screen and (min-width: 800px) {
+    .box_link {
+        font-size: 1.3em;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .box_link {
+        font-size: 2em;
+    }
 }
