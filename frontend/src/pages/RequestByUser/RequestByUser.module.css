@@ -16,29 +16,13 @@
 }
 
 .request_by_user div {
-    text-align: center;
-    margin: .4em;
+    margin-bottom: 1.5em;
 }
 
-.request_by_user div p {
-    margin: .3em;
+.request_by_user div p:last-of-type {
+    margin-bottom: .7em;
 }
 
-.request_by_user div p a {
-    color: black;
-}
-
-.request_by_user div p button {
-    border: 1px solid black;
-    border-radius: .3em;
-    padding: .2em;
-    transition: .3s;
-    margin-left: .2em;
-    cursor: pointer;
-    font-size: 1em;
-}
-
-.request_by_user div p button:hover {
-    color: white;
-    background-color: #ED1B22;
+.request_by_user div a {
+    margin-bottom: .7em;
 }
