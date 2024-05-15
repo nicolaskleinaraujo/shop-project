@@ -1,6 +1,9 @@
 .box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 80vw;
-    text-align: center;
     box-shadow: 2px 3px 5px 0px rgba(0,0,0,0.39);
     padding: .5em;
     border-radius: .3em;
@@ -11,4 +14,27 @@
 
 .box:hover {
     border: .2em solid #ED1B22;
+}
+
+.box_value {
+    margin-top: .5em;
+    color: #40ad6c;
+}
+
+.box_desc {
+    margin-bottom: .7em;
+}
+
+.box_btn {
+    border: 1px solid black;
+    border-radius: .3em;
+    padding: .2em;
+    transition: .3s;
+    cursor: pointer;
+    margin-bottom: .3em;
+}
+
+.box_btn:hover {
+    color: white;
+    background-color: #ED1B22;
 }

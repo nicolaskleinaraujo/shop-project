@@ -9,7 +9,7 @@ const Box = (props) => {
         <div className={styles.box}>
             {props.title && <p className={styles.box_title}>{props.title}</p>}
 
-            {props.value && <p className={styles.box_value}>{props.value}</p>}
+            {props.value && <p className={styles.box_value}>R$ {props.value}</p>}
 
             {props.desc && <p className={styles.box_desc}>{props.desc}</p>}
 
