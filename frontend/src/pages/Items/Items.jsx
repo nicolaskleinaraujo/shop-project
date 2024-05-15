@@ -4,7 +4,9 @@ import styles from "./Items.module.css"
 // Modules
 import dbFetch from "../../axios/config"
 import { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
+
+// Components
+import Box from "../../components/Box/Box"
 
 const Items = () => {
     const [loading, setLoading] = useState(true)
@@ -38,11 +40,18 @@ const Items = () => {
                 <img src="/loading.svg" alt="Carregando" />
             ) : (
                 items.map((item) => (
-                    <div key={item.id}>
-                        <p>{item.name} | {item.value}</p>
-                        <Link to={`/update-item/${item.id}`}>Atualizar</Link> |
-                        <button onClick={() => deleteItem(item.id)}>Deletar</button>
-                    </div>
+                    <Box 
+                        key={item.id}
+
+                        name={item.name}
+                        value={item.value}
+
+                        linkText="Atualizar"
+                        link={`/update-item/${item.id}`}
+
+                        btnText="Deletar"
+                        btnAction={() => deleteItem(item.id)}
+                    />
                 )))
             }
         </div>
