@@ -6,17 +6,18 @@ import dbFetch from "../../axios/config"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 
+// Components
+import Box from "../../components/Box/Box"
+
 const RequestBySlug = () => {
     const { slug } = useParams()
     const [loading, setLoading] = useState(true)
 
     const [request, setRequest] = useState([])
-    const [items, setItems] = useState([])
     
     const getRequest = async() => {
         const res = await dbFetch.get(`/request/slug/${slug}`)
         setRequest(res.data)
-        setItems(res.data.items.split(", "))
         if (loading) { setLoading(false) }
     }
 
@@ -31,17 +32,11 @@ const RequestBySlug = () => {
             {loading ? (
                 <img src="/loading.svg" alt="Carregando" />
             ) : (
-                <div>
-                    {items &&
-                        items.map((item, index) => (
-                            <p key={index}>{item}</p>
-                        ))
-                    }
-
-                    <p className={styles.request_by_slug_value}>R${request.value}</p>
-
-                    { request.details && <p>OBS: {request.details}</p> }
-                </div>
+                <Box
+                    name={request.items}
+                    value={request.value}
+                    desc={request.details}
+                />
             )}
             
         </div>
