@@ -1,0 +1,14 @@
+.box {
+    width: 80vw;
+    text-align: center;
+    box-shadow: 2px 3px 5px 0px rgba(0,0,0,0.39);
+    padding: .5em;
+    border-radius: .3em;
+    margin: .5em;
+    border: .2em solid #ed1b224d;
+    transition: .2s linear;
+}
+
+.box:hover {
+    border: .2em solid #ED1B22;
+}
