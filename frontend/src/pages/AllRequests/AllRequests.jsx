@@ -6,6 +6,9 @@ import dbFetch from "../../axios/config"
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 
+// Components
+import Box from "../../components/Box/Box"
+
 const AllRequests = () => {
     const [requests, setRequests] = useState([])
     const [loading, setLoading] = useState(true)
@@ -36,22 +39,19 @@ const AllRequests = () => {
                 <img src="/loading.svg" alt="Carregando" />
             ) : (
                 requests.map((request) => (
-                    <div key={request.id}>
-                        <p>{request.items} | {request.author.fullName}</p>
+                    <Box 
+                        key={request.id}
 
-                        { request.details && <p>OBS: {request.details}</p> }
+                        name={request.author.fullName}
+                        desc={request.items}
+                        value={request.value}
 
-                        <p>{request.author.street} - {request.author.houseNum} | {request.author.city}</p>
+                        btnText={!request.delivered ? "Marcar Entregue" : "Desmarcar Entregue"}
+                        btnAction={() => delivered(request.id)}
 
-                        <p>
-                            <Link to={`/request/${request.slug}`}>Ver Pedido</Link> | 
-                            { !request.delivered ? (
-                                <button onClick={() => delivered(request.id)}>Marcar Entregue</button>
-                            ) : (
-                                <button onClick={() => delivered(request.id)}>Desmarcar Entregue</button>
-                            )}
-                        </p>
-                    </div>
+                        linkText="Ver Pedido"
+                        link={`/request/${request.slug}`}
+                    />
                 )))
             }
         </div>
