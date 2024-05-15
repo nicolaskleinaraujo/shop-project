@@ -65,11 +65,12 @@ const Home = () => {
       }
 
       {!loading && userId === 0 &&
-        <div className={styles.home_welcome}>
-          <h1>Loja de Doces</h1>
-          <p>Bem vindo a minha loja de doces. Para testar todas as features do projeto, primeiramente crie uma conta!</p>
-          <Link to="/register">Criar conta</Link>
-        </div>
+        <Box 
+          title="Loja de Doces"
+          desc="Bem vindo a minha loja de doces. Para testar todas as features do projeto, primeiramente crie uma conta!"
+          linkText="Criar conta"
+          link="/register"
+        />
       }
 
       {loading ? (
@@ -80,7 +81,7 @@ const Home = () => {
           items.map((item) => (
             <Box
               key={item.id}
-              title={item.name}
+              name={item.name}
               value={item.value}
               desc={item.description}
               btnText="Adicionar ao carrinho"
@@ -93,7 +94,7 @@ const Home = () => {
           searchResults.map((item) => (
             <Box
               key={item.id}
-              title={item.name}
+              name={item.name}
               value={item.value}
               desc={item.description}
               btnText="Adicionar ao carrinho"
