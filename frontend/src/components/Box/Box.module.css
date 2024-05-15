@@ -29,6 +29,11 @@
     margin: 0 .2em .7em .2em;
 }
 
+.box_link {
+    color: black;
+    margin-bottom: .3em;
+}
+
 .box_btn {
     border: 1px solid black;
     border-radius: .3em;
@@ -41,11 +46,6 @@
 .box_btn:hover {
     color: white;
     background-color: #ED1B22;
-}
-
-.box_link {
-    color: black;
-    margin-bottom: .3em;
 }
 
 @media screen and (min-width: 800px) {

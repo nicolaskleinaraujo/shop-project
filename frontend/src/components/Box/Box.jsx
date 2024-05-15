@@ -15,9 +15,9 @@ const Box = (props) => {
 
             {props.desc && <p className={styles.box_desc}>{props.desc}</p>}
 
-            {props.btnText && <button onClick={props.btnAction} className={styles.box_btn}>{props.btnText}</button>}
-
             {props.link && <Link to={props.link} className={styles.box_link}>{props.linkText}</Link>}
+
+            {props.btnText && <button onClick={props.btnAction} className={styles.box_btn}>{props.btnText}</button>}
         </div>
     )
 }
