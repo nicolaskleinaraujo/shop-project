@@ -53,14 +53,13 @@ const Home = () => {
   return (
     <div className={styles.home}>
       {search &&
-        <div className={styles.home_search}>
-          <input 
-            type="text" 
-            placeholder="Pesquise por produtos" 
-            onChange={(e) => { setSearchValue(e.target.value), searchItems(searchValue) }} 
-            value={searchValue} 
-          />
-        </div>
+        <input 
+          className={styles.home_search}
+          type="text" 
+          placeholder="Pesquise por produtos" 
+          onChange={(e) => { setSearchValue(e.target.value), searchItems(searchValue) }} 
+          value={searchValue} 
+        />
       }
 
       {!loading && userId === 0 &&

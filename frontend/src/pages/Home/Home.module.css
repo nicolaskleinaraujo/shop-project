@@ -8,15 +8,11 @@
 
 .home_search {
     position: absolute;
-    top: 7%;
-    background-color: #ED1B22;
-    width: 15vw;
-}
-
-.home_search input {
+    top: 8.6%;
+    left: 50%;
+    transform: translate(-50%, -8.6%);
     width: 73vw;
-    margin: auto;
-    border: 1px solid black;
+    border: .2em solid #ED1B22;
     padding: .5em;
     border-radius: .3em;
 }
@@ -31,7 +27,7 @@
 
 @media screen and (min-width: 800px) {
     .home_search {
-        top: 8%;
+        top: 11.6%;
     }
 
     .home_search input {
@@ -41,7 +37,7 @@
 
 @media screen and (min-width: 1200px) {
     .home_search {
-        top: 11%;
+        top: 14%;
     }
 
     .home_search input {
