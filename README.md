@@ -11,6 +11,10 @@
  The API makes the communication between the web page and the database that stores all the data.
  If you want to add or remove an item on the site, please, use moderately.
 
+# Working on
+ - [ ] Better UI
+ - [ ] New sorting options
+
  # Used Tecnologies
   ### Back-end
   - JavaScript
