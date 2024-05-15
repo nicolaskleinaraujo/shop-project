@@ -6,19 +6,10 @@
     min-height: 83vh;
 }
 
-.request_by_slug h1 {
-    margin: .5em;
-}
-
 .request_by_slug img {
     width: 14em;
 }
 
-.request_by_slug div {
-    text-align: left;
-}
-
-.request_by_slug_value {
-    margin: .8em 0;
-    color: #40ad6c;
+.request_by_slug div p:last-child {
+    margin-bottom: .1em;
 }
