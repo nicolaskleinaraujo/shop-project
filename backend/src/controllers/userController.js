@@ -207,6 +207,12 @@ const userController = {
         return
       }
 
+      await prisma.request.deleteMany({
+        where: {
+          authorId: id,
+        },
+      })
+
       await prisma.user.delete({
         where: {
           id,
