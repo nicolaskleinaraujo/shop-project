@@ -5,6 +5,9 @@ import styles from "./AllUsers.module.css"
 import dbFetch from "../../axios/config"
 import { useState, useEffect } from "react"
 
+// Components
+import Box from "../../components/Box/Box"
+
 const AllUsers = () => {
     const [loading, setLoading] = useState(true)
     const [update, setUpdate] = useState(false)
@@ -40,15 +43,12 @@ const AllUsers = () => {
                 <img src="/loading.svg" alt="Carregando" />
             ) : (
                 users.map((user) => (
-                    <div key={user.id}>
-                        <p>{user.fullName}</p>
-
-                        {!user.isAdmin ? (
-                            <button onClick={() => changeAdmin(user.id, true)}>Tornar Admin</button>
-                        ) : (
-                            <button onClick={() => changeAdmin(user.id, false)}>Remover Admin</button>
-                        )}
-                    </div>
+                    <Box 
+                        key={user.id}
+                        name={user.fullName}
+                        btnText={!user.isAdmin ? "Tornar Admin" : "Remover Admin"}
+                        btnAction={!user.isAdmin ? () => changeAdmin(user.id, true) : () => changeAdmin(user.id, false)}
+                    />
                 ))
             )}
         </div>
