@@ -7,6 +7,9 @@ import { useState, useEffect, useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 
+// Components
+import Box from "../../components/Box/Box"
+
 // Context
 import { UserContext } from "../../context/UserContext"
 
@@ -104,10 +107,12 @@ const Cart = () => {
           <>
             <div className={styles.cart_items}>
               {items.map((item, index) => (
-                <div key={index}>
-                  <p>{item} | </p>
-                  <button onClick={() => removeItem(index)}>Remover</button>
-                </div>
+                <Box 
+                  key={index}
+                  name={item}
+                  btnText="Remover"
+                  btnAction={() => removeItem(index)}
+                />
               ))}
 
               <p>Total: <span className={styles.cart_value}>R$ {totalValue.toFixed(2)}</span></p>
