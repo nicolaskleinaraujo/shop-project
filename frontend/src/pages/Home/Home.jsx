@@ -7,6 +7,9 @@ import { useContext, useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { toast } from "react-toastify"
 
+// Components
+import Box from "../../components/Box/Box"
+
 // Context
 import { UserContext } from "../../context/UserContext"
 import { SearchContext } from "../../context/SearchContext"
@@ -75,23 +78,27 @@ const Home = () => {
         searchResults.length === 0 ? (
 
           items.map((item) => (
-            <div key={item.id} className={styles.home_items}>
-              <p className={styles.home_name}>{item.name}</p>
-              <p className={styles.home_value}>R$ {item.value}</p>
-              <p className={styles.home_description}>{item.description}</p>
-              <button onClick={() => addToCart(item.id)}>Adicionar ao carrinho</button>
-            </div>
+            <Box
+              key={item.id}
+              title={item.name}
+              value={item.value}
+              desc={item.description}
+              btnText="Adicionar ao carrinho"
+              btnAction={() => addToCart(item.id)}
+            />
           ))
 
         ) : (
 
           searchResults.map((item) => (
-            <div key={item.id} className={styles.home_items}>
-              <p className={styles.home_name}>{item.name}</p>
-              <p className={styles.home_value}>R$ {item.value}</p>
-              <p className={styles.home_description}>{item.description}</p>
-              <button onClick={() => addToCart(item.id)}>Adicionar ao carrinho</button>
-            </div>
+            <Box
+              key={item.id}
+              title={item.name}
+              value={item.value}
+              desc={item.description}
+              btnText="Adicionar ao carrinho"
+              btnAction={() => addToCart(item.id)}
+            />
           ))
 
         ))
