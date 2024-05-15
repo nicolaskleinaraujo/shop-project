@@ -15,6 +15,10 @@
     width: 14em;
 }
 
+.all_requests div {
+    margin-bottom: 1.5em;
+}
+
 .all_requests div a {
     margin-bottom: .7em;
 }
