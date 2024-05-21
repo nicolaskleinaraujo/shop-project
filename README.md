@@ -14,6 +14,7 @@
 # Working on
  - [ ] Better UI
  - [ ] New sorting options
+ - [ ] Tests with vitest
 
  # Used Tecnologies
   ### Back-end
