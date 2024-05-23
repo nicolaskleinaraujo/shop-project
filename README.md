@@ -15,6 +15,7 @@
  - [ ] Better UI
  - [ ] New sorting options
  - [ ] Tests with vitest
+ - [ ] Add HATEOAS to the API
 
  # Used Tecnologies
   ### Back-end
