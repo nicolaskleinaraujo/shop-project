@@ -21,10 +21,18 @@ const Navbar = () => {
     return (
         <nav className={styles.navbar}>
             {searchBar ? (
-                <input 
-                    type="text" 
-                    placeholder="Pesquise por produtos" 
-                />
+                <>
+                    <input 
+                        type="search" 
+                        placeholder="Pesquise por produtos..." 
+                        className={styles.search_bar}
+                    />
+
+                    <button  
+                        className={styles.clear_search} 
+                        onClick={() => setSearchBar(false)}
+                    >X</button>
+                </>
             ) : (
                 <>
                     {location.pathname == "/" ? (
