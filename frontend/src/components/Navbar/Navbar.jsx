@@ -25,7 +25,9 @@ const Navbar = () => {
                     <input 
                         type="search" 
                         placeholder="Pesquise por produtos..." 
-                        className={styles.search_bar}
+                        className={styles.search_bar} 
+                        autoFocus={true} 
+                        
                     />
 
                     <button  
