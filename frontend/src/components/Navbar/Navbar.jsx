@@ -2,7 +2,7 @@
 import styles from "./Navbar.module.css"
 
 // Modules
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import { FaUser, FaShoppingCart, FaSearch } from "react-icons/fa"
 
@@ -15,37 +15,47 @@ const Navbar = () => {
     const navigate = useNavigate()
     
     const { userId } = useContext(UserContext)
-    const { search, setSearch } = useContext(SearchContext)
+    // const { search, setSearch } = useContext(SearchContext)
+    const [searchBar, setSearchBar] = useState(false)
 
     return (
         <nav className={styles.navbar}>
-            {location.pathname == "/" ? (
-
-                <div
-                    className={styles.search} 
-                    onClick={() => setSearch(!search)} 
-                ><FaSearch /></div>
-
+            {searchBar ? (
+                <input 
+                    type="text" 
+                    placeholder="Pesquise por produtos" 
+                />
             ) : (
+                <>
+                    {location.pathname == "/" ? (
 
-                <div
-                    className={styles.search} 
-                    onClick={() => { navigate("/"), setSearch(true) }} 
-                ><FaSearch /></div>
+                        <div
+                            className={styles.search} 
+                            onClick={() => setSearchBar(!searchBar)} 
+                        ><FaSearch /></div>
 
+                    ) : (
+
+                        <div
+                            className={styles.search} 
+                            onClick={() => { navigate("/"), setSearchBar(true) }} 
+                        ><FaSearch /></div>
+
+                    )}
+
+                    <div><Link to="/"><img src="/project-logo.png" alt="Logo do Site" /></Link></div>
+                    
+                    <div className={styles.menu}>
+                        <Link to="/my-cart"><FaShoppingCart /></Link>
+
+                        {userId != 0 ? (
+                            <Link to="/user"><FaUser /></Link>
+                        ) : (
+                            <Link to="/login"><FaUser /></Link>
+                        )}
+                    </div>             
+                </>
             )}
-
-            <div><Link to="/"><img src="/project-logo.png" alt="Logo do Site" /></Link></div>
-            
-            <div className={styles.menu}>
-                <Link to="/my-cart"><FaShoppingCart /></Link>
-
-                {userId != 0 ? (
-                    <Link to="/user"><FaUser /></Link>
-                ) : (
-                    <Link to="/login"><FaUser /></Link>
-                )}
-            </div>
         </nav>
     )
 }
