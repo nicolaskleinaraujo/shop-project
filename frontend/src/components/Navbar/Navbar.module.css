@@ -6,6 +6,21 @@
     padding: .5em;
 }
 
+.search_bar {
+    width: 50vw;
+    border: .2em solid #ED1B22;
+    padding: .5em;
+    border-radius: .3em;
+}
+
+.clear_search {
+    position: absolute;
+    right: 26%;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
 .search {
     margin: 0 3.1em 0 1.5em;
     cursor: pointer;
