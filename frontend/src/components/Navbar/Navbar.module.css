@@ -13,19 +13,6 @@
     border-radius: .3em;
 }
 
-/* Removes IE default clear button */
-.search_bar::-ms-clear {
-    display: none;
-}
-
-.clear_search {
-    position: absolute;
-    right: 26%;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-}
-
 .search {
     margin: 0 3.1em 0 1.5em;
     cursor: pointer;

@@ -29,11 +29,6 @@ const Navbar = () => {
                         autoFocus={true} 
                         
                     />
-
-                    <button  
-                        className={styles.clear_search} 
-                        onClick={() => setSearchBar(false)}
-                    >X</button>
                 </>
             ) : (
                 <>
