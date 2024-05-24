@@ -17,7 +17,6 @@ const Home = () => {
   const [items, setItems] = useState([])
   
   const { search } = useContext(SearchContext)
-  const [searchValue, setSearchValue] = useState("")
   const [searchResults, setSearchResults] = useState([])
 
   const { userId } = useContext(UserContext)
@@ -31,6 +30,10 @@ const Home = () => {
   }
 
   const searchItems = (e) => {
+    if (e === "") {
+      return
+    }
+
     const res = items.filter((item) => item.name.toLowerCase().includes(e.toLowerCase()))
     setSearchResults(res)
   }
@@ -48,20 +51,14 @@ const Home = () => {
 
   useEffect(() => {
     getItems()
-  }, [searchValue == ""])
+  }, [search === ""])
+
+  useEffect(() => {
+    searchItems(search)
+  }, [search])
 
   return (
     <div className={styles.home}>
-      {search &&
-        <input 
-          className={styles.home_search}
-          type="text" 
-          placeholder="Pesquise por produtos" 
-          onChange={(e) => { setSearchValue(e.target.value), searchItems(searchValue) }} 
-          value={searchValue} 
-        />
-      }
-
       {!loading && userId === 0 &&
         <Box 
           title="Loja de Doces"
