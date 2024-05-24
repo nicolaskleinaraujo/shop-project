@@ -21,15 +21,20 @@ const Navbar = () => {
     return (
         <nav className={styles.navbar}>
             {searchBar ? (
-                <>
+                <div className={styles.search_bar}>
+                    <div
+                        className={styles.search} 
+                        onClick={() => setSearchBar(false)} 
+                    ><FaSearch /></div>
+
                     <input 
                         type="search" 
                         placeholder="Pesquise por produtos..." 
-                        className={styles.search_bar} 
                         autoFocus={true} 
-                        
+                        onChange={(e) => setSearch(e.target.value)} 
+                        value={search} 
                     />
-                </>
+                </div>
             ) : (
                 <>
                     {location.pathname == "/" ? (
