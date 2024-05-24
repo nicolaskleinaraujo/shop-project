@@ -15,7 +15,7 @@ const Navbar = () => {
     const navigate = useNavigate()
     
     const { userId } = useContext(UserContext)
-    // const { search, setSearch } = useContext(SearchContext)
+    const { search, setSearch } = useContext(SearchContext)
     const [searchBar, setSearchBar] = useState(false)
 
     return (

@@ -6,7 +6,7 @@ export const SearchContext = createContext()
 
 // Provider
 export const SearchProvider = ({ children }) => {
-    const [search, setSearch] = useState(false)
+    const [search, setSearch] = useState("")
 
     return (
         <SearchContext.Provider value={{ search, setSearch }}>
