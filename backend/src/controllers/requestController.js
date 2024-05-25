@@ -209,6 +209,16 @@ const requestController = {
     }
 
     try {
+      if (sort != null) {
+        const requests = await prisma.request.findMany({
+          include: { author: true },
+          where: { delivered: sort },
+        })
+        
+        res.status(200).json(requests)
+        return
+      }
+
       const requests = await prisma.request.findMany({
         include: { author: true }
       })
