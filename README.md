@@ -13,7 +13,7 @@
 
 # Working on
  - [x] ~~Better UI~~
- - [ ] New sorting options
+ - [x] ~~New sorting options~~
  - [ ] Tests with vitest
  - [ ] Add HATEOAS to the API
 
