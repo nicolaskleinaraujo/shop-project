@@ -15,8 +15,8 @@ const AllRequests = () => {
     const [loading, setLoading] = useState(true)
     const [update, setUpdate] = useState(false)
 
-    const getAllRequests = async() => {
-        const res = await dbFetch.get("/request")
+    const getRequests = async() => {
+        const res = await dbFetch.get(`/request/${sort}`)
         setRequests(res.data)
         if (loading) { setLoading(false) }
         if (update) { setUpdate(false) }
@@ -29,7 +29,7 @@ const AllRequests = () => {
     }
     
     useEffect(() => {
-        getAllRequests()
+        getRequests()
     }, [update === true])
 
     return (
