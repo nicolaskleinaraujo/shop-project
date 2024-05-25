@@ -10,6 +10,8 @@ import Box from "../../components/Box/Box"
 
 const AllRequests = () => {
     const [requests, setRequests] = useState([])
+    const [sort, setSort] = useState(null)
+
     const [loading, setLoading] = useState(true)
     const [update, setUpdate] = useState(false)
 
@@ -33,6 +35,11 @@ const AllRequests = () => {
     return (
         <div className={styles.all_requests}>
             <h1>Todos os Pedidos</h1>
+            <select onChange={(e) => { setSort(e.target.value), setUpdate(true), setLoading(true) }}>
+                <option value="null">Todos</option>
+                <option value="false">Não entregue</option>
+                <option value="true">Entregue</option>
+            </select>
 
             {loading ? (
                 <img src="/loading.svg" alt="Carregando" />
