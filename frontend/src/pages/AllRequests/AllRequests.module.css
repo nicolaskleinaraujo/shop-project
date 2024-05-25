@@ -11,6 +11,15 @@
     margin: .5em;
 }
 
+.all_requests select {
+    width: 65vw;
+    max-width: 35em;
+    margin-bottom: .7em;
+    border: 1px solid black;
+    padding: .5em;
+    border-radius: .3em;
+}
+
 .all_requests img {
     width: 14em;
 }
