@@ -12,7 +12,7 @@
  If you want to add or remove an item on the site, please, use moderately.
 
 # Working on
- - [ ] Better UI
+ - [x] ~~Better UI~~
  - [ ] New sorting options
  - [ ] Tests with vitest
  - [ ] Add HATEOAS to the API
