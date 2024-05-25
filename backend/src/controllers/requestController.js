@@ -189,6 +189,25 @@ const requestController = {
   },
 
   getRequests: async (req, res) => {
+    var sort = req.params.sort
+
+    switch (sort) {
+      case "null":
+        sort = null
+        break;
+  
+      case "false":
+        sort = false
+        break
+
+      case "true":
+        sort = true
+        break
+
+      default:
+        break;
+    }
+
     try {
       const requests = await prisma.request.findMany({
         include: { author: true }
