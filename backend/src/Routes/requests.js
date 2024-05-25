@@ -12,7 +12,7 @@ router.route("/request/update").post(authorAuth, (req, res) => requestController
 router.route("/request/delete/:id").delete(authorAuth, (req, res) => requestController.delete(req, res))
 router.route("/request/user").get(cookieAuth, (req, res) => requestController.getByUser(req, res))
 router.route("/request/slug/:slug").get(cookieAuth, (req, res) => requestController.getBySlug(req, res))
-router.route("/request").get(adminAuth, (req, res) => requestController.getRequests(req, res))
+router.route("/request/:sort").get(adminAuth, (req, res) => requestController.getRequests(req, res))
 router.route("/request/delivered/:id").post(adminAuth, (req, res) => requestController.setDelivered(req, res))
 
 module.exports = router
