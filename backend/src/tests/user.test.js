@@ -69,20 +69,20 @@ describe("Create account routes", () => {
     })
 })
 
-        const payload = {
-            fullName: "Nicolas Klein Araujo",
-            email: "nicolas@gmail.com",
-            number: 123456789,
+describe("Update account route", () => {
+    it("Should update the account infos", async() => {
+        const updatePayload = {
+            id,
+            fullName: "Still a Test",
+            email: "test@gmail.com",
+            number: 123,
             password: "12345",
             city: "Maringá",
             street: "Av. Juscelino Kubitschek",
-            houseNum: 258,
+            houseNum: 852,
         }
 
-        await request.post("/user/create").send(payload)
-        const res = await request.post("/user/create").send(payload)
-
-        expect(res.body.msg).toBe("Email ou numero já cadastrado")
-        expect(res.statusCode).toBe(400)
+        const res = await request.post("/user/update").send(updatePayload).set("Cookie", cookie)
+        expect(res.statusCode).toBe(200)
     })
 })
