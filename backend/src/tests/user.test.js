@@ -5,8 +5,8 @@ const supertest = require("supertest")
 const request = supertest("http://localhost:3000")
 
 // Setup
-var cookie = ""
-var id = 0
+let cookie = ""
+let id = 0
 
 beforeAll(async() => {
     await prisma.$connect()
@@ -56,6 +56,7 @@ describe("Create account routes", () => {
 
     it("Should return a missing info message", async() => {
         const res = await request.post("/user/create").send(payload.fullName)
+        
         expect(res.body.msg).toBe("Informações insuficientes")
         expect(res.statusCode).toBe(400)
     })
