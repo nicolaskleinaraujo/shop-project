@@ -139,6 +139,11 @@ const userController = {
       },
     })
 
+    if (!user) {
+      res.status(400).json({ msg: "Usuario inexistente" })
+      return
+    }
+
     const searchEmail = await prisma.user.findUnique({
       where: {
         email,
