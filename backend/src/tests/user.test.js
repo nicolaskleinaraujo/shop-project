@@ -9,11 +9,11 @@ beforeAll(async() => {
     await prisma.$connect()
 })
 
-beforeEach(async() => {
+const resetDatabase = async() => {
     await prisma.request.deleteMany({})
     await prisma.user.deleteMany({})
     await prisma.item.deleteMany({})
-})
+}
 
 afterAll(async() => {
     await prisma.$disconnect()
@@ -22,6 +22,8 @@ afterAll(async() => {
 // Tests
 describe("Create account routes", () => {
     it("Should create a account", async() => {
+        resetDatabase()
+
         const payload = {
             fullName: "Nicolas Klein Araujo",
             email: "nicolas@gmail.com",
@@ -37,6 +39,8 @@ describe("Create account routes", () => {
     })
 
     it("Should return a missing info message", async() => {
+        resetDatabase()
+
         const payload = {
             fullName: "Nicolas Klein Araujo"
         }
@@ -47,6 +51,8 @@ describe("Create account routes", () => {
     })
 
     it("Should return a email already cadastered message", async() => {
+        resetDatabase()
+
         const payload = {
             fullName: "Nicolas Klein Araujo",
             email: "nicolas@gmail.com",
