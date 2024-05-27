@@ -84,8 +84,16 @@ describe("Update account route", () => {
 
     it("Should update the account infos", async() => {
         updatePayload.id = id
-
         const res = await request.post("/user/update").send(updatePayload).set("Cookie", cookie)
+
         expect(res.statusCode).toBe(200)
+    })
+
+    it("Should return a missing info message", async() => {
+        updatePayload.id = id
+        const res = await request.post("/user/update").send(updatePayload.fullName).set("Cookie", cookie)
+
+        expect(res.body.msg).toBe("Informações insuficientes")
+        expect(res.statusCode).toBe(400)
     })
 })
