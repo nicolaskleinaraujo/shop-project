@@ -6,17 +6,18 @@ const request = supertest("http://localhost:3000")
 
 // Setup
 beforeAll(async() => {
-    prisma.$connect()
+    await prisma.$connect()
 })
 
 beforeEach(async() => {
-    prisma.request.deleteMany({})
-    prisma.user.deleteMany({})
-    prisma.item.deleteMany({})
+    await prisma.request.deleteMany({})
+    await prisma.user.deleteMany({})
+    await prisma.item.deleteMany({})
 })
 
 afterAll(async() => {
-    prisma.$disconnect()
+    await prisma.$disconnect()
+})
 
 // Tests
 describe("Create account routes", () => {
