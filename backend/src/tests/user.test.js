@@ -110,10 +110,22 @@ describe("Update account route", () => {
     it("Should return a email already cadastered message", async() => {
         await request.post("/user/create").send(payload)
         updatePayload.id = id
-        updatePayload.email = "nicolas@gmail.com"
+        updatePayload.email = payload.email
 
         const res = await request.post("/user/update").send(updatePayload).set("Cookie", cookie)
         expect(res.body.msg).toBe("Email já cadastrado")
+        expect(res.statusCode).toBe(400)
+
+        updatePayload.email = "test@gmail.com"
+    })
+
+    it("Should return a number already cadastered message", async() => {
+        await request.post("/user/create").send(payload)
+        updatePayload.id = id
+        updatePayload.number = payload.number
+
+        const res = await request.post("/user/update").send(updatePayload).set("Cookie", cookie)
+        expect(res.body.msg).toBe("Numero já cadastrado")
         expect(res.statusCode).toBe(400)
     })
 })
