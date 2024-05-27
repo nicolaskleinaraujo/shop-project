@@ -5,15 +5,33 @@ const supertest = require("supertest")
 const request = supertest("http://localhost:3000")
 
 // Setup
+var cookie = ""
+var id = 0
+
 beforeAll(async() => {
     await prisma.$connect()
 })
 
-const resetDatabase = async() => {
+beforeEach(async() => {
     await prisma.request.deleteMany({})
     await prisma.user.deleteMany({})
     await prisma.item.deleteMany({})
-}
+
+    // This user is used on the "update account" tests
+    const payload = {
+        fullName: "test",
+        email: "test@gmail.com",
+        number: 123,
+        password: "12345",
+        city: "test",
+        street: "test",
+        houseNum: 258,
+    }
+
+    const res = await request.post("/user/create").send(payload)
+    cookie = res.headers['set-cookie']
+    id = res.body.id
+})
 
 afterAll(async() => {
     await prisma.$disconnect()
@@ -21,37 +39,35 @@ afterAll(async() => {
 
 // Tests
 describe("Create account routes", () => {
+    const payload = {
+        fullName: "Nicolas Klein Araujo",
+        email: "nicolas@gmail.com",
+        number: 123456789,
+        password: "12345",
+        city: "Maringá",
+        street: "Av. Juscelino Kubitschek",
+        houseNum: 258,
+    }
+
     it("Should create a account", async() => {
-        resetDatabase()
-
-        const payload = {
-            fullName: "Nicolas Klein Araujo",
-            email: "nicolas@gmail.com",
-            number: 123456789,
-            password: "12345",
-            city: "Maringá",
-            street: "Av. Juscelino Kubitschek",
-            houseNum: 258,
-        }
-
         const res = await request.post("/user/create").send(payload)
         expect(res.statusCode).toBe(200)
     })
 
     it("Should return a missing info message", async() => {
-        resetDatabase()
-
-        const payload = {
-            fullName: "Nicolas Klein Araujo"
-        }
-
-        const res = await request.post("/user/create").send(payload)
+        const res = await request.post("/user/create").send(payload.fullName)
         expect(res.body.msg).toBe("Informações insuficientes")
         expect(res.statusCode).toBe(400)
     })
 
     it("Should return a email already cadastered message", async() => {
-        resetDatabase()
+        await request.post("/user/create").send(payload)
+        const res = await request.post("/user/create").send(payload)
+
+        expect(res.body.msg).toBe("Email ou numero já cadastrado")
+        expect(res.statusCode).toBe(400)
+    })
+})
 
         const payload = {
             fullName: "Nicolas Klein Araujo",
