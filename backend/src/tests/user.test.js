@@ -35,4 +35,13 @@ describe("Create account routes", () => {
         const res = await request.post("/user/create").send(payload)
         expect(res.statusCode).toBe(200)
     })
+
+    it("Should return a missing info message", async() => {
+        const payload = {
+            fullName: "Nicolas Klein Araujo"
+        }
+
+        const res = await request.post("/user/create").send(payload)
+        expect(res.body.msg).toBe("Informações insuficientes")
+    })
 })
