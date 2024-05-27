@@ -71,6 +71,16 @@ describe("Create account routes", () => {
 })
 
 describe("Update account route", () => {
+    const payload = {
+        fullName: "Nicolas Klein Araujo",
+        email: "nicolas@gmail.com",
+        number: 123456789,
+        password: "12345",
+        city: "Maringá",
+        street: "Av. Juscelino Kubitschek",
+        houseNum: 258,
+    }
+
     const updatePayload = {
         id,
         fullName: "Still a Test",
@@ -94,6 +104,16 @@ describe("Update account route", () => {
         const res = await request.post("/user/update").send(updatePayload.fullName).set("Cookie", cookie)
 
         expect(res.body.msg).toBe("Informações insuficientes")
+        expect(res.statusCode).toBe(400)
+    })
+
+    it("Should return a email already cadastered message", async() => {
+        await request.post("/user/create").send(payload)
+        updatePayload.id = id
+        updatePayload.email = "nicolas@gmail.com"
+
+        const res = await request.post("/user/update").send(updatePayload).set("Cookie", cookie)
+        expect(res.body.msg).toBe("Email já cadastrado")
         expect(res.statusCode).toBe(400)
     })
 })
