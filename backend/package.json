@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
-    "test": "jest"
+    "test": "set DATABASE_URL=mysql://api:12345@localhost:3306/shop_project && jest"
   },
   "keywords": [],
   "author": "",

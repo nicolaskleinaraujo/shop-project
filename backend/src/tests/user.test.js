@@ -71,17 +71,19 @@ describe("Create account routes", () => {
 })
 
 describe("Update account route", () => {
+    const updatePayload = {
+        id,
+        fullName: "Still a Test",
+        email: "test@gmail.com",
+        number: 123,
+        password: "12345",
+        city: "Maringá",
+        street: "Av. Juscelino Kubitschek",
+        houseNum: 852,
+    }
+
     it("Should update the account infos", async() => {
-        const updatePayload = {
-            id,
-            fullName: "Still a Test",
-            email: "test@gmail.com",
-            number: 123,
-            password: "12345",
-            city: "Maringá",
-            street: "Av. Juscelino Kubitschek",
-            houseNum: 852,
-        }
+        updatePayload.id = id
 
         const res = await request.post("/user/update").send(updatePayload).set("Cookie", cookie)
         expect(res.statusCode).toBe(200)
