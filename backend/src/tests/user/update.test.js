@@ -36,19 +36,14 @@ describe("Update account route", () => {
         req.body.id = await res.json.mock.calls[0][0].id
 
         await userController.update(req, res)
-        expect(res.json.mock.calls[1][0].msg).toBe("Usuario atualizado com sucesso")
+        expect(res.json).toHaveBeenCalledWith({ msg: "Usuario atualizado com sucesso" })
         expect(res.status.mock.calls[1][0]).toBe(200)
     })
 
     it("Should return a missing info message", async() => {
-        const userCredentials = await request.post("/user/create").send(updatePayload)
-        updatePayload.id = userCredentials.body.id
-
-        const res = await request.post("/user/update").send(updatePayload.fullName).set("Cookie", userCredentials.headers['set-cookie'])
-        expect(res.body.msg).toBe("Informações insuficientes")
-        expect(res.statusCode).toBe(400)
-
-        delete updatePayload.id
+        await userController.update(req, res)
+        expect(res.json).toHaveBeenCalledWith({ msg: "Informações insuficientes" })
+        expect(res.status).toHaveBeenCalledWith(400)
     })
 
 
