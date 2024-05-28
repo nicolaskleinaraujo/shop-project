@@ -14,8 +14,7 @@
 # Working on
  - [x] ~~Better UI~~
  - [x] ~~New sorting options~~
- - [ ] Tests with vitest
- - [ ] Add HATEOAS to the API
+ - [ ] Tests with JEST
 
  # Used Tecnologies
   ### Back-end
