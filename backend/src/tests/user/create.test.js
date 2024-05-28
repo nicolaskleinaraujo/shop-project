@@ -27,10 +27,11 @@ describe("Create account routes", () => {
     })
 
     it("Should return a missing info message", async() => {
-        const res = await request.post("/user/create").send(payload.fullName)
-        
-        expect(res.body.msg).toBe("Informações insuficientes")
-        expect(res.statusCode).toBe(400)
+        req.body.fullName = ""
+        await userController.create(req, res)
+
+        expect(res.json).toHaveBeenCalledWith({msg: "Informações insuficientes"})
+        expect(res.status).toHaveBeenCalledWith(400)
     })
 
     it("Should return a email or number already cadastered message", async() => {
