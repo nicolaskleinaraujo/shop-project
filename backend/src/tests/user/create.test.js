@@ -1,9 +1,12 @@
 // Modules
 const userController = require("../../controllers/userController")
 
-// Tests
-describe("Create account routes", () => {
-    const req = {
+// Setup
+let req = {}
+let res = {}
+
+beforeEach(() => {
+    req = {
         body: {
             fullName: "Nicolas Klein Araujo",
             email: "nicolas@gmail.com",
@@ -15,12 +18,15 @@ describe("Create account routes", () => {
         }
     }
 
-    const res = {
+    res = {
         status: jest.fn().mockReturnThis(),
         json: jest.fn(),
         cookie: jest.fn(),
     }
+})
 
+// Tests
+describe("User controller create function", () => {
     it("Should create a account", async() => {
         await userController.create(req, res)
         expect(res.status).toHaveBeenCalledWith(200)
