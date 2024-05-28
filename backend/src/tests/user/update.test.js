@@ -1,28 +1,33 @@
 // Modules
-const supertest = require("supertest")
-const request = supertest("http://localhost:3000")
+const userController = require("../../controllers/userController")
+
+// Setup
+let req = {}
+let res = {
+    status: jest.fn().mockReturnThis(),
+    json: jest.fn(),
+    cookie: jest.fn(),
+}
 
 // Tests
 describe("Update account route", () => {
-    const payload = {
-        fullName: "Nicolas Klein Araujo",
-        email: "nicolas@gmail.com",
-        number: 123456789,
-        password: "12345",
-        city: "Maringá",
-        street: "Av. Juscelino Kubitschek",
-        houseNum: 258,
-    }
-
-    const updatePayload = {
-        fullName: "test",
-        email: "test@gmail.com",
-        number: 123,
-        password: "12345",
-        city: "test",
-        street: "test",
-        houseNum: 258,
-    }
+    beforeEach(async() => {
+        req = {
+            body: {
+                fullName: "Nicolas Klein Araujo",
+                email: "nicolas@gmail.com",
+                number: 123456789,
+                password: "12345",
+                city: "Maringá",
+                street: "Av. Juscelino Kubitschek",
+                houseNum: 258,
+            }
+        }
+    
+        res.status.mockClear()
+        res.json.mockClear()
+        res.cookie.mockClear()
+    })
 
     it("Should update the account infos", async() => {
         const userCredentials = await request.post("/user/create").send(updatePayload)
