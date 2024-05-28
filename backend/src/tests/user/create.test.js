@@ -1,22 +1,29 @@
 // Modules
-const supertest = require("supertest")
-const request = supertest("http://localhost:3000")
+const userController = require("../../controllers/userController")
 
 // Tests
 describe("Create account routes", () => {
-    const payload = {
-        fullName: "Nicolas Klein Araujo",
-        email: "nicolas@gmail.com",
-        number: 123456789,
-        password: "12345",
-        city: "Maringá",
-        street: "Av. Juscelino Kubitschek",
-        houseNum: 258,
+    const req = {
+        body: {
+            fullName: "Nicolas Klein Araujo",
+            email: "nicolas@gmail.com",
+            number: 123456789,
+            password: "12345",
+            city: "Maringá",
+            street: "Av. Juscelino Kubitschek",
+            houseNum: 258,
+        }
+    }
+
+    const res = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn(),
+        cookie: jest.fn(),
     }
 
     it("Should create a account", async() => {
-        const res = await request.post("/user/create").send(payload)
-        expect(res.statusCode).toBe(200)
+        await userController.create(req, res)
+        expect(res.status).toHaveBeenCalledWith(200)
     })
 
     it("Should return a missing info message", async() => {
