@@ -41,10 +41,10 @@ describe("User controller create function", () => {
     })
 
     it("Should return a email or number already cadastered message", async() => {
-        await request.post("/user/create").send(payload)
-        const res = await request.post("/user/create").send(payload)
+        await userController.create(req, res)
+        await userController.create(req, res)
 
-        expect(res.body.msg).toBe("Email ou numero já cadastrado")
-        expect(res.statusCode).toBe(400)
+        expect(res.json).toHaveBeenCalledWith({msg: "Email ou numero já cadastrado"})
+        expect(res.status).toHaveBeenCalledWith(400)
     })
 })
