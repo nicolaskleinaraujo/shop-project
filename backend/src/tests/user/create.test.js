@@ -26,7 +26,7 @@ describe("Create account routes", () => {
         expect(res.statusCode).toBe(400)
     })
 
-    it("Should return a email already cadastered message", async() => {
+    it("Should return a email or number already cadastered message", async() => {
         await request.post("/user/create").send(payload)
         const res = await request.post("/user/create").send(payload)
 
