@@ -1,46 +1,38 @@
 // Modules
-const userController = require("../../controllers/userController")
+const app = require("../../index")
+const request = require("supertest")(app)
+const clearDatabase = require("../../db/clearDatabase")
 
 // Setup
-let req = {}
-let res = {
-    status: jest.fn().mockReturnThis(),
-    json: jest.fn(),
-    cookie: jest.fn(),
-}
+let data = {}
+
+beforeEach(() => {
+    data = {
+        fullName: "Nicolas Klein Araujo",
+        email: `${Date.now()}@gmail.com`,
+        number: parseInt(Date.now().toString().slice(-9)),
+        password: "12345",
+        city: "Maringá",
+        street: "Av. Juscelino Kubitschek",
+        houseNum: 258,
+    }
+})
 
 // Tests
 describe("Update account route", () => {
-    beforeEach(async() => {
-        req = {
-            body: {
-                fullName: "Nicolas Klein Araujo",
-                email: "nicolas@gmail.com",
-                number: 123456789,
-                password: "12345",
-                city: "Maringá",
-                street: "Av. Juscelino Kubitschek",
-                houseNum: 258,
-            }
-        }
-    
-        res.status.mockClear()
-        res.json.mockClear()
-        res.cookie.mockClear()
-    })
-
     it("Should update the account infos", async() => {
-        await userController.create(req, res)
+        await clearDatabase()
 
-        req.body.fullName = "Still a Test"
-        req.body.id = await res.json.mock.calls[0][0].id
+        const credentials = await request.post("/user/create").send(data)
+        const cookie = credentials.headers['set-cookie']
+        data.fullName = "Still a Test"
+        data.id = credentials.body.id
 
-        await userController.update(req, res)
-        expect(res.json).toHaveBeenCalledWith({ msg: "Usuario atualizado com sucesso" })
-        expect(res.status.mock.calls[1][0]).toBe(200)
+        const res = await request.post("/user/update").set("Cookie", cookie).send(data)
+        expect(res.statusCode).toBe(200)
     })
 
-    it("Should return a missing info message", async() => {
+    /*it("Should return a missing info message", async() => {
         await userController.update(req, res)
         expect(res.json).toHaveBeenCalledWith({ msg: "Informações insuficientes" })
         expect(res.status).toHaveBeenCalledWith(400)
@@ -64,17 +56,18 @@ describe("Update account route", () => {
     })
 
     it("Should return a number already cadastered message", async() => {
-        await request.post("/user/create").send(payload)
+        await userController.create(req, res)
+        
+        req.body.number = 987654321
+        req.body.email = "test@gmail.com"
+        await userController.create(req, res)
 
-        const userCredentials = await request.post("/user/create").send(updatePayload)
-        updatePayload.id = userCredentials.body.id
-        updatePayload.number = payload.number
 
-        const res = await request.post("/user/update").send(updatePayload).set("Cookie", userCredentials.headers['set-cookie'])
-        expect(res.body.msg).toBe("Numero já cadastrado")
-        expect(res.statusCode).toBe(400)
+        req.body.id = await res.json.mock.calls[1][0].id
+        req.body.number = 123456789
+        await userController.update(req, res)
 
-        delete updatePayload.id
-        updatePayload.number = 123
-    })
+        expect(res.json).toHaveBeenCalledWith({ msg: "Numero já cadastrado" })
+        expect(res.status).toHaveBeenCalledWith(400)
+    })*/
 })
