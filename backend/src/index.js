@@ -3,7 +3,6 @@ const express = require("express")
 const app = express()
 const cors = require("cors")
 const cookieParser = require("cookie-parser")
-const port = process.env.PORT || 3000
 
 const users = require("./Routes/users")
 const requests = require("./Routes/requests")
@@ -27,6 +26,4 @@ app.use("/", users)
 app.use("/", requests)
 app.use("/", items)
 
-app.listen(port, () => {
-  console.log("Server running!")
-})
+module.exports = app
