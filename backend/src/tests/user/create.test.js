@@ -26,11 +26,11 @@ describe("User controller create function", () => {
     })
 
     it("Should return a missing info message", async() => {
-        req.body.fullName = ""
-        await userController.create(req, res)
+        data.fullName = ""
+        const res = await request.post("/user/create").send(data)
 
-        expect(res.json).toHaveBeenCalledWith({msg: "Informações insuficientes"})
-        expect(res.status).toHaveBeenCalledWith(400)
+        expect(res.body.msg).toBe("Informações insuficientes")
+        expect(res.statusCode).toBe(400)
     })
 
     it("Should return a email or number already cadastered message", async() => {
