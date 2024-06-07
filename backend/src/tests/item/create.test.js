@@ -1,18 +1,26 @@
 // Modules
 const app = require("../../index")
 const request = require("supertest")(app)
+const prisma = require("../../db/client")
 
 // Setup
-let data = {}
+let itemData = {}
+let userData = {}
 
 beforeEach(() => {
-    data = {
-        fullName: "Nicolas Klein Araujo",
-        email: `${Date.now()}@gmail.com`,
-        number: parseInt(Date.now().toString().slice(-9)),
+    itemData = {
+        name: "Cheesecake",
+        description: "Cheesecake with red fruit syrup",
+        value: 9.99,
+    }
+
+    userData = {
+        fullName: "Admin User",
+        email: "admin@gmail.com",
+        number: 123456789,
         password: "12345",
-        city: "Maringá",
-        street: "Av. Juscelino Kubitschek",
+        city: "Admin City",
+        street: "Admin Street",
         houseNum: 258,
     }
 })
