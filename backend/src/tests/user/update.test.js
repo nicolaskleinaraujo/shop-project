@@ -1,7 +1,6 @@
 // Modules
 const app = require("../../index")
 const request = require("supertest")(app)
-const clearDatabase = require("../../db/clearDatabase")
 
 // Setup
 let data = {}
@@ -21,8 +20,6 @@ beforeEach(() => {
 // Tests
 describe("Update account route", () => {
     it("Should update the account infos", async() => {
-        await clearDatabase()
-
         const credentials = await request.post("/user/create").send(data)
         const cookie = credentials.headers['set-cookie']
         data.fullName = "Still a Test"
@@ -33,8 +30,6 @@ describe("Update account route", () => {
     })
 
     it("Should return a missing info message", async() => {
-        await clearDatabase()
-
         const credentials = await request.post("/user/create").send(data)
         const cookie = credentials.headers['set-cookie']
         data.fullName = ""
@@ -47,8 +42,6 @@ describe("Update account route", () => {
 
 
     it("Should return a email already cadastered message", async() => {
-        await clearDatabase()
-
         await request.post("/user/create").send(data)
         const repeteadEmail = data.email
 
@@ -66,8 +59,6 @@ describe("Update account route", () => {
     })
 
     it("Should return a number already cadastered message", async() => {
-        await clearDatabase()
-
         await request.post("/user/create").send(data)
         const repeteadNumber = data.number
 
