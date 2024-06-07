@@ -32,14 +32,21 @@ describe("Update account route", () => {
         expect(res.statusCode).toBe(200)
     })
 
-    /*it("Should return a missing info message", async() => {
-        await userController.update(req, res)
-        expect(res.json).toHaveBeenCalledWith({ msg: "Informações insuficientes" })
-        expect(res.status).toHaveBeenCalledWith(400)
+    it("Should return a missing info message", async() => {
+        await clearDatabase()
+
+        const credentials = await request.post("/user/create").send(data)
+        const cookie = credentials.headers['set-cookie']
+        data.fullName = ""
+        data.id = credentials.body.id
+
+        const res = await request.post("/user/update").set("Cookie", cookie).send(data)
+        expect(res.statusCode).toBe(400)
+        expect(res.body.msg).toBe("Informações insuficientes")
     })
 
 
-    it("Should return a email already cadastered message", async() => {
+    /*it("Should return a email already cadastered message", async() => {
         await userController.create(req, res)
         
         req.body.email = "test@gmail.com"
