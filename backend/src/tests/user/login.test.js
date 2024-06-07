@@ -45,4 +45,13 @@ describe("Login account route", () => {
         expect(res.statusCode).toBe(400)
         expect(res.body.msg).toBe("Login incorreto")
     })
+
+    it("Should return a password doesn't match message", async() => {
+        await request.post("/user/create").send(data)
+        data.password = "wrongPassword"
+
+        const res = await request.post("/user/login").send(data)
+        expect(res.statusCode).toBe(400)
+        expect(res.body.msg).toBe("Login incorreto")
+    })
 })
