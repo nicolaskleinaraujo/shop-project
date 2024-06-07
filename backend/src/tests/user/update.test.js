@@ -46,23 +46,26 @@ describe("Update account route", () => {
     })
 
 
-    /*it("Should return a email already cadastered message", async() => {
-        await userController.create(req, res)
-        
-        req.body.email = "test@gmail.com"
-        req.body.number = 987654321
-        await userController.create(req, res)
+    it("Should return a email already cadastered message", async() => {
+        await clearDatabase()
 
+        await request.post("/user/create").send(data)
+        const repeteadEmail = data.email
 
-        req.body.id = await res.json.mock.calls[1][0].id
-        req.body.email = "nicolas@gmail.com"
-        await userController.update(req, res)
+        data.email = `${Date.now()}@gmail.com`
+        data.number = parseInt(Date.now().toString().slice(-9))
 
-        expect(res.json).toHaveBeenCalledWith({ msg: "Email já cadastrado" })
-        expect(res.status).toHaveBeenCalledWith(400)
+        const credentials = await request.post("/user/create").send(data)
+        const cookie = credentials.headers['set-cookie']
+        data.id = credentials.body.id
+        data.email = repeteadEmail
+
+        const res = await request.post("/user/update").set("Cookie", cookie).send(data)
+        expect(res.statusCode).toBe(400)
+        expect(res.body.msg).toBe("Email já cadastrado")
     })
 
-    it("Should return a number already cadastered message", async() => {
+    /*it("Should return a number already cadastered message", async() => {
         await userController.create(req, res)
         
         req.body.number = 987654321
