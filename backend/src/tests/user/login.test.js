@@ -36,4 +36,13 @@ describe("Login account route", () => {
         expect(res.statusCode).toBe(400)
         expect(res.body.msg).toBe("Informações insuficientes")
     })
+
+    it("Should return a user doesn't exist message", async() => {
+        await request.post("/user/create").send(data)
+        data.email = "wrongEmail@gmail.com"
+
+        const res = await request.post("/user/login").send(data)
+        expect(res.statusCode).toBe(400)
+        expect(res.body.msg).toBe("Login incorreto")
+    })
 })
