@@ -27,5 +27,15 @@ beforeEach(() => {
 
 // Tests
 describe("Create item route", () => {
-    
+    it("Should create succesfully the item", async() => {
+        const credentials = await request.post("/user/create").send(userData)
+        const cookie = credentials.headers['set-cookie']
+        userData.id = credentials.body.id
+
+        await prisma.$executeRaw`UPDATE \`User\` SET \`isAdmin\` = 1 WHERE \`id\` = ${userData.id}`
+
+        const res = await request.post("/item/create").set("Cookie", cookie).send(itemData)
+        expect(res.statusCode).toBe(200)
+        expect(res.body.msg).toBe(`${itemData.name} criado com sucesso`)
+    })
 })
