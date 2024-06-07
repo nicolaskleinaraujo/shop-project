@@ -36,4 +36,13 @@ describe("Delete account route", () => {
         expect(res.statusCode).toBe(400)
         expect(res.body.msg).toBe("ID não especificado")
     })
+
+    it("Should return a user doesn't exist message", async() => {
+        const credentials = await request.post("/user/create").send(data)
+        const cookie = credentials.headers['set-cookie']
+        
+        const res = await request.delete(`/user/${credentials.body.id + 1}`).set("Cookie", cookie)
+        expect(res.statusCode).toBe(400)
+        expect(res.body.msg).toBe("Usuario inexistente")
+    })
 })
