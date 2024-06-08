@@ -1,14 +1,13 @@
 // Modules
 const app = require("../../index")
 const request = require("supertest")(app)
-const prisma = require("../../db/client")
 
 // Setup
-let itemData = {}
+let requestData = {}
 let userData = {}
 
 beforeEach(() => {
-    itemData = {
+    requestData = {
         items: "Cheesecake, Pancake",
         details: "Lactose-free pancake",
         value: 15.99,
