@@ -88,6 +88,18 @@ const requestController = {
     }
 
     try {
+      // Checks for existing request
+      const request = await prisma.request.findUnique({
+        where: {
+          id,
+        },
+      })
+
+      if (!request) {
+        res.status(400).json({ msg: "Pedido inexistente" })
+        return
+      }
+
       await prisma.request.update({
         where: {
           id,
