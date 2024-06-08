@@ -47,4 +47,14 @@ describe("Create request route", () => {
         expect(res.statusCode).toBe(400)
         expect(res.body.msg).toBe("Informações insuficientes")
     })
+
+    it("Should return a user doesn't exist message", async() => {
+        const credentials = await request.post("/user/create").send(userData)
+        const cookie = credentials.headers['set-cookie']
+        requestData.id = credentials.body.id + 1
+
+        const res = await request.post("/request/create").set("Cookie", cookie).send(requestData)
+        expect(res.statusCode).toBe(400)
+        expect(res.body.msg).toBe("Usuario inexistente")
+    })
 })
