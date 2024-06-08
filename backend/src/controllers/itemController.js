@@ -20,14 +20,14 @@ const itemController = {
     }
 
     try {
-      await prisma.item.create({
+      const item = await prisma.item.create({
         data: {
           name,
           description,
           value,
         },
       })
-      res.status(200).json({ msg: `${name} criado com sucesso` })
+      res.status(200).json({ msg: `${name} criado com sucesso`, id: item.id })
     } catch (err) {
       res.status(500).json(err)
     }
@@ -79,7 +79,7 @@ const itemController = {
 
     try {
       // Update item based on his id
-      await prisma.item.update({
+      const item = await prisma.item.update({
         where: { id },
         data: {
           name,
@@ -87,7 +87,7 @@ const itemController = {
           value,
         },
       })
-      res.status(200).json({ msg: `${name} atualizado com sucesso` })
+      res.status(200).json({ msg: `${name} atualizado com sucesso`, id: item.id })
     } catch (err) {
       res.status(500).json(err)
     }
