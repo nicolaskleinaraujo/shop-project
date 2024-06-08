@@ -31,7 +31,7 @@ const requestController = {
       // Create slug based on user name and the actual date
       const slug = slugify(user.fullName + " " + Date.now(), { lower: true })
 
-      await prisma.request.create({
+      const request = await prisma.request.create({
         data: {
           authorId,
           items,
@@ -40,7 +40,7 @@ const requestController = {
           slug,
         },
       })
-      res.status(200).json({ msg: "Pedido feito com sucesso" })
+      res.status(200).json({ msg: "Pedido feito com sucesso", id: request.id })
     } catch (err) {
       res.status(500).json(err)
     }
