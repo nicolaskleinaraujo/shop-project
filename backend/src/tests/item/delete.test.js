@@ -27,5 +27,18 @@ beforeEach(() => {
 
 // Tests
 describe("Delete item route", () => {
-    
+    it("Should delete a item", async() => {
+        const userCredentials = await request.post("/user/create").send(userData)
+        const cookie = userCredentials.headers['set-cookie']
+        userData.id = userCredentials.body.id
+
+        await prisma.$executeRaw`UPDATE \`User\` SET \`isAdmin\` = 1 WHERE \`id\` = ${userData.id}`
+
+        const itemCredentials = await request.post("/item/create").set("Cookie", cookie).send(itemData)
+        itemData.id = itemCredentials.body.id
+
+        const res = await request.delete(`/item/${itemData.id}`).set("Cookie", cookie)
+        expect(res.statusCode).toBe(200)
+        expect(res.body.msg).toBe("item deletado com sucesso")
+    })
 })
