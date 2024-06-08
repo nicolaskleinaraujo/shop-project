@@ -26,4 +26,13 @@ beforeEach(() => {
 
 // Tests
 describe("Create request route", () => {
+    it("Should create succesfully the request", async() => {
+        const credentials = await request.post("/user/create").send(userData)
+        const cookie = credentials.headers['set-cookie']
+        requestData.id = credentials.body.id
+
+        const res = await request.post("/request/create").set("Cookie", cookie).send(requestData)
+        expect(res.statusCode).toBe(200)
+        expect(res.body.msg).toBe("Pedido feito com sucesso")
+    })
 })
