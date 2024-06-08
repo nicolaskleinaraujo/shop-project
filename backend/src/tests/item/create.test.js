@@ -38,4 +38,18 @@ describe("Create item route", () => {
         expect(res.statusCode).toBe(200)
         expect(res.body.msg).toBe(`${itemData.name} criado com sucesso`)
     })
+
+    it("Should return a missing info message", async() => {
+        const credentials = await request.post("/user/create").send(userData)
+        const cookie = credentials.headers['set-cookie']
+        userData.id = credentials.body.id
+
+        await prisma.$executeRaw`UPDATE \`User\` SET \`isAdmin\` = 1 WHERE \`id\` = ${userData.id}`
+
+        itemData.name = ""
+
+        const res = await request.post("/item/create").set("Cookie", cookie).send(itemData)
+        expect(res.statusCode).toBe(400)
+        expect(res.body.msg).toBe("Informações insuficientes")
+    })
 })
