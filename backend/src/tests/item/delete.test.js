@@ -55,4 +55,19 @@ describe("Delete item route", () => {
         expect(res.statusCode).toBe(400)
         expect(res.body.msg).toBe("ID não especificado")
     })
+
+    it("Should return a item doesn't exist message", async() => {
+        const userCredentials = await request.post("/user/create").send(userData)
+        const cookie = userCredentials.headers['set-cookie']
+        userData.id = userCredentials.body.id
+
+        await prisma.$executeRaw`UPDATE \`User\` SET \`isAdmin\` = 1 WHERE \`id\` = ${userData.id}`
+
+        const itemCredentials = await request.post("/item/create").set("Cookie", cookie).send(itemData)
+        itemData.id = itemCredentials.body.id
+
+        const res = await request.delete(`/item/${itemData.id + 1}`).set("Cookie", cookie)
+        expect(res.statusCode).toBe(400)
+        expect(res.body.msg).toBe("Item inexistente")
+    })
 })
