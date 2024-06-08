@@ -35,4 +35,16 @@ describe("Create request route", () => {
         expect(res.statusCode).toBe(200)
         expect(res.body.msg).toBe("Pedido feito com sucesso")
     })
+
+    it("Should return a missing info message", async() => {
+        const credentials = await request.post("/user/create").send(userData)
+        const cookie = credentials.headers['set-cookie']
+        requestData.id = credentials.body.id
+
+        requestData.items = ""
+
+        const res = await request.post("/request/create").set("Cookie", cookie).send(requestData)
+        expect(res.statusCode).toBe(400)
+        expect(res.body.msg).toBe("Informações insuficientes")
+    })
 })
