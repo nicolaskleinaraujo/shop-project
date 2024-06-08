@@ -39,4 +39,18 @@ describe("Create request route", () => {
         expect(res.statusCode).toBe(200)
         expect(res.body.msg).toBe("Pedido atualizado com sucesso")
     })
+
+    it("Should return a missing info message", async() => {
+        const userCredentials = await request.post("/user/create").send(userData)
+        const cookie = userCredentials.headers['set-cookie']
+        requestData.id = userCredentials.body.id
+
+        const reqCredentials = await request.post("/request/create").set("Cookie", cookie).send(requestData)
+        requestData.id = reqCredentials.body.id
+        requestData.items = ""
+
+        const res = await request.post("/request/update").set("Cookie", cookie).send(requestData)
+        expect(res.statusCode).toBe(400)
+        expect(res.body.msg).toBe("Informações insuficientes")
+    })
 })
