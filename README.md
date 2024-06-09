@@ -14,7 +14,7 @@
 # Working on
  - [x] ~~Better UI~~
  - [x] ~~New sorting options~~
- - [ ] Tests with JEST
+ - [x] ~~Tests with JEST~~
 
  # Used Tecnologies
   ### Back-end
@@ -38,6 +38,33 @@
   ### Implantation
   - Website: https://nk-shop-project.netlify.app
   - API: https://shop-project-hwt4.onrender.com (check project for routes)
+
+ # Testing
+  ### Prerequisites
+  - Node.js installed
+  - NPM installed
+  - Git installed
+  - MySQL Database named "shop-project"
+ ### Step-by-step
+ ```bash
+ # clone repository
+ git clone https://github.com/nicolaskleinaraujo/shop-project
+
+ # enter "backend" folder
+ cd shop-project\backend
+
+ # Install depedencies
+ npm install
+
+ # Create a .env file with your database url
+ DATABASE_URL = "yourDatabaseUrl"
+
+ # Run the following prisma command
+ npx prisma db push
+
+ # Run the test command
+ npm run test
+ ```
 
   # Author
    Nicolas Klein Faria de Araujo <br>
