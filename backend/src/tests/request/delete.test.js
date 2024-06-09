@@ -26,5 +26,16 @@ beforeEach(() => {
 
 // Tests
 describe("Delete request route", () => {
-    
+    it("Should delete succesfuly the request", async() => {
+        const userCredentials = await request.post("/user/create").send(userData)
+        const cookie = userCredentials.headers['set-cookie']
+        requestData.id = userCredentials.body.id
+
+        const reqCredentials = await request.post("/request/create").set("Cookie", cookie).send(requestData)
+        const requestId = reqCredentials.body.id
+
+        const res = await request.delete(`/request/delete/${requestId}`).set("Cookie", cookie)
+        expect(res.statusCode).toBe(200)
+        expect(res.body.msg).toBe("Pedido deletado com sucesso")
+    })
 })
