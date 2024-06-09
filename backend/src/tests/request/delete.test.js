@@ -50,4 +50,17 @@ describe("Delete request route", () => {
         expect(res.statusCode).toBe(400)
         expect(res.body.msg).toBe("Informações insuficientes") 
     })
+
+    it("Should return a request doesn't exist message", async() => {
+        const userCredentials = await request.post("/user/create").send(userData)
+        const cookie = userCredentials.headers['set-cookie']
+        requestData.id = userCredentials.body.id
+
+        const reqCredentials = await request.post("/request/create").set("Cookie", cookie).send(requestData)
+        const requestId = reqCredentials.body.id + 1
+
+        const res = await request.delete(`/request/delete/${requestId}`).set("Cookie", cookie)
+        expect(res.statusCode).toBe(400)
+        expect(res.body.msg).toBe("Pedido inexistente")
+    })
 })
