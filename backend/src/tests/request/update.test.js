@@ -25,7 +25,7 @@ beforeEach(() => {
 })
 
 // Tests
-describe("Create request route", () => {
+describe("Update request route", () => {
     it("Should update succesfuly the request", async() => {
         const userCredentials = await request.post("/user/create").send(userData)
         const cookie = userCredentials.headers['set-cookie']
