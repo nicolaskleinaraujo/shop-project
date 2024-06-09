@@ -38,4 +38,16 @@ describe("Delete request route", () => {
         expect(res.statusCode).toBe(200)
         expect(res.body.msg).toBe("Pedido deletado com sucesso")
     })
+
+    it("Should return a missing info message", async() => {
+        const userCredentials = await request.post("/user/create").send(userData)
+        const cookie = userCredentials.headers['set-cookie']
+        requestData.id = userCredentials.body.id
+
+        await request.post("/request/create").set("Cookie", cookie).send(requestData)
+
+        const res = await request.delete("/request/delete/notAnId").set("Cookie", cookie)
+        expect(res.statusCode).toBe(400)
+        expect(res.body.msg).toBe("Informações insuficientes") 
+    })
 })
