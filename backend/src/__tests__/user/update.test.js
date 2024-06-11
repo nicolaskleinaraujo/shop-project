@@ -3,10 +3,11 @@ const app = require("../../app")
 const request = require("supertest")(app)
 
 // Setup
-let data = {}
+let userData
+let cookie
 
-beforeEach(() => {
-    data = {
+beforeEach(async() => {
+    userData = {
         fullName: "Nicolas Klein Araujo",
         email: `${Date.now()}@gmail.com`,
         number: parseInt(Date.now().toString().slice(-9)),
@@ -15,63 +16,59 @@ beforeEach(() => {
         street: "Av. Juscelino Kubitschek",
         houseNum: 258,
     }
+
+    const userCredentials = await request.post("/user/create").send(userData)
+    cookie = userCredentials.headers['set-cookie']
+    userData.id = userCredentials.body.id
+
+    userData.fullName = "Still a Test"
 })
 
 // Tests
 describe("Update account route", () => {
     it("Should update the account infos", async() => {
-        const credentials = await request.post("/user/create").send(data)
-        const cookie = credentials.headers['set-cookie']
-        data.fullName = "Still a Test"
-        data.id = credentials.body.id
-
-        const res = await request.post("/user/update").set("Cookie", cookie).send(data)
+        const res = await request.post("/user/update").set("Cookie", cookie).send(userData)
         expect(res.statusCode).toBe(200)
     })
 
     it("Should return a missing info message", async() => {
-        const credentials = await request.post("/user/create").send(data)
-        const cookie = credentials.headers['set-cookie']
-        data.fullName = ""
-        data.id = credentials.body.id
+        userData.fullName = ""
 
-        const res = await request.post("/user/update").set("Cookie", cookie).send(data)
+        const res = await request.post("/user/update").set("Cookie", cookie).send(userData)
         expect(res.statusCode).toBe(400)
         expect(res.body.msg).toBe("Informações insuficientes")
     })
 
 
     it("Should return a email already cadastered message", async() => {
-        await request.post("/user/create").send(data)
-        const repeteadEmail = data.email
+        const repeteadEmail = userData.email
 
-        data.email = `${Date.now()}@gmail.com`
-        data.number = parseInt(Date.now().toString().slice(-9))
+        userData.email = `${Date.now()}@gmail.com`
+        userData.number = parseInt(Date.now().toString().slice(-9))
 
-        const credentials = await request.post("/user/create").send(data)
-        const cookie = credentials.headers['set-cookie']
-        data.id = credentials.body.id
-        data.email = repeteadEmail
+        const newCredentials = await request.post("/user/create").send(userData)
+        cookie = newCredentials.headers['set-cookie']
+        userData.id = newCredentials.body.id
+        userData.email = repeteadEmail
 
-        const res = await request.post("/user/update").set("Cookie", cookie).send(data)
-        expect(res.statusCode).toBe(400)
-        expect(res.body.msg).toBe("Email já cadastrado")
+        const test = await request.post("/user/update").set("Cookie", cookie).send(userData)
+        expect(test.statusCode).toBe(400)
+        expect(test.body.msg).toBe("Email já cadastrado")
     })
 
     it("Should return a number already cadastered message", async() => {
-        await request.post("/user/create").send(data)
-        const repeteadNumber = data.number
+        const repeteadNumber = userData.number
 
-        data.email = `${Date.now()}@gmail.com`
-        data.number = parseInt(Date.now().toString().slice(-9))
+        userData.email = `${Date.now()}@gmail.com`
+        userData.number = parseInt(Date.now().toString().slice(-9))
 
-        const credentials = await request.post("/user/create").send(data)
-        const cookie = credentials.headers['set-cookie']
-        data.id = credentials.body.id
-        data.number = repeteadNumber
+        const newCredentials = await request.post("/user/create").send(userData)
+        cookie = newCredentials.headers['set-cookie']
+        userData.id = newCredentials.body.id
+        userData.number = repeteadNumber
 
-        const res = await request.post("/user/update").set("Cookie", cookie).send(data)
-        expect(res.statusCode).toBe(400)
-        expect(res.body.msg).toBe("Numero já cadastrado")
+        const test = await request.post("/user/update").set("Cookie", cookie).send(userData)
+        expect(test.statusCode).toBe(400)
+        expect(test.body.msg).toBe("Numero já cadastrado")
     })
 })
