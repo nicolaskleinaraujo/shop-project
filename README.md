@@ -57,7 +57,7 @@
  npm install
 
  # Create a .env file with your database url
- DATABASE_URL = "yourDatabaseUrl"
+ DATABASE_URL = "mysql://yourUser:yourPassword@localhost:3306/shop_project"
 
  # Run the following prisma command
  npx prisma db push
