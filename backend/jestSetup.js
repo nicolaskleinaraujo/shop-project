@@ -1,5 +1,5 @@
 // Modules
-const clearDatabase = require("../db/clearDatabase")
+const clearDatabase = require("./src/db/clearDatabase")
 
 // Setup
 beforeEach(async() => {
