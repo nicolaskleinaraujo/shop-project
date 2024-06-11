@@ -25,10 +25,8 @@ beforeEach(async() => {
         houseNum: 258,
     }
 
-    // Creating new user
+    // Creating new user and assigning values to the payload
     const credentials = await request.post("/user/create").send(userData)
-
-    // Adding the user ID and Cookie to the variables
     cookie = credentials.headers['set-cookie']
     userData.id = credentials.body.id
 
@@ -39,16 +37,16 @@ beforeEach(async() => {
 // Tests
 describe("Create item route", () => {
     it("Should create succesfully the item", async() => {
-        const res = await request.post("/item/create").set("Cookie", cookie).send(itemData)
-        expect(res.statusCode).toBe(200)
-        expect(res.body.msg).toBe(`${itemData.name} criado com sucesso`)
+        const test = await request.post("/item/create").set("Cookie", cookie).send(itemData)
+        expect(test.statusCode).toBe(200)
+        expect(test.body.msg).toBe(`${itemData.name} criado com sucesso`)
     })
 
     it("Should return a missing info message", async() => {
         itemData.name = ""
 
-        const res = await request.post("/item/create").set("Cookie", cookie).send(itemData)
-        expect(res.statusCode).toBe(400)
-        expect(res.body.msg).toBe("Informações insuficientes")
+        const test = await request.post("/item/create").set("Cookie", cookie).send(itemData)
+        expect(test.statusCode).toBe(400)
+        expect(test.body.msg).toBe("Informações insuficientes")
     })
 })
