@@ -3,10 +3,10 @@ const app = require("../../app")
 const request = require("supertest")(app)
 
 // Setup
-let data = {}
+let userData
 
 beforeEach(() => {
-    data = {
+    userData = {
         fullName: "Nicolas Klein Araujo",
         email: "nicolas@gmail.com",
         number: 123456789,
@@ -20,23 +20,23 @@ beforeEach(() => {
 // Tests
 describe("User controller create function", () => {
     it("Should create a account", async() => {
-        const res = await request.post("/user/create").send(data)
-        expect(res.statusCode).toBe(200)
+        const test = await request.post("/user/create").send(userData)
+        expect(test.statusCode).toBe(200)
     })
 
     it("Should return a missing info message", async() => {
-        data.fullName = ""
-        const res = await request.post("/user/create").send(data)
+        userData.fullName = ""
+        const test = await request.post("/user/create").send(userData)
 
-        expect(res.body.msg).toBe("Informações insuficientes")
-        expect(res.statusCode).toBe(400)
+        expect(test.body.msg).toBe("Informações insuficientes")
+        expect(test.statusCode).toBe(400)
     })
 
     it("Should return a email or number already cadastered message", async() => {
-        await request.post("/user/create").send(data)
-        const res = await request.post("/user/create").send(data)
+        await request.post("/user/create").send(userData)
+        const test = await request.post("/user/create").send(userData)
 
-        expect(res.body.msg).toBe("Email ou numero já cadastrado")
-        expect(res.statusCode).toBe(400)
+        expect(test.body.msg).toBe("Email ou numero já cadastrado")
+        expect(test.statusCode).toBe(400)
     })
 })
