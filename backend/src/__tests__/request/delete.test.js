@@ -3,10 +3,12 @@ const app = require("../../app")
 const request = require("supertest")(app)
 
 // Setup
-let requestData = {}
-let userData = {}
+let requestData
+let userData
+let requestId
+let cookie
 
-beforeEach(() => {
+beforeEach(async() => {
     requestData = {
         items: "Cheesecake, Pancake",
         details: "Lactose-free pancake",
@@ -22,45 +24,36 @@ beforeEach(() => {
         street: "Admin Street",
         houseNum: 258,
     }
+
+    // Creating new user and assigning values to the payload
+    const userCredentials = await request.post("/user/create").send(userData)
+    cookie = userCredentials.headers['set-cookie']
+    requestData.id = userCredentials.body.id
+
+    // Creating request and assigning ID to the variable
+    const requestCredentials = await request.post("/request/create").set("Cookie", cookie).send(requestData)
+    requestId = requestCredentials.body.id
 })
 
 // Tests
 describe("Delete request route", () => {
     it("Should delete succesfuly the request", async() => {
-        const userCredentials = await request.post("/user/create").send(userData)
-        const cookie = userCredentials.headers['set-cookie']
-        requestData.id = userCredentials.body.id
-
-        const reqCredentials = await request.post("/request/create").set("Cookie", cookie).send(requestData)
-        const requestId = reqCredentials.body.id
-
-        const res = await request.delete(`/request/delete/${requestId}`).set("Cookie", cookie)
-        expect(res.statusCode).toBe(200)
-        expect(res.body.msg).toBe("Pedido deletado com sucesso")
+        const test = await request.delete(`/request/delete/${requestId}`).set("Cookie", cookie)
+        expect(test.statusCode).toBe(200)
+        expect(test.body.msg).toBe("Pedido deletado com sucesso")
     })
 
     it("Should return a missing info message", async() => {
-        const userCredentials = await request.post("/user/create").send(userData)
-        const cookie = userCredentials.headers['set-cookie']
-        requestData.id = userCredentials.body.id
-
-        await request.post("/request/create").set("Cookie", cookie).send(requestData)
-
-        const res = await request.delete("/request/delete/notAnId").set("Cookie", cookie)
-        expect(res.statusCode).toBe(400)
-        expect(res.body.msg).toBe("Informações insuficientes") 
+        const test = await request.delete("/request/delete/notAnId").set("Cookie", cookie)
+        expect(test.statusCode).toBe(400)
+        expect(test.body.msg).toBe("Informações insuficientes") 
     })
 
     it("Should return a request doesn't exist message", async() => {
-        const userCredentials = await request.post("/user/create").send(userData)
-        const cookie = userCredentials.headers['set-cookie']
-        requestData.id = userCredentials.body.id
+        requestId += 1
 
-        const reqCredentials = await request.post("/request/create").set("Cookie", cookie).send(requestData)
-        const requestId = reqCredentials.body.id + 1
-
-        const res = await request.delete(`/request/delete/${requestId}`).set("Cookie", cookie)
-        expect(res.statusCode).toBe(400)
-        expect(res.body.msg).toBe("Pedido inexistente")
+        const test = await request.delete(`/request/delete/${requestId}`).set("Cookie", cookie)
+        expect(test.statusCode).toBe(400)
+        expect(test.body.msg).toBe("Pedido inexistente")
     })
 })
