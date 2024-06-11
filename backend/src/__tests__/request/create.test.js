@@ -3,10 +3,11 @@ const app = require("../../app")
 const request = require("supertest")(app)
 
 // Setup
-let requestData = {}
-let userData = {}
+let requestData
+let userData
+let cookie
 
-beforeEach(() => {
+beforeEach(async() => {
     requestData = {
         items: "Cheesecake, Pancake",
         details: "Lactose-free pancake",
@@ -22,39 +23,34 @@ beforeEach(() => {
         street: "Admin Street",
         houseNum: 258,
     }
+
+    // Creating new user and assigning values to the payload
+    const credentials = await request.post("/user/create").send(userData)
+    cookie = credentials.headers['set-cookie']
+    requestData.id = credentials.body.id
 })
 
 // Tests
 describe("Create request route", () => {
     it("Should create succesfully the request", async() => {
-        const credentials = await request.post("/user/create").send(userData)
-        const cookie = credentials.headers['set-cookie']
-        requestData.id = credentials.body.id
-
-        const res = await request.post("/request/create").set("Cookie", cookie).send(requestData)
-        expect(res.statusCode).toBe(200)
-        expect(res.body.msg).toBe("Pedido feito com sucesso")
+        const test = await request.post("/request/create").set("Cookie", cookie).send(requestData)
+        expect(test.statusCode).toBe(200)
+        expect(test.body.msg).toBe("Pedido feito com sucesso")
     })
 
     it("Should return a missing info message", async() => {
-        const credentials = await request.post("/user/create").send(userData)
-        const cookie = credentials.headers['set-cookie']
-        requestData.id = credentials.body.id
-
         requestData.items = ""
 
-        const res = await request.post("/request/create").set("Cookie", cookie).send(requestData)
-        expect(res.statusCode).toBe(400)
-        expect(res.body.msg).toBe("Informações insuficientes")
+        const test = await request.post("/request/create").set("Cookie", cookie).send(requestData)
+        expect(test.statusCode).toBe(400)
+        expect(test.body.msg).toBe("Informações insuficientes")
     })
 
     it("Should return a user doesn't exist message", async() => {
-        const credentials = await request.post("/user/create").send(userData)
-        const cookie = credentials.headers['set-cookie']
-        requestData.id = credentials.body.id + 1
+        requestData.id += 1
 
-        const res = await request.post("/request/create").set("Cookie", cookie).send(requestData)
-        expect(res.statusCode).toBe(400)
-        expect(res.body.msg).toBe("Usuario inexistente")
+        const test = await request.post("/request/create").set("Cookie", cookie).send(requestData)
+        expect(test.statusCode).toBe(400)
+        expect(test.body.msg).toBe("Usuario inexistente")
     })
 })
