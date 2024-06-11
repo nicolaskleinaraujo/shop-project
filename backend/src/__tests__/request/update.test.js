@@ -3,10 +3,11 @@ const app = require("../../app")
 const request = require("supertest")(app)
 
 // Setup
-let requestData = {}
-let userData = {}
+let requestData
+let userData
+let cookie
 
-beforeEach(() => {
+beforeEach(async() => {
     requestData = {
         items: "Cheesecake, Pancake",
         details: "Lactose-free pancake",
@@ -22,49 +23,41 @@ beforeEach(() => {
         street: "Admin Street",
         houseNum: 258,
     }
+
+    // Creating new user and assigning values to the payload
+    const userCredentials = await request.post("/user/create").send(userData)
+    cookie = userCredentials.headers['set-cookie']
+    requestData.id = userCredentials.body.id
+
+    // Creating request and assigning ID to the payload
+    const reqCredentials = await request.post("/request/create").set("Cookie", cookie).send(requestData)
+    requestData.id = reqCredentials.body.id
+
+    // Changind the payload items
+    requestData.items = "Updated Request"
 })
 
 // Tests
 describe("Update request route", () => {
     it("Should update succesfuly the request", async() => {
-        const userCredentials = await request.post("/user/create").send(userData)
-        const cookie = userCredentials.headers['set-cookie']
-        requestData.id = userCredentials.body.id
-
-        const reqCredentials = await request.post("/request/create").set("Cookie", cookie).send(requestData)
-        requestData.id = reqCredentials.body.id
-        requestData.items = "Updated Request"
-
-        const res = await request.post("/request/update").set("Cookie", cookie).send(requestData)
-        expect(res.statusCode).toBe(200)
-        expect(res.body.msg).toBe("Pedido atualizado com sucesso")
+        const test = await request.post("/request/update").set("Cookie", cookie).send(requestData)
+        expect(test.statusCode).toBe(200)
+        expect(test.body.msg).toBe("Pedido atualizado com sucesso")
     })
 
     it("Should return a missing info message", async() => {
-        const userCredentials = await request.post("/user/create").send(userData)
-        const cookie = userCredentials.headers['set-cookie']
-        requestData.id = userCredentials.body.id
-
-        const reqCredentials = await request.post("/request/create").set("Cookie", cookie).send(requestData)
-        requestData.id = reqCredentials.body.id
         requestData.items = ""
 
-        const res = await request.post("/request/update").set("Cookie", cookie).send(requestData)
-        expect(res.statusCode).toBe(400)
-        expect(res.body.msg).toBe("Informações insuficientes")
+        const test = await request.post("/request/update").set("Cookie", cookie).send(requestData)
+        expect(test.statusCode).toBe(400)
+        expect(test.body.msg).toBe("Informações insuficientes")
     })
 
     it("Should return a request doesn't exist message", async() => {
-        const userCredentials = await request.post("/user/create").send(userData)
-        const cookie = userCredentials.headers['set-cookie']
-        requestData.id = userCredentials.body.id
+        requestData.id += 1
 
-        const reqCredentials = await request.post("/request/create").set("Cookie", cookie).send(requestData)
-        requestData.id = reqCredentials.body.id + 1
-        requestData.items = "Updated Request"
-
-        const res = await request.post("/request/update").set("Cookie", cookie).send(requestData)
-        expect(res.statusCode).toBe(400)
-        expect(res.body.msg).toBe("Pedido inexistente")
+        const test = await request.post("/request/update").set("Cookie", cookie).send(requestData)
+        expect(test.statusCode).toBe(400)
+        expect(test.body.msg).toBe("Pedido inexistente")
     })
 })
