@@ -1,5 +1,5 @@
 # Shop made with React and Node.js
- ![MIT License](https://img.shields.io/badge/license-MIT-blue) [![Netlify Status](https://api.netlify.com/api/v1/badges/d3453055-12c9-4d4d-b8ba-969d88f9c578/deploy-status)](https://app.netlify.com/sites/nk-blog-project/deploys)
+ ![MIT License](https://img.shields.io/badge/license-MIT-blue)
 <br>
  <img src="./frontend/public/home-page.PNG" alt="Print Home Page" width="700">.
  ### Demo app: https://nk-shop-project.netlify.app
