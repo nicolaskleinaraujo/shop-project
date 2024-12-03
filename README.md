@@ -2,7 +2,7 @@
  ![MIT License](https://img.shields.io/badge/license-MIT-blue)
 <br>
  <img src="./frontend/public/home-page.PNG" alt="Print Home Page" width="700">.
- ### Demo app: https://nk-shop-project.netlify.app
+ ### Demo app: https://shop-project.nkportfolio.tech
 # About
  This project is a shop that let users create requests, manage items and use many more features.
  In order to use admin features, please use the following account: email: "admin@gmail.com", password: "12345".
@@ -36,8 +36,8 @@
   - CSS
 
   ### Implantation
-  - Website: https://nk-shop-project.netlify.app
-  - API: https://shop-project-hwt4.onrender.com (check project for routes)
+  - Website: https://shop-project.nkportfolio.tech
+  - API: https://shop-project-api.nkportfolio.tech (check project for routes)
 
  # Testing
   ### Prerequisites
